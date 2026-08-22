@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 · 页面未找到</title>
+    <!-- 纯粹卡片：居中、无emoji、无多余提示，保留核心信息 + 返回主页 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #e9f0f5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            padding: 1.5rem;
+            margin: 0;
+        }
+
+        /* 卡片容器 —— 居中，圆润，有层次 */
+        .card {
+            max-width: 620px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 48px;
+            padding: 3rem 2.5rem;
+            box-shadow: 
+                0 30px 60px -20px rgba(0, 20, 40, 0.25),
+                0 8px 20px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;          /* 所有内联内容居中 */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 40px 70px -20px rgba(0, 20, 40, 0.3);
+        }
+
+        /* 主标题 */
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 650;
+            letter-spacing: -0.02em;
+            color: #1a2634;
+            margin: 0.2rem 0 0.6rem 0;
+            line-height: 1.2;
+        }
+
+        /* 副标题 / 描述 */
+        .description {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            opacity: 0.8;
+            margin: 0.8rem 0 1.2rem 0;
+            font-weight: 430;
+            line-height: 1.5;
+        }
+
+        /* 错误代码框 — 卡片内元素 */
+        .error-tag {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #1e2b39;
+            border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+            margin: 1rem 0 0.2rem 0;
+            backdrop-filter: blur(2px);
+            background: rgba(241, 245, 249, 0.7);
+        }
+
+        .error-tag strong {
+            font-weight: 600;
+            color: #b91c1c;
+            background: rgba(185, 28, 28, 0.06);
+            padding: 0.1rem 0.4rem;
+            border-radius: 30px;
+            font-family: inherit;
+        }
+
+        /* 返回主页按钮 — 替代刷新 */
+        .action-link {
+            display: inline-block;
+            margin-top: 2.2rem;
+            padding: 0.7rem 2.4rem;
+            background: #1d2b3a;
+            color: white;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            letter-spacing: 0.3px;
+        }
+
+        .action-link:hover {
+            background: #0f1a26;
+            transform: scale(0.98);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+        }
+
+        /* 极简脚注（符合原内容，不加额外提示） */
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            opacity: 0.15;
+            letter-spacing: 0.5px;
+            color: #1f3a4b;
+            border: none;
+            user-select: none;
+        }
+
+        /* 适应小屏 */
+        @media (max-width: 480px) {
+            .card {
+                padding: 2.2rem 1.5rem;
+                border-radius: 32px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 卡片：仅保留用户提供的内容，无emoji，无额外提示，按钮改为“返回主页” -->
+    <div class="card">
+
+        <!-- 主标题：啊哦，页面不见了！ -->
+        <h1>啊哦，页面不见了！</h1>
+
+        <!-- 描述文字：网页不存在。请尝试刷新页面。 -->
+        <p class="description">
+            你访问的页面不存在，可能已移除、修改或暂不存在。
+        </p>
+
+        <!-- 错误信息卡片 (DNS_PROBE_FINISHED_NXDOMAIN) 完全保留 -->
+        <div class="error-tag">
+            ERROR: <strong>DNS_PROBE_FINISHED_NXDOMAIN</strong>
+        </div>
+
+        <!-- 返回主页按钮 (替代刷新) — 点击跳转到首页 (此处用 "#" 占位，可替换为实际URL) -->
+        <a href="#" class="action-link" onclick="window.location.href='/';">← 返回主页</a>
+        </div>
+    </div>
+
+</body>
+</html>
