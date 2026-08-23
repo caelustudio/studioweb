@@ -1,2 +1,6 @@
 Caelus Studio 是一家专注于数字界面原型与交互体验设计的创意工作室。我们致力于探索人机交互的边界，尤其擅长利用 Microsoft PowerPoint、WPS Office、Keynote 讲演、Google Slides 以及VBA 构建高保真的PPTOS概念演示系统。
-该仓库用于使用 Caelus Studio 网站的文件，使用 GitHub Pages 托管。网址：https://www.caelus.top
+该 GitHub 仓库用于存放 Caelus Studio 网站的文件，使用 GitHub Pages 托管。网址：https://www.caelus.top。
+社交平台：
+哔哩哔哩、X、TikTok、抖音、小红书：Orange_Caelus
+Instragram、Threads：caelustudio1
+YouTube、Facebook：Caelus Studio
