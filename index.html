@@ -1060,6 +1060,9 @@
       .nav-menu-btn { width: 32px; height: 32px; }
       .back-to-top { bottom: 1rem; right: 1rem; width: 38px; height: 38px; }
       .back-to-top svg { width: 19px; height: 19px; }
+      .stats-section { gap: 1.5rem; padding: 2rem 0 1rem; }
+      .stat-number { font-size: 2.2rem; }
+      .stat-label { font-size: 0.7rem; }
     }
 
     ::-webkit-scrollbar { width: 4px; background: #000; }
@@ -1068,6 +1071,104 @@
     [data-theme="light"] ::-webkit-scrollbar-thumb { background: #bbb; }
 
     * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    /* ===== 页面加载动画 ===== */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      background: var(--bg-primary);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-logo {
+      width: 64px;
+      height: 64px;
+      animation: loaderPulse 1.6s ease-in-out infinite;
+    }
+    .loader-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .loader-bar {
+      width: 120px;
+      height: 2px;
+      background: var(--border-color);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      background: var(--text-secondary);
+      border-radius: 2px;
+      animation: loaderSlide 1.2s ease-in-out infinite;
+    }
+    @keyframes loaderPulse {
+      0%, 100% { transform: scale(0.82); opacity: 0.6; }
+      50% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes loaderSlide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
+
+    /* ===== 导航高亮当前区块 ===== */
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+    [data-theme="light"] .site-nav.scrolled .nav-links a.active {
+      color: #1a1a1a;
+      background: rgba(0,0,0,0.08);
+    }
+
+    /* ===== 数字统计区 ===== */
+    .stats-section {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 2.5rem 0 1.5rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-color);
+      transition: border-color 0.3s ease;
+    }
+    .stat-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 200;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
 
     /* ===== 彩蛋游戏样式（与主题无关） ===== */
     #game-overlay {
@@ -1121,8 +1222,16 @@
       pointer-events: none;
     }
   </style>
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
+
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-logo"><img src="" alt="Caelus Studio" id="loaderLogo"></div>
+    <div class="loader-bar"></div>
+  </div>
 
   <div class="custom-cursor" id="customCursor"></div>
 
@@ -1266,6 +1375,21 @@
         </div>
       </div>
 
+      <div class="stats-section reveal">
+        <div class="stat-item">
+          <div class="stat-number" data-target="2">0</div>
+          <div class="stat-label">年设计经验</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="11">0</div>
+          <div class="stat-label">个作品</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">&#8734;</div>
+          <div class="stat-label">创意</div>
+        </div>
+      </div>
+
       <div class="section-title reveal">
         <h2>下载作品</h2>
       </div>
@@ -1363,16 +1487,42 @@
   </div>
 
   <script>
+    // ===== 页面加载动画 =====
+    (function() {
+      var favicon = document.querySelector('link[rel="icon"]');
+      var loaderLogo = document.getElementById('loaderLogo');
+      if (favicon && loaderLogo) loaderLogo.src = favicon.href;
+      var loader = document.getElementById('pageLoader');
+      function hideLoader() { if (loader) loader.classList.add('hidden'); }
+      window.addEventListener('load', function() { setTimeout(hideLoader, 400); });
+      setTimeout(hideLoader, 3000);
+    })();
+
     // ===== 导航栏 & 返回顶部：滚动响应 =====
     (function() {
       const nav = document.getElementById('siteNav');
       const backBtn = document.getElementById('backToTop');
+      const navAnchors = document.querySelectorAll('.nav-links a');
+      const dlSection = document.getElementById('download');
+      const ctSection = document.getElementById('contact');
       let ticking = false;
 
       function onScroll() {
         const y = window.scrollY;
         nav.classList.toggle('scrolled', y > 60);
         backBtn.classList.toggle('visible', y > 400);
+        // 导航高亮当前区块
+        var activeId = 'top';
+        if (ctSection && y >= ctSection.offsetTop - 120) {
+          activeId = 'contact';
+        } else if (dlSection && y >= dlSection.offsetTop - 120) {
+          activeId = 'download';
+        }
+        navAnchors.forEach(function(a) {
+          var href = a.getAttribute('href');
+          var isActive = (href === '#' && activeId === 'top') || (href === '#' + activeId);
+          a.classList.toggle('active', isActive);
+        });
         ticking = false;
       }
 
@@ -1830,6 +1980,30 @@
       }
     }, { passive: false });
 
+
+    // ===== 数字统计动画 =====
+    (function() {
+      var statNumbers = document.querySelectorAll('.stat-number[data-target]');
+      var statObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var target = parseInt(el.dataset.target);
+            var duration = 1200;
+            var start = performance.now();
+            function tick(now) {
+              var progress = Math.min((now - start) / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.round(target * eased);
+              if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+            statObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      statNumbers.forEach(function(el) { statObserver.observe(el); });
+    })();
 
     // ===== 滚动触发动画 =====
     (function() {
