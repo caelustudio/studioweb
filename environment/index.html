@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="x5BHIF28zEqPbTroNKAjkf">
+<head data-page-node-id="5HhGYkzCQr2JPVLSNuSbeZ">
+  <meta charset="UTF-8" data-page-node-id="ATgeEiW3C9eD1uBvoNKbwt">
+  <link rel="icon" href="../assets/favicon.png" type="image/png" data-page-node-id="RUzduPcPNBKMCofzFg8Zl4">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="RM4Zpa7X8x0SJngGGyXWo5">
+  <title>环境责任 - Caelus Studio</title>
+  <meta name="description" content="一切为了地球、绿色和人类。Caelus Studio 致力于环保、保护地球和碳中和。" data-page-node-id="ipeVgOJOLUbOCCQ7kCCgJz">
+  <meta name="theme-color" content="#0b0b0b" data-page-node-id="EdU0oa1jAktW0CDBvSRaDU">
+  <!-- Open Graph：社交分享卡片 -->
+  <meta property="og:type" content="website" data-page-node-id="pvH6y1TlRYhTvebblQhLgW">
+  <meta property="og:site_name" content="Caelus Studio" data-page-node-id="4K7jY09GXs14RZzZ7B8AHC">
+  <meta property="og:title" content="环境责任 - Caelus Studio" data-page-node-id="7bBz3LFsoQlwx2lpmW7n2V">
+  <meta property="og:description" content="一切为了地球、绿色和人类。Caelus Studio 致力于环保、保护地球和碳中和。" data-page-node-id="9j6j2k26rKAnhsD66jY8AA">
+  <meta property="og:locale" content="zh_CN" data-page-node-id="OehF0131i2CjLtY3YDairW">
+  <meta property="og:image" content="https://www.caelus.top/assets/earth.jpg" data-page-node-id="AZA3ywpIn14cd6UCr1Psm1">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" data-page-node-id="FGqnQNhmjOMHvrWyBsA8oR">
+  <meta name="twitter:title" content="环境责任 - Caelus Studio" data-page-node-id="TychZy3auJzPlYpXHJN41e">
+  <meta name="twitter:description" content="一切为了地球、绿色和人类。Caelus Studio 致力于环保、保护地球和碳中和。" data-page-node-id="2dakjUAka4qKRfYTQApJ5N">
+  <meta name="twitter:image" content="https://www.caelus.top/assets/earth.jpg" data-page-node-id="A3dAjCUgnLV53Y0wptx5FL">
+  <style>
+    /* ===== 基础重置 & 变量 ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0b0b0b;
+      --bg-secondary: #0b0b0b;
+      --bg-card: #111;
+      --text-primary: #f0f0f0;
+      --text-secondary: #d0d0d0;
+      --text-muted: #888;
+      --border-color: rgba(255,255,255,0.04);
+      --border-card: rgba(255,255,255,0.04);
+      --shadow-card: 0 4px 16px rgba(0,0,0,0.3);
+      --hero-overlay: rgba(0,0,0,0.25);
+      --hero-text: #ffffff;
+      --hero-sub: rgba(255,255,255,0.9);
+      --scroll-color: rgba(255,255,255,0.7);
+      --scroll-text: rgba(255,255,255,0.5);
+      --footer-color: #555;
+      --footer-highlight: #666;
+      --tag-bg: #0a2a1a;
+      --tag-color: #7de8a2;
+      --tag-border: rgba(80,220,140,0.15);
+      --accent: #32d74b;
+      --card-hover-border: rgba(255,255,255,0.08);
+    }
+
+    /* ===== 浅色主题 ===== */
+    [data-theme="light"] {
+      --bg-primary: #f5f5f5;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #2a2a2a;
+      --text-muted: #555;
+      --border-color: rgba(0,0,0,0.06);
+      --border-card: rgba(0,0,0,0.06);
+      --shadow-card: 0 4px 16px rgba(0,0,0,0.06);
+      --hero-overlay: rgba(0,0,0,0.25);
+      --hero-text: #ffffff;
+      --hero-sub: rgba(255,255,255,0.9);
+      --scroll-color: rgba(255,255,255,0.7);
+      --scroll-text: rgba(255,255,255,0.5);
+      --footer-color: #999;
+      --footer-highlight: #aaa;
+      --tag-bg: #e6f7ec;
+      --tag-color: #0a6a2a;
+      --tag-border: rgba(30,140,70,0.15);
+      --accent: #1d8a3a;
+      --card-hover-border: rgba(0,0,0,0.1);
+    }
+
+    body {
+      cursor: none;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    a, button, .env-card {
+      cursor: none !important;
+    }
+
+    /* ===== 自定义光标 ===== */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      will-change: transform;
+    }
+
+    [data-theme="light"] .custom-cursor {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .custom-cursor.clicked {
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    [data-theme="light"] .custom-cursor.clicked {
+      background: rgba(0, 0, 0, 0.15);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .custom-cursor.hover {
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    [data-theme="light"] .custom-cursor.hover {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    @media (pointer: coarse) {
+      .custom-cursor { display: none !important; }
+      a, button, .env-card { cursor: auto !important; }
+    }
+
+    /* ===== 主题切换按钮 ===== */
+    .theme-toggle {
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #fff;
+      user-select: none;
+    }
+
+    [data-theme="light"] .site-nav.scrolled .theme-toggle {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.06);
+      color: #1a1a1a;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.08);
+      background: rgba(255,255,255,0.12);
+    }
+
+    [data-theme="light"] .site-nav.scrolled .theme-toggle:hover {
+      background: rgba(0,0,0,0.08);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .theme-toggle:hover svg {
+      transform: rotate(30deg);
+    }
+
+    /* ===== 页面加载动画 ===== */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      background: var(--bg-primary);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-logo {
+      width: 64px;
+      height: 64px;
+      animation: loaderPulse 1.6s ease-in-out infinite;
+    }
+    .loader-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .loader-logo-dark { display: none; }
+    [data-theme="light"] .loader-logo-light { display: none; }
+    [data-theme="light"] .loader-logo-dark { display: block; }
+    [data-theme="dark"] .loader-logo-light { display: block; }
+    [data-theme="dark"] .loader-logo-dark { display: none; }
+    .loader-bar {
+      width: 120px;
+      height: 2px;
+      background: var(--border-color);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      background: var(--text-secondary);
+      border-radius: 2px;
+      animation: loaderSlide 1.2s ease-in-out infinite;
+    }
+    @keyframes loaderPulse {
+      0%, 100% { transform: scale(0.82); opacity: 0.6; }
+      50% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes loaderSlide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
+
+    /* ===== 平滑滚动 ===== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ===== 减少动画偏好 ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== 导航栏 ===== */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      z-index: 90;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-nav.scrolled {
+      background: rgba(11,11,11,0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+
+    [data-theme="light"] .site-nav.scrolled {
+      background: rgba(255,255,255,0.75);
+      border-bottom-color: rgba(0,0,0,0.06);
+    }
+
+    .nav-brand {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: #fff;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    [data-theme="light"] .site-nav.scrolled .nav-brand {
+      color: #1a1a1a;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    [data-theme="light"] .site-nav.scrolled .nav-links a {
+      color: rgba(26,26,26,0.6);
+    }
+
+    [data-theme="light"] .site-nav.scrolled .nav-links a:hover {
+      background: rgba(0,0,0,0.06);
+      color: #1a1a1a;
+    }
+
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+
+    [data-theme="light"] .site-nav.scrolled .nav-links a.active {
+      color: #1a1a1a;
+      background: rgba(0,0,0,0.08);
+    }
+
+    /* ===== 汉堡菜单按钮（仅移动端显示） ===== */
+    .nav-menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      border: none;
+      padding: 0 7px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .nav-menu-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease, background 0.3s ease;
+    }
+
+    [data-theme="light"] .site-nav.scrolled .nav-menu-btn span {
+      background: #1a1a1a;
+    }
+
+    .nav-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
+    .nav-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== 移动端菜单面板 ===== */
+    .mobile-menu {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      right: 0;
+      z-index: 89;
+      background: rgba(11,11,11,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      padding: 0.4rem 1.5rem 1rem;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      color: #f0f0f0;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.85rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s ease;
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    [data-theme="light"] .mobile-menu {
+      background: rgba(255,255,255,0.94);
+      border-bottom-color: rgba(0,0,0,0.06);
+    }
+
+    [data-theme="light"] .mobile-menu a {
+      color: #1a1a1a;
+      border-bottom-color: rgba(0,0,0,0.05);
+    }
+
+    /* ===== 返回顶部按钮 ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 90;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      color: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    [data-theme="light"] .back-to-top {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.06);
+      color: #1a1a1a;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    [data-theme="light"] .back-to-top:hover {
+      background: rgba(0,0,0,0.08);
+    }
+
+    .back-to-top svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* ===== 第一屏：地球背景 ===== */
+    .hero-earth {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      position: relative;
+      background-color: #000;
+      background-image: url('../assets/earth.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    /* 背景缓慢缩放（inherit 自 hero-earth） */
+    .hero-earth::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: inherit;
+      background-color: inherit;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      animation: heroBgZoom 20s ease-out forwards;
+    }
+
+    .hero-earth::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--hero-overlay);
+      z-index: 1;
+      transition: background 0.3s ease;
+    }
+
+    .hero-title-group {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-earth h1 {
+      font-size: clamp(2rem, 7vw, 5.5rem);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--hero-text) !important;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+      max-width: 100%;
+      white-space: normal;
+      word-break: break-word;
+      padding: 0 0.5rem;
+    }
+
+    .hero-earth .sub {
+      color: var(--hero-sub);
+      font-weight: 350;
+      letter-spacing: 0.06em;
+      font-size: clamp(0.95rem, 2.2vw, 1.4rem);
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      animation: float-down 2s ease-in-out infinite;
+    }
+
+    .scroll-arrow {
+      width: 28px;
+      height: 28px;
+      color: var(--scroll-color);
+      animation: bounce-arrow 2s ease-in-out infinite;
+    }
+
+    .scroll-arrow svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: none;
+      stroke: var(--scroll-color);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .scroll-text {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--scroll-text);
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    @keyframes float-down {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      50% { transform: translateX(-50%) translateY(6px); opacity: 0.7; }
+    }
+
+    @keyframes bounce-arrow {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(6px); opacity: 0.5; }
+    }
+
+    /* ===== 入场动画 ===== */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroFadeUpCentered {
+      from { opacity: 0; transform: translateX(-50%) translateY(40px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    @keyframes heroBgZoom {
+      from { transform: scale(1.0); }
+      to   { transform: scale(1.12); }
+    }
+
+    .hero-earth h1 {
+      animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+    }
+
+    .hero-earth .sub {
+      animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+    }
+
+    .hero-earth .scroll-indicator {
+      animation: heroFadeUpCentered 1s cubic-bezier(0.22, 1, 0.36, 1) 1s both;
+    }
+
+    /* ===== 滚动触发入场 ===== */
+    .reveal {
+      opacity: 0;
+    }
+
+    .reveal.reveal-visible {
+      animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .env-card.reveal.reveal-visible {
+      animation-delay: var(--reveal-delay, 0s);
+    }
+
+    /* ===== 内容区块 ===== */
+    .env-section {
+      width: 100%;
+      padding: 6.5rem 2rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .env-section.alt {
+      background: var(--bg-primary);
+    }
+
+    .env-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .env-kicker {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .env-headline {
+      font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    .env-lede {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 760px;
+      transition: color 0.3s ease;
+    }
+
+    .env-lede strong {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* ===== 数字统计区 ===== */
+    .stats-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      padding: 2.5rem 0 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 200;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    /* ===== 卡片网格 ===== */
+    .env-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    .env-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .env-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-hover-border);
+    }
+
+    .env-card .icon {
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 12px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .env-card .icon svg {
+      width: 1.4rem;
+      height: 1.4rem;
+      fill: var(--accent);
+    }
+
+    .env-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+      transition: color 0.3s ease;
+    }
+
+    .env-card p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      transition: color 0.3s ease;
+    }
+
+    /* ===== 底部链接 ===== */
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      transition: border-color 0.3s ease;
+    }
+
+    .footer-links .link-group {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .footer-links .link-group .link-title {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links .link-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links .link-group ul li {
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-links .link-group ul li a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 350;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-links .link-group ul li a:hover {
+      color: var(--text-primary);
+    }
+
+    .site-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+
+    .site-footer p {
+      color: var(--footer-color);
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      transition: color 0.3s ease;
+    }
+
+    .site-footer .highlight {
+      color: var(--footer-highlight);
+      transition: color 0.3s ease;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 800px) {
+      .env-section { padding: 4.5rem 1.5rem; }
+      .stats-section { gap: 1.5rem; padding: 2rem 0 1rem; }
+      .stat-number { font-size: 2.2rem; }
+      .stat-label { font-size: 0.7rem; }
+      .footer-links { flex-direction: column; gap: 2rem; }
+      .footer-links .link-group { min-width: auto; }
+      .scroll-indicator { bottom: 1.5rem; }
+      .scroll-arrow { width: 22px; height: 22px; }
+      .scroll-text { font-size: 0.65rem; }
+    }
+
+    @media (max-width: 500px) {
+      .hero-earth { padding: 3rem 1.2rem 2rem; }
+      .hero-earth h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
+      .hero-earth .sub { font-size: 1rem; letter-spacing: 0.04em; }
+      .nav-links { display: none; }
+      .nav-menu-btn { display: flex; }
+      .env-section { padding: 3.5rem 1.2rem; }
+      .theme-toggle { width: 32px; height: 32px; }
+      .theme-toggle svg { width: 16px; height: 16px; }
+    }
+  </style>
+</head>
+<body data-page-node-id="wxWPYhmU3V9bVKEisv6A5D">
+
+  <!-- ===== 页面加载动画 ===== -->
+  <div class="page-loader" id="pageLoader" data-page-node-id="RZMMiAGBOOQxDEBaZD7Dms">
+    <div class="loader-logo" data-page-node-id="TvjEYu7sZ1uPrPnV1TMrMX">
+      <img class="loader-logo-light" src="../assets/favicon.png" alt="Caelus Studio" data-page-node-id="gken78UdEhzaqVFcFWbVSS">
+      <img class="loader-logo-dark" src="../assets/favicon-inverted.png" alt="Caelus Studio" data-page-node-id="Ohv0PXnL8kmDEhzFi6wTuO">
+    </div>
+    <div class="loader-bar" data-page-node-id="FYt7vDXhXRom02rNW1SNwF"></div>
+  </div>
+
+  <div class="custom-cursor" id="customCursor" data-page-node-id="XP8Gnu5RjFqFFbtUNk0IjU"></div>
+
+  <!-- ===== 导航栏 ===== -->
+  <nav class="site-nav" id="siteNav" data-page-node-id="5knpmEAhqceLruUuCPDCGQ">
+    <a class="nav-brand" href="../index.html" data-page-node-id="YUDHPjkyz9AMzE8dO7OKsT">Caelus Studio</a>
+    <div class="nav-right" data-page-node-id="IB3fR24EUWjEjGnkVZo2sr">
+      <ul class="nav-links" data-page-node-id="cUeqH9ddO38pC3B7hgITA2">
+        <li data-page-node-id="JsvT6i49a7niZwFi6xSLW7"><a href="#promise" data-page-node-id="OBxaT4weYWvzv49uSt5ug0">我们的承诺</a></li>
+        <li data-page-node-id="mEyw2AiNK9RaqdeQWPB0l7"><a href="#practice" data-page-node-id="2tzCk4QYf2tgtni7l99JEx">全方位践行</a></li>
+        <li data-page-node-id="OuW3N6rhlKIDh7KWpLmKgx"><a href="#cycle" data-page-node-id="R8SmPUtEz7C3BwavoLEHUU">循环利用</a></li>
+        <li data-page-node-id="gBnDuLZKZBpvxEGOu31Tb9"><a href="#values" data-page-node-id="FrGkmcuZ8D2FZsiHYG67J9">价值观</a></li>
+      </ul>
+      <button class="nav-menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false" data-page-node-id="7yE1Q5fUoicdOqFtbaFaPt">
+        <span data-page-node-id="o6ef1iwLGiFsJ6qDLhqzmG"></span><span data-page-node-id="sCXAeDLcHXTY4oWpCGimlB"></span><span data-page-node-id="8i5RFdhoA0YoXtJJuZmodQ"></span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换深色/浅色模式" data-page-node-id="Up1hGXGaIsMdPtz1j5sCf1">
+        <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" data-page-node-id="CDroe7GV2GaVoBG2mGwnHp"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" data-page-node-id="YGiugneKf4GStSAs7sAW0V"></path></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== 移动端菜单面板 ===== -->
+  <div class="mobile-menu" id="mobileMenu" data-page-node-id="siUAvCHTpN9MmiYds93KI7">
+    <a href="#promise" data-page-node-id="a7OZCJnsfmBzekHkbTZcLV">我们的承诺</a>
+    <a href="#practice" data-page-node-id="jhGFxS9nlp9dQHJ8inLpAR">全方位践行</a>
+    <a href="#cycle" data-page-node-id="dKFUYbhB82uCj4GpMTAMC7">循环利用</a>
+    <a href="#values" data-page-node-id="t6a3EinzUz5m7ZCnfwnkqk">价值观</a>
+    <a href="../index.html" data-page-node-id="1jsTtWzkEJqFXQ3E4FekpL">返回主站</a>
+  </div>
+
+  <!-- ===== 返回顶部按钮 ===== -->
+  <button class="back-to-top" id="backToTop" aria-label="返回顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})" data-page-node-id="pCDyg6T5Nu3qres29xLp8l">
+    <svg viewBox="0 0 24 24" data-page-node-id="4Vi5Ce1W5XnNZG8S9hwBjm"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" data-page-node-id="qHgB7IaWLEOPGnp6IOnAzg"></path></svg>
+  </button>
+
+  <!-- ===== 第一屏：地球 ===== -->
+  <section class="hero-earth" id="top" data-page-node-id="AFLpcudV6Y6UFSgxBE6Yyp">
+    <div class="hero-title-group" data-page-node-id="wmt6zRwiwS8e0t8zBaewNU">
+      <h1 data-page-node-id="GZjD9GHuui6dCSxRpY95jX">一切为了地球、绿色和人类。</h1>
+      <div class="sub" data-page-node-id="BMB1HTfftJ4ihOsa53dfmU">Caelus Studio 致力于环保、保护地球和碳中和。</div>
+    </div>
+    <div class="scroll-indicator" data-page-node-id="XvxFUuWiwizQmqaTzqlLmE">
+      <div class="scroll-arrow" data-page-node-id="1L5FwPu9EibOvnERuvh13l">
+        <svg viewBox="0 0 24 24" data-page-node-id="k5mfVeh4Q1Jmd0dDYW0TLR">
+          <path d="M7 13l5 5 5-5" data-page-node-id="kFKUpDyaDsj4CKD9Golqbk"></path>
+          <path d="M7 7l5 5 5-5" data-page-node-id="JkjLtbh3oERj9YkwNb1HcK"></path>
+        </svg>
+      </div>
+      <span class="scroll-text" data-page-node-id="GBgdDkeWs15qcBUpFLyKCP">下滑探索</span>
+    </div>
+  </section>
+
+  <!-- ===== 我们的承诺 ===== -->
+  <section class="env-section" id="promise" data-page-node-id="YMlHaVIPFsZ1EWujEjck9U">
+    <div class="env-container" data-page-node-id="o3DyaKnRsoT4xTE3ADUSNF">
+      <span class="env-kicker reveal" data-page-node-id="pSMlanMmCgKrVyOEfxOnVN">Caelus Green 2030</span>
+      <h2 class="env-headline reveal" data-page-node-id="QLsJqNQMgtRiZxLIdPbaSZ">创新大步攀升，<br data-page-node-id="FtUnq6SIBaYpQJHH4x0A3L">碳排放一降再降。</h2>
+      <p class="env-lede reveal" data-page-node-id="Qq0Pako09p9QKG2YJwkSrP">
+        我们正式启动 <strong data-page-node-id="b280w2UJ7dZeYs7viepLyV">Caelus Green 2030</strong> 计划——一份基于科学的碳中和蓝图。
+        以 2026 年为基准，我们致力于将工作室运营所产生的温室气体排放量减少
+        <strong data-page-node-id="WbUSa2tVwBuZCzAUrDxV94">75%</strong>，再优先采用以自然为本、符合严格国际标准的解决方案，
+        抵消剩余的碳排放，力争在 <strong data-page-node-id="GiCmOqKXT9LgX6S1GZoqhA">2030 年实现碳中和</strong>。
+      </p>
+      <div class="stats-section reveal" data-page-node-id="YJ0vuF50u8uz7H2QwGnU1n">
+        <div class="stat-item" data-page-node-id="enzWb6w2QCQt1aluwSEYCA">
+          <div class="stat-number" data-target="75" data-page-node-id="o65qHaOAylVR3buwyz3OV1">0</div>
+          <div class="stat-label" data-page-node-id="NmEhnt39k87LHDaRTwDxPU">% 温室气体减排目标</div>
+        </div>
+        <div class="stat-item" data-page-node-id="Z8DSDdFIg7Y52Q9AzqROHW">
+          <div class="stat-number" data-target="2030" data-page-node-id="MpcswIYo8YcoeklspuHuRn">0</div>
+          <div class="stat-label" data-page-node-id="E9SeegGOYDzUZSVTISQEFV">年 碳中和目标</div>
+        </div>
+        <div class="stat-item" data-page-node-id="OA5BFzeV2AaL1GZFVhw8HR">
+          <div class="stat-number" data-target="100" data-page-node-id="2ssbhxxJ12uLl2JDfQCQ6h">0</div>
+          <div class="stat-label" data-page-node-id="VKpBLPBjcOTiJi1rRvnVu8">% 可再生能源</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 全方位践行 ===== -->
+  <section class="env-section alt" id="practice" data-page-node-id="ZN7N3zFDD6OoWGaoxvBOWC">
+    <div class="env-container" data-page-node-id="eO7lkhAqCU4bxpLn0CGnrr">
+      <span class="env-kicker reveal" data-page-node-id="7if8PDEZgDiX4C6BfA7kfZ">全方位践行</span>
+      <h2 class="env-headline reveal" data-page-node-id="BsOfZORBbzRL6zTT3Ov3rN">从设计到交付，<br data-page-node-id="IHtFj6Y8V5hEpL4FeyHSmd">全方位践行。</h2>
+      <p class="env-lede reveal" data-page-node-id="DvzycCvOt2kYbA8R1H1dEz">
+        从第一笔草图到最终交付，环保理念贯穿我们创作与运营的每一个环节。
+      </p>
+      <div class="env-grid" data-page-node-id="J0QmkzFNEMZGwwZDy3LAam">
+        <div class="env-card reveal" style="--reveal-delay:0s" data-page-node-id="nXNKOWH8CgPfsTcJRu6lYS">
+          <div class="icon" data-page-node-id="9GVu7N47ktbeV0HVPqehjg">
+            <svg viewBox="0 0 24 24" data-page-node-id="c7swBqLREtUEp1IAFDyOFY"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" data-page-node-id="XN5m6dulRPVGZC9v1f8LFM"></path></svg>
+          </div>
+          <h3 data-page-node-id="Gqr8e7gFjO5n6bkQmbQiJg">绿色设计</h3>
+          <p data-page-node-id="03SzsxgdXxpoHOam3gz6ua">作品优先采用深色底稿与高效配色，降低设备显示功耗；排版紧凑克制，减少不必要的渲染负担。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.08s" data-page-node-id="bej8fY5EyAR3wvrBUoG84j">
+          <div class="icon" data-page-node-id="EzLpFhx9LB82PeF79DA5iq">
+            <svg viewBox="0 0 24 24" data-page-node-id="MBjSVKaJKWxpCHx2ZzFg2t"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" data-page-node-id="T7oNyoYW5aQS84cKcd1oKa"></path></svg>
+          </div>
+          <h3 data-page-node-id="n8Z3uYi3JqofjOKXb23i2L">数字优先</h3>
+          <p data-page-node-id="LfrlE3a7TyJh6MOBb56EHf">作品全程以数字文件交付与分享，不打印、不刻盘，从源头减少纸张与耗材的消耗。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.16s" data-page-node-id="oG6y8mYMV7gDaRtjpAnBmF">
+          <div class="icon" data-page-node-id="E8tJGtXMcrLU1ebSdI57nC">
+            <svg viewBox="0 0 24 24" data-page-node-id="upOmhvtEjG7qagmEj3rZYX"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" data-page-node-id="V8yGq6svP8cxSl0Z4y24jb"></path></svg>
+          </div>
+          <h3 data-page-node-id="FPK2f35r3thmZqQUk6eJG9">线上协作</h3>
+          <p data-page-node-id="W3BdpTAFAuYDPhjUJgD8Mg">成员之间围绕设计与 PPT 话题的交流、评审与迭代全部在线完成，减少通勤与差旅产生的碳足迹。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.24s" data-page-node-id="SvQ5xWdMGtJzAjDJxL01bu">
+          <div class="icon" data-page-node-id="I3tTU7zCLcZA1aFLlOGjV8">
+            <svg viewBox="0 0 24 24" data-page-node-id="WIRh4PHiJq0HBEsssOyzXE"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z" data-page-node-id="ggCj7s8qm5Ukmu57OEBA7F"></path></svg>
+          </div>
+          <h3 data-page-node-id="krkIb6B9ERSRf17MdvB8Pd">云端存储</h3>
+          <p data-page-node-id="6UrK2SEtskYDLa5XBMC2Tu">文件库托管于云端，按需取用，避免多份冗余副本分散存储带来的能源浪费。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 循环利用 ===== -->
+  <section class="env-section" id="cycle" data-page-node-id="eVNdXS8m9q5Mygn1VmqB6N">
+    <div class="env-container" data-page-node-id="KFEI7VHDoS22F4sFLfVP7w">
+      <span class="env-kicker reveal" data-page-node-id="SpDqGLn3blg2ZbaHJS6I5D">循环利用</span>
+      <h2 class="env-headline reveal" data-page-node-id="gC3xGcNFJSj8BuXjn7Egad">物尽其用、循环共享，<br data-page-node-id="ZjMIfQABaGQiKYzw1w0jZI">让创作更持久。</h2>
+      <p class="env-lede reveal" data-page-node-id="qAkmiD9XdhzWpzh0XUOAg0">
+        我们打造经久耐用的设计资产，并在作品生命周期的每一端做好「回收」，
+        帮助保护地球的宝贵资源。
+      </p>
+      <div class="env-grid" data-page-node-id="HiTemHvNS65p3DAPsLTtyM">
+        <div class="env-card reveal" style="--reveal-delay:0s" data-page-node-id="aBhnD0LEbnpoRFOLXPAOni">
+          <div class="icon" data-page-node-id="AvGsGoMbzzMET4e3qPMQrJ">
+            <svg viewBox="0 0 24 24" data-page-node-id="XesoYB4V2SEm3f8rr7a9tF"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z" data-page-node-id="xZT9mM48fdeTycGZqB4SBG"></path></svg>
+          </div>
+          <h3 data-page-node-id="BYk66BGY2DG3NaThQDfGKd">模板复用</h3>
+          <p data-page-node-id="cIWcTUPu1NTYyTjyd8Tlvi">一套模板持续迭代多年，架构化的母版设计让每次更新都建立在既有成果之上，而非推倒重来。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.08s" data-page-node-id="F8c4QokUScJZDWCbFPMBOz">
+          <div class="icon" data-page-node-id="DEEngGNi7QFaQAP5SBllE4">
+            <svg viewBox="0 0 24 24" data-page-node-id="0fX6OckQpxh7H7Y2pP3tdj"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" data-page-node-id="9iSuXnsOrXtT9AXYuPTzjB"></path></svg>
+          </div>
+          <h3 data-page-node-id="1UeMXwHPPmT5NFsYyk4Bui">素材共享</h3>
+          <p data-page-node-id="mHALgiNRqv6nws6nsNgz7J">图标、字体、配色与组件在成员间开放共享，一份素材全工作室复用，避免重复创作。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.16s" data-page-node-id="BiCtPWJabJeZPHMlNDL7Pm">
+          <div class="icon" data-page-node-id="tF2oGFtC72jCwCa6jPG3tz">
+            <svg viewBox="0 0 24 24" data-page-node-id="lgPsVtCnGFUvBQmS5KD6Oi"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" data-page-node-id="bK2lJJJf8MAIiiFUxLlWMD"></path></svg>
+          </div>
+          <h3 data-page-node-id="ChZZ4dKcZHdrAg6oO8dYxw">文件回收整理</h3>
+          <p data-page-node-id="SBtCyGFNWbUsUQ0SFoqUJI">定期整理文件库，归档过时版本、清理冗余缓存，让云端存储始终精简高效。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.24s" data-page-node-id="dXAYQgiuppNHF51EBqHwqH">
+          <div class="icon" data-page-node-id="LAI7nE5ZW6BFRqIsXZYyok">
+            <svg viewBox="0 0 24 24" data-page-node-id="W7npNpVeaHrCTOkji3sDEu"><path d="M9.5 2c-1.82 0-3.31 1.21-3.82 2.86C4.11 5.36 3 6.76 3 8.5c0 .69.19 1.33.5 1.89C2.58 10.93 2 11.89 2 13c0 1.32.84 2.44 2.01 2.86C4.01 15.9 4 15.95 4 16c0 1.65 1.34 3 3 3 .36 0 .7-.07 1.02-.18C8.44 20.13 9.87 21 11.5 21c1.63 0 3.06-.87 3.48-2.18.32.11.66.18 1.02.18 1.66 0 3-1.35 3-3 0-.05-.01-.1-.01-.14C20.16 15.44 21 14.32 21 13c0-1.11-.58-2.07-1.5-2.61.31-.56.5-1.2.5-1.89 0-1.74-1.11-3.14-2.68-3.64C16.81 3.21 15.32 2 13.5 2c-.86 0-1.65.28-2.29.74C10.94 2.29 10.26 2 9.5 2z" data-page-node-id="7L3DfYes1HleOJoYN2Fbgv"></path></svg>
+          </div>
+          <h3 data-page-node-id="EfYm03bvlI9RQsGo8vmyVv">经久耐用</h3>
+          <p data-page-node-id="9xu2p2pX9tW9lL8nnGggkS">作品经受得住时间考验：严格的细节打磨与一致性检查，让每一份设计都能被长期信赖与沿用。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 价值观 ===== -->
+  <section class="env-section alt" id="values" data-page-node-id="3A9lmEZVnLpMPcJ8EEIDRw">
+    <div class="env-container" data-page-node-id="T906pIViSL2OuVpzaYpac9">
+      <span class="env-kicker reveal" data-page-node-id="NRd9D1jRRQs16fgtfJN8Mi">价值观</span>
+      <h2 class="env-headline reveal" data-page-node-id="twogHaLnnzuydSLEuRvbnF">我们的价值观，<br data-page-node-id="9yGH5zVjBts6pMJoIy8iQp">为我们导航。</h2>
+      <p class="env-lede reveal" data-page-node-id="hESrCXkWFvFzqAVwE9NOno">
+        环保是 Caelus Studio 价值观的重要一环，与这些信念一起，指引我们前进的方向。
+      </p>
+      <div class="env-grid" data-page-node-id="LA304D83JjLca0nmj1huqq">
+        <div class="env-card reveal" style="--reveal-delay:0s" data-page-node-id="WJYnfZV4c9ln8jn8DzB62L">
+          <div class="icon" data-page-node-id="2DCFf5knvCYajn3urEZY86">
+            <svg viewBox="0 0 24 24" data-page-node-id="ChPxWDyhpTgBYoGwOjGq8J"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" data-page-node-id="bvaHpXbixnMcPgPChsL5SU"></path></svg>
+          </div>
+          <h3 data-page-node-id="SeCr8sL9Nr0BH4cTlZsfWB">设计</h3>
+          <p data-page-node-id="3AGmWK8yF0QyyltnQpVocF">始于设计，忠于设计。我们用 PowerPoint 打造系统、动画与界面设计，追求极致的作品品质。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.08s" data-page-node-id="BPY98R7kKHEbDa5lV4Qg9r">
+          <div class="icon" data-page-node-id="AHgNcwjBngStFDgxpIDUTE">
+            <svg viewBox="0 0 24 24" data-page-node-id="Y9HKWAcE9RkEDifrNaRyQc"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" data-page-node-id="ZN7cRr9hoeHZ0aSbZyizqw"></path></svg>
+          </div>
+          <h3 data-page-node-id="YqZEJDvLogxh81n9vPCneE">教育</h3>
+          <p data-page-node-id="scQBDVJ3ByvvX4Ec5pBdoL">我们毫无保留地分享技巧与经验，全力支持每一位成员学习、创造，开创属于自己的成功。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.16s" data-page-node-id="sCHr0g6MtVhqMgNtjENT0A">
+          <div class="icon" data-page-node-id="f7dIS39UFuFCWzkBfq0DQs">
+            <svg viewBox="0 0 24 24" data-page-node-id="1KV7S7hEDtY41XGc6GxfqC"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" data-page-node-id="ar7mV7RQZXzlPn7QqCU4Kn"></path></svg>
+          </div>
+          <h3 data-page-node-id="b07zWLGyK2IwlDC2tCKZsP">开源</h3>
+          <p data-page-node-id="A2r2myiHVKLY0tVQ96jDnT">CaelusOS 等作品在 GitHub 开放，我们相信开放的分享能让创意走得更远。</p>
+        </div>
+        <div class="env-card reveal" style="--reveal-delay:0.24s" data-page-node-id="DvUdH2GuG1hKFb0QouQ65p">
+          <div class="icon" data-page-node-id="F9We4oOh1hyPQbWwoyx9ZL">
+            <svg viewBox="0 0 24 24" data-page-node-id="e0PwAtgctld4CfiiZbaxkt"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z" data-page-node-id="1pzKik6HVIahhHPH2cTZzl"></path></svg>
+          </div>
+          <h3 data-page-node-id="79xb4FeFwAdB3coNiRNyAr">环保</h3>
+          <p data-page-node-id="ECej3Z0bJmehVwgBDLLWEm">一切为了地球、绿色和人类。从运营到创作，我们把对这颗星球的关心，落实到每一个细节。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 底部 ===== -->
+  <section class="env-section" id="footer" data-page-node-id="7LNB9uEMvSRkOLAJGbGmiT">
+    <div class="env-container" data-page-node-id="M8Z1uJwCcuN8g5v2xtdrGz">
+      <div class="footer-links reveal" data-page-node-id="ARgp7MLyhSNE7y5EMCTAsI">
+        <div class="link-group">
+          <div class="link-title">文件库</div>
+          <ul>
+            <li><a href="https://caelustudio.feishu.cn/wiki/space/7668877677914278860?ccm_open_type=lark_wiki_spaceLink&amp;open_tab_from=wiki_home" target="_blank" rel="noopener">Caelus Studio 文件库</a></li>
+            <li><a href="https://caelustudio.feishu.cn/wiki/space/7668679549147728860?ccm_open_type=lark_wiki_spaceLink&amp;open_tab_from=wiki_home" target="_blank" rel="noopener">CaelusOS 文件库</a></li>
+            <li><a href="https://caelustudio.feishu.cn/wiki/space/7672229743277690146?ccm_open_type=lark_wiki_spaceLink&amp;open_tab_from=wiki_home" target="_blank" rel="noopener">TreeOS 文件库</a></li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <div class="link-title">价值观</div>
+          <ul>
+            <li><a href="#top">环保</a></li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <div class="link-title">友情链接</div>
+          <ul>
+            <li><a href="https://www.okteam.cn/" target="_blank" rel="noopener">OK Team</a></li>
+            <li><a href="https://git.rivulet.org.cn/" target="_blank" rel="noopener">GitSource</a></li>
+            <li><a href="https://console.hivemind.synergize.co/" target="_blank" rel="noopener">HiveMind Synergize</a></li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <div class="link-title">联系方式</div>
+          <ul>
+            <li><a href="mailto:caelustudio@outlook.com">电子邮件</a></li>
+            <li><a href="https://space.bilibili.com/502631018" target="_blank" rel="noopener">哔哩哔哩</a></li>
+            <li><a href="https://x.com/CaelusStudio" target="_blank" rel="noopener">X</a></li>
+            <li><a href="https://qm.qq.com/q/xr13sRirZe" target="_blank" rel="noopener">QQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="site-footer reveal" data-page-node-id="WnEgDdKwvR0DtrM6oY77kU">
+        <p data-page-node-id="xZHxWDXFUHBlI8t9aQamPh">©️ 2026 Caelus Studio.</p>
+        <p class="highlight" data-page-node-id="vVZrVpfI2ishgD3WPJJ2c0">网页由人工智能辅助生成 · 地球影像 © NASA</p>
+      </footer>
+    </div>
+  </section>
+
+  <script>
+    // ===== 页面加载动画 =====
+    (function() {
+      var loader = document.getElementById('pageLoader');
+      function hideLoader() { if (loader) loader.classList.add('hidden'); }
+      window.addEventListener('load', function() { setTimeout(hideLoader, 400); });
+      setTimeout(hideLoader, 3000);
+    })();
+
+    // ===== 导航栏 & 返回顶部：滚动响应 + 区块高亮 =====
+    (function() {
+      const nav = document.getElementById('siteNav');
+      const backBtn = document.getElementById('backToTop');
+      const navAnchors = document.querySelectorAll('.nav-links a');
+      const sections = ['promise', 'practice', 'cycle', 'values'].map(id => document.getElementById(id));
+      let ticking = false;
+
+      function onScroll() {
+        const y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 60);
+        backBtn.classList.toggle('visible', y > 400);
+        // 导航高亮当前区块
+        var activeId = null;
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i] && y >= sections[i].offsetTop - 120) activeId = sections[i].id;
+        }
+        navAnchors.forEach(function(a) {
+          var href = a.getAttribute('href');
+          a.classList.toggle('active', href === '#' + activeId);
+        });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      onScroll();
+    })();
+
+    // ===== 移动端汉堡菜单 =====
+    (function() {
+      const menuBtn = document.getElementById('navMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      function closeMenu() {
+        menuBtn.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = mobileMenu.classList.toggle('open');
+        menuBtn.classList.toggle('open', isOpen);
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (mobileMenu.classList.contains('open') &&
+            !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 500) closeMenu();
+      });
+    })();
+
+    // ===== 自定义光标 =====
+    (function() {
+      const cursor = document.getElementById('customCursor');
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      document.addEventListener('mousedown', () => cursor.classList.add('clicked'));
+      document.addEventListener('mouseup', () => cursor.classList.remove('clicked'));
+      document.addEventListener('mouseleave', () => cursor.style.display = 'none');
+      document.addEventListener('mouseenter', () => cursor.style.display = 'block');
+      const interactiveElements = document.querySelectorAll('a, button, .env-card');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    })();
+
+    // ===== 主题切换 =====
+    (function theme() {
+      const toggleBtn = document.getElementById('themeToggle');
+      const icon = document.getElementById('themeIcon');
+      const html = document.documentElement;
+
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      let currentTheme = localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light');
+
+      function setTheme(theme) {
+        currentTheme = theme;
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateIcon(theme);
+      }
+
+      function updateIcon(theme) {
+        if (theme === 'dark') {
+          icon.innerHTML = `<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>`;
+        } else {
+          icon.innerHTML = `<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/><path d="M12 4a8 8 0 0 0-4 15 8 8 0 0 0 4-15z" opacity="0.6"/>`;
+        }
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      });
+
+      prefersDark.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      setTheme(currentTheme);
+    })();
+
+    // ===== 数字统计动画 =====
+    (function() {
+      var statNumbers = document.querySelectorAll('.stat-number[data-target]');
+      var statObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var target = parseInt(el.dataset.target);
+            var duration = 1200;
+            var start = performance.now();
+            function tick(now) {
+              var progress = Math.min((now - start) / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.round(target * eased);
+              if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+            statObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      statNumbers.forEach(function(el) { statObserver.observe(el); });
+    })();
+
+    // ===== 滚动触发动画 =====
+    (function() {
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
