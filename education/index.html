@@ -44,10 +44,10 @@
       --scroll-text: rgba(255,255,255,0.5);
       --footer-color: #555;
       --footer-highlight: #666;
-      --tag-bg: #0a2a1a;
-      --tag-color: #7de8a2;
-      --tag-border: rgba(80,220,140,0.15);
-      --accent: #32d74b;
+      --tag-bg: #0a1e33;
+      --tag-color: #7db8e8;
+      --tag-border: rgba(80,160,220,0.15);
+      --accent: #0a84ff;
       --card-hover-border: rgba(255,255,255,0.08);
     }
 
@@ -891,16 +891,11 @@
     }
   </style>
   <style>
-    /* ===== 本页 hero 覆盖：纯色背景（无地球图）===== */
+    /* ===== 本页 hero：头图背景 ===== */
     .hero-earth {
-      background-color: transparent;
-      background-image: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(50, 211, 75, 0.14), transparent 70%), linear-gradient(var(--bg-primary), var(--bg-primary));
-      --scroll-color: var(--text-muted);
-      --scroll-text: var(--text-muted);
+      background-color: #000;
+      background-image: url('../assets/education-hero.jpg');
     }
-    .hero-earth::before { display: none; }
-    .hero-earth h1 { color: var(--text-primary) !important; text-shadow: none; }
-    .hero-earth .sub { color: var(--text-secondary); text-shadow: none; }
   </style>
   <script>
     (function(){var t=localStorage.getItem('theme||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
