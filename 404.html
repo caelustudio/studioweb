@@ -381,6 +381,7 @@
       document.getElementById('cancelCountdown').addEventListener('click', function () {
         clearInterval(timer);
         document.getElementById('countdown').style.display = 'none';
+        document.querySelector('.loader-bar').style.display = 'none';
       });
     })();
   </script>
