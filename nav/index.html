@@ -897,6 +897,9 @@
       background-image: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(10, 132, 255, 0.12), transparent 70%), linear-gradient(var(--bg-primary), var(--bg-primary));
       --scroll-color: var(--text-muted);
       --scroll-text: var(--text-muted);
+      /* 关键：把模板的白色 hero 文字变量重定义为跟随主题 */
+      --hero-text: var(--text-primary);
+      --hero-sub: var(--text-secondary);
     }
     .hero-earth::before { display: none; }
     .hero-earth h1 { color: var(--text-primary) !important; text-shadow: none; }
