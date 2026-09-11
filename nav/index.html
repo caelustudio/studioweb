@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>导航 - Caelus Studio</title>
+  <meta name="description" content="Caelus Studio 导航页：站内页面、作品仓库、友情链接与联系方式，一页直达。">
+  <meta property="og:title" content="导航 - Caelus Studio">
+  <meta property="og:description" content="Caelus Studio 导航页：站内页面、作品仓库、友情链接与联系方式，一页直达。">
+  <meta name="twitter:title" content="导航 - Caelus Studio">
+  <meta name="twitter:description" content="Caelus Studio 导航页：站内页面、作品仓库、友情链接与联系方式，一页直达。">
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --text-2: #6e6e73;
+      --border: rgba(0, 0, 0, 0.08);
+      --hover-border: rgba(10, 132, 255, 0.45);
+      --accent: #0a84ff;
+      --accent-2: #5e5ce6;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.12);
+      --header-bg: rgba(245, 245, 247, 0.82);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0d0f;
+        --surface: #17171a;
+        --text: #f5f5f7;
+        --text-2: #98989d;
+        --border: rgba(255, 255, 255, 0.1);
+        --hover-border: rgba(10, 132, 255, 0.6);
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
+        --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.5), 0 16px 40px rgba(0, 0, 0, 0.55);
+        --header-bg: rgba(13, 13, 15, 0.82);
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== 顶部 ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .brand .tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      border: 1px solid var(--hover-border);
+      border-radius: 999px;
+      padding: 2px 10px;
+    }
+    nav.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    nav.tabs a {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    nav.tabs a:hover { color: var(--text); background: var(--border); }
+    nav.tabs a.on { color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    @media (prefers-color-scheme: light) {
+      nav.tabs a.on { color: #fff; }
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 72px 22px 20px;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      margin-top: 12px;
+      font-size: 1.02rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    /* ===== 区块 ===== */
+    main { max-width: 980px; margin: 0 auto; padding: 24px 22px 60px; }
+    section { padding-top: 28px; }
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .sec-head .num {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+    .sec-head h2 {
+      font-size: 1.35rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+    .sec-head .hint {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--text-2);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s cubic-bezier(0.2, 0.6, 0.2, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--hover-border);
+      box-shadow: var(--shadow-hover);
+    }
+    .card:hover::after { opacity: 1; }
+    .card .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card .icon {
+      width: 38px;
+      height: 38px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.12), rgba(94, 92, 230, 0.12));
+      font-size: 1.15rem;
+    }
+    .card .icon svg { width: 19px; height: 19px; fill: var(--accent); }
+    .card .arrow {
+      color: var(--text-2);
+      font-size: 0.9rem;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+    .card:hover .arrow { transform: translateX(3px); color: var(--accent); }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+    .card .host {
+      margin-top: 6px;
+      font-size: 0.74rem;
+      color: var(--text-2);
+      opacity: 0.75;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ===== 底部 ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      transition: background 0.3s ease;
+    }
+    .footer-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 22px 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 28px;
+    }
+    .f-group h4 {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .f-group ul { list-style: none; display: grid; gap: 8px; }
+    .f-group a {
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.85;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+    .f-group a:hover { opacity: 1; color: var(--accent); }
+    .copyright {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 22px 34px;
+      font-size: 0.78rem;
+      color: var(--text-2);
+    }
+
+    @media (max-width: 560px) {
+      .hero { padding-top: 48px; }
+      .sec-head .hint { display: none; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">Caelus Studio <span class="tag">导航</span></div>
+      <nav class="tabs" id="tabs">
+        <a href="#site" class="on">站内</a>
+        <a href="#works">作品</a>
+        <a href="#friends">友情</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>一页，去往所有地方。</h1>
+    <p>Caelus Studio 的站内页面、作品仓库、友情链接与联系方式，都整理在这里。</p>
+  </div>
+
+  <main>
+    <!-- ===== 站内页面 ===== -->
+    <section id="site">
+      <div class="sec-head">
+        <span class="num">01</span>
+        <h2>站内页面</h2>
+        <span class="hint">4 个页面</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://www.caelus.top/">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.33-.96-.33-1.34 0l-8.36 7.53c-.34.3-.13.87.34.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>主站首页</h3>
+          <p>作品展示、下载与工作室介绍。</p>
+          <span class="host">www.caelus.top</span>
+        </a>
+        <a class="card" href="https://www.caelus.top/environment/">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M6.05 8.05a7.001 7.001 0 0 0-.02 9.88c1.47 1.47 3.4 2.2 5.32 2.2.1 0 .19 0 .29-.01a6.97 6.97 0 0 0 4.31-2.19L6.05 8.05zm11.9-1.98a7.002 7.002 0 0 0-9.88-.02l9.9 9.9c2.73-2.73 2.71-7.15-.02-9.88z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>环保</h3>
+          <p>一切为了地球、绿色和人类。</p>
+          <span class="host">caelus.top/environment</span>
+        </a>
+        <a class="card" href="https://www.caelus.top/education/">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>教育</h3>
+          <p>教育赋予每个人前行的力量。</p>
+          <span class="host">caelus.top/education</span>
+        </a>
+        <a class="card" href="https://www.caelus.top/privacy/">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm3 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>隐私</h3>
+          <p>隐私，是每个人的基本权利。</p>
+          <span class="host">caelus.top/privacy</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== 作品与文件库 ===== -->
+    <section id="works">
+      <div class="sec-head">
+        <span class="num">02</span>
+        <h2>作品与文件库</h2>
+        <span class="hint">6 个入口</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://github.com/caelustudio/CaelusOS" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.84c.85 0 1.7.11 2.5.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>CaelusOS</h3>
+          <p>开源操作系统作品，GitHub 仓库。</p>
+          <span class="host">github.com/caelustudio</span>
+        </a>
+        <a class="card" href="https://www.okteam.cn/store/work/24" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>StarOS</h3>
+          <p>星空主题系统设计作品，OK Team 应用市场。</p>
+          <span class="host">okteam.cn/store/work/24</span>
+        </a>
+        <a class="card" href="https://www.okteam.cn/store/work/36" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zm0 0c0-4.97-4.03-9-9-9 0 4.97 4.03 9 9 9zm0-13c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 4c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>TreeOS</h3>
+          <p>自然主题系统设计作品，OK Team 应用市场。</p>
+          <span class="host">okteam.cn/store/work/36</span>
+        </a>
+        <a class="card" href="https://caelustudio.feishu.cn/wiki/space/7668877677914278860?ccm_open_type=lark_wiki_spaceLink&amp;open_tab_from=wiki_home" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>Caelus Studio 文件库</h3>
+          <p>工作室资料与文档总库，飞书知识库。</p>
+          <span class="host">caelustudio.feishu.cn</span>
+        </a>
+        <a class="card" href="https://caelustudio.feishu.cn/wiki/space/7668679549147728860?ccm_open_type=lark_wiki_spaceLink&amp;open_tab_from=wiki_home" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>CaelusOS 文件库</h3>
+          <p>CaelusOS 相关资料与文档，飞书知识库。</p>
+          <span class="host">caelustudio.feishu.cn</span>
+        </a>
+        <a class="card" href="https://caelustudio.feishu.cn/wiki/space/7672229743277690146?ccm_open_type=lark_wiki_spaceLink&amp;open_tab_from=wiki_home" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>TreeOS 文件库</h3>
+          <p>TreeOS 相关资料与文档，飞书知识库。</p>
+          <span class="host">caelustudio.feishu.cn</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== 友情链接 ===== -->
+    <section id="friends">
+      <div class="sec-head">
+        <span class="num">03</span>
+        <h2>友情链接</h2>
+        <span class="hint">3 位伙伴</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://www.okteam.cn/" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>OK Team</h3>
+          <p>创作团队与应用市场，作品发布平台。</p>
+          <span class="host">www.okteam.cn</span>
+        </a>
+        <a class="card" href="https://git.rivulet.org.cn/" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.84c.85 0 1.7.11 2.5.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>GitSource</h3>
+          <p>代码托管与开源协作平台。</p>
+          <span class="host">git.rivulet.org.cn</span>
+        </a>
+        <a class="card" href="https://console.hivemind.synergize.co/" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2l9 5v2H3V7l9-5zm-8 9h2v7H4v-7zm4 0h2v7H8v-7zm4 0h2v7h-2v-7zm4 0h2v7h-2v-7zM3 20h18v2H3v-2z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>HiveMind Synergize</h3>
+          <p>协同控制台。</p>
+          <span class="host">console.hivemind.synergize.co</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== 联系社区 ===== -->
+    <section id="contact">
+      <div class="sec-head">
+        <span class="num">04</span>
+        <h2>联系社区</h2>
+        <span class="hint">4 个渠道</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://space.bilibili.com/502631018" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 8h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1zm4-4l2.5 3h3L16 4h2.5L16 7.5h4A2 2 0 0 1 22 9.5v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h4L5.5 4H8zM8.5 11.5L7 13l2 2-2 2 1.5 1.5L12 15l-3.5-3.5zm7 0L14 13l2 2-2 2 1.5 1.5L19 15l-3.5-3.5z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>哔哩哔哩</h3>
+          <p>作品视频与教程发布，欢迎一键三连。</p>
+          <span class="host">space.bilibili.com</span>
+        </a>
+        <a class="card" href="https://x.com/CaelusStudio" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>X（Twitter）</h3>
+          <p>动态与想法，第一时间在这里更新。</p>
+          <span class="host">x.com/CaelusStudio</span>
+        </a>
+        <a class="card" href="https://qm.qq.com/q/xr13sRirZe" target="_blank" rel="noopener">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 9h10v2H7V9zm6 5H7v-2h6v2zm4-6H7V6h10v2z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>QQ 群</h3>
+          <p>加入群聊，和成员们交流设计与 PPT。</p>
+          <span class="host">qm.qq.com</span>
+        </a>
+        <a class="card" href="mailto:caelustudio@outlook.com">
+          <div class="row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+            <span class="arrow">→</span>
+          </div>
+          <h3>电子邮件</h3>
+          <p>合作与事务联系，邮件必回。</p>
+          <span class="host">caelustudio@outlook.com</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="f-group">
+        <h4>页面</h4>
+        <ul>
+          <li><a href="https://www.caelus.top/">主站首页</a></li>
+          <li><a href="https://www.caelus.top/environment/">环保</a></li>
+          <li><a href="https://www.caelus.top/education/">教育</a></li>
+          <li><a href="https://www.caelus.top/privacy/">隐私</a></li>
+        </ul>
+      </div>
+      <div class="f-group">
+        <h4>友情链接</h4>
+        <ul>
+          <li><a href="https://www.okteam.cn/" target="_blank" rel="noopener">OK Team</a></li>
+          <li><a href="https://git.rivulet.org.cn/" target="_blank" rel="noopener">GitSource</a></li>
+          <li><a href="https://console.hivemind.synergize.co/" target="_blank" rel="noopener">HiveMind Synergize</a></li>
+        </ul>
+      </div>
+      <div class="f-group">
+        <h4>联系方式</h4>
+        <ul>
+          <li><a href="mailto:caelustudio@outlook.com">电子邮件</a></li>
+          <li><a href="https://space.bilibili.com/502631018" target="_blank" rel="noopener">哔哩哔哩</a></li>
+          <li><a href="https://x.com/CaelusStudio" target="_blank" rel="noopener">X</a></li>
+          <li><a href="https://qm.qq.com/q/xr13sRirZe" target="_blank" rel="noopener">QQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Caelus Studio · 导航页 · 网页由人工智能辅助生成</div>
+  </footer>
+
+  <script>
+    // tab 滚动高亮
+    (function () {
+      const tabs = document.querySelectorAll('#tabs a');
+      const map = {};
+      tabs.forEach(a => map[a.getAttribute('href').slice(1)] = a);
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            tabs.forEach(a => a.classList.remove('on'));
+            const a = map[e.target.id];
+            if (a) a.classList.add('on');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      document.querySelectorAll('main section').forEach(s => io.observe(s));
+    })();
+  </script>
+</body>
+</html>
