@@ -165,6 +165,11 @@
       border-color: rgba(0,0,0,0.06);
       color: #1a1a1a;
     }
+    [data-theme="light"] .site-nav .theme-toggle {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.06);
+      color: #1a1a1a;
+    }
 
     .theme-toggle:hover {
       transform: scale(1.08);
@@ -301,6 +306,22 @@
       color: #1a1a1a;
     }
 
+    /* 浅色模式未滚动时导航文字改深色（hero 为浅色背景，白色会看不见） */
+    [data-theme="light"] .site-nav .nav-brand {
+      color: #1a1a1a;
+    }
+    [data-theme="light"] .site-nav .nav-links a {
+      color: rgba(26,26,26,0.6);
+    }
+    [data-theme="light"] .site-nav .nav-links a:hover {
+      background: rgba(0,0,0,0.06);
+      color: #1a1a1a;
+    }
+    [data-theme="light"] .site-nav .nav-links a.active {
+      color: #1a1a1a;
+      background: rgba(0,0,0,0.08);
+    }
+
     .nav-right {
       display: flex;
       align-items: center;
@@ -372,6 +393,9 @@
     }
 
     [data-theme="light"] .site-nav.scrolled .nav-menu-btn span {
+      background: #1a1a1a;
+    }
+    [data-theme="light"] .site-nav .nav-menu-btn span {
       background: #1a1a1a;
     }
 
