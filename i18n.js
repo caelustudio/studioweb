@@ -47,6 +47,7 @@
   function tr(s) { var e = DICT[norm(s)]; if (!e) return null; var v = e[IDX[cur()]]; return v === undefined ? null : v; }
 
   var obs = null;
+  var ORIG_N = new WeakMap(), ORIG_P = new WeakMap(), ORIG_T = null;
   function apply() {
     if (obs) obs.disconnect();
     try {
@@ -54,17 +55,20 @@
       var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (node) { var p = node.parentNode; return (p && (p.nodeName === 'SCRIPT' || p.nodeName === 'STYLE')) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } }), n, nodes = [];
       while ((n = w.nextNode())) nodes.push(n);
       for (var i = 0; i < nodes.length; i++) {
-        var key = norm(nodes[i].nodeValue);
+        if (!ORIG_N.has(nodes[i])) ORIG_N.set(nodes[i], norm(nodes[i].nodeValue));
+        var key = ORIG_N.get(nodes[i]);
         if (!key) continue;
         var t = tr(key);
         if (t !== null && t !== nodes[i].nodeValue) nodes[i].nodeValue = t;
       }
       var els = document.querySelectorAll('input[placeholder], textarea[placeholder]');
       for (var j = 0; j < els.length; j++) {
-        var tp = tr(els[j].getAttribute('placeholder'));
+        if (!ORIG_P.has(els[j])) ORIG_P.set(els[j], norm(els[j].getAttribute('placeholder')));
+        var tp = tr(ORIG_P.get(els[j]));
         if (tp !== null) els[j].setAttribute('placeholder', tp);
       }
-      var tt = tr(document.title);
+      if (ORIG_T === null) ORIG_T = document.title;
+      var tt = tr(ORIG_T);
       if (tt !== null) document.title = tt;
       document.documentElement.setAttribute('lang', HTMLLANG[cur()]);
       var btn = document.getElementById('langToggle');
