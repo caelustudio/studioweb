@@ -71,7 +71,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      cursor: none;
       transition: all 0.3s ease;
       color: var(--text);
       user-select: none;
@@ -118,8 +118,7 @@
     }
     .row {
       display: flex;
-      align-items: center;
-      gap: 0.9rem;
+      flex-direction: column;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -128,9 +127,54 @@
       transition: border-color 0.3s ease, background 0.3s ease, transform 0.25s ease, opacity 0.5s ease;
       opacity: 0;
       transform: translateY(8px);
+      user-select: none;
     }
+    .row .main { display: flex; align-items: center; gap: 0.9rem; }
+    .row.open { border-color: rgba(52,199,123,0.35); }
     .row.shown { opacity: 1; transform: translateY(0); }
     .row:hover { transform: translateY(-2px); }
+    .row .chev {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      fill: none;
+      stroke: var(--text-3);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), stroke 0.3s ease;
+    }
+    .row.open .chev { transform: rotate(180deg); stroke: var(--text-2); }
+    .row .more {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease;
+    }
+    .row.open .more { max-height: 180px; opacity: 1; margin-top: 0.85rem; }
+    .row .kv { display: flex; gap: 0.5rem; font-size: 0.85rem; color: var(--text-2); }
+    .row .kv b { color: var(--text-3); font-weight: 400; flex-shrink: 0; }
+    .row .kv span { word-break: break-all; }
+    .row .visit {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--accent);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease;
+      cursor: none;
+    }
+    .row .visit:hover { transform: translateY(-1px); filter: brightness(1.4); }
+    [data-theme="light"] .row .visit:hover { filter: brightness(0.94); }
+    .row .visit svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .row .dot {
       width: 11px; height: 11px; border-radius: 50%;
       background: var(--text-3);
@@ -188,6 +232,7 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       pointer-events: none;
       z-index: 9999;
+      opacity: 0;
       transform: translate(-50%, -50%);
       transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
@@ -257,11 +302,12 @@
     document.addEventListener('mousemove', function (e) {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
+      cursor.style.opacity = '1';
     });
     document.addEventListener('mousedown', function () { cursor.classList.add('clicked'); });
     document.addEventListener('mouseup', function () { cursor.classList.remove('clicked'); });
     document.addEventListener('mouseleave', function () { cursor.style.display = 'none'; });
-    document.addEventListener('mouseenter', function () { cursor.style.display = 'block'; });
+    document.addEventListener('mouseenter', function () { cursor.style.display = 'block'; cursor.style.opacity = '1'; });
     function bindCursorHover() {
       document.querySelectorAll('a, button').forEach(function (el) {
         if (el.dataset.cursorBound) return;
@@ -312,11 +358,12 @@
     function render(d) {
       var rows = document.getElementById('rows');
       var h = '';
-      d.results.forEach(function (r) {
-        h += '<div class="row">'
+      d.results.forEach(function (r, idx) {
+        h += '<div class="row" data-idx="' + idx + '" role="button" tabindex="0">'
+          + '<div class="main">'
           + '<span class="dot ' + (r.ok ? 'ok' : 'fail') + '"></span>'
           + '<div class="info"><div class="name">' + r.name + '</div>'
-          + '<a class="url" href="' + r.url + '" target="_blank" rel="noopener"><div class="url">' + r.url + '</div></a>'
+          + '<div class="url">' + r.url.replace(/^https?:\/\//, '') + '</div>'
           + '</div>'
           + '<div class="meta">'
           + (r.ok
@@ -324,9 +371,30 @@
               : '<div class="detail">' + (r.detail || '故障') + '</div>')
           + '<div class="when">' + fmtTime(r.at) + ' 检测</div>'
           + '</div>'
+          + '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
+          + '</div>'
+          + '<div class="more">'
+          + '<div class="kv"><b>域名</b><span>' + r.url + '</span></div>'
+          + '<div class="kv"><b>状态</b><span>' + (r.ok ? '✅ 正常运行' : '❌ 故障') + ' · HTTP ' + (r.code || '-') + '</span></div>'
+          + '<div class="kv"><b>响应</b><span>' + (r.ms >= 1000 ? (r.ms / 1000).toFixed(2) + ' 秒' : r.ms + ' 毫秒') + '</span></div>'
+          + '<div class="kv"><b>检测</b><span>' + new Date(r.at).toLocaleString('zh-CN') + '</span></div>'
+          + '<a class="visit" href="' + r.url + '" target="_blank" rel="noopener">前往站点 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>'
+          + '</div>'
           + '</div>';
       });
       rows.innerHTML = h;
+
+      // 点击展开/收起详情
+      rows.querySelectorAll('.row').forEach(function (el) {
+        var r = d.results[+el.dataset.idx];
+        el.addEventListener('click', function (e) {
+          if (e.target.closest('.visit')) return;
+          el.classList.toggle('open');
+        });
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.classList.toggle('open'); }
+        });
+      });
 
       // 逐行浮现动画
       var els = rows.querySelectorAll('.row');
