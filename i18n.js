@@ -66,6 +66,8 @@
     "点此加入群聊。": ["点此加入群聊。", "點此加入群聊。", "Click to join the group."],
     "关于": ["关于", "關於", "About"],
     '浏览': ['浏览', '瀏覽', 'Browse'],
+    '站点状态': ['站点状态', '站點狀態', 'Site Status'],
+    '各站点可用性实时检测，故障第一时间告警。': ['各站点可用性实时检测，故障第一时间告警。', '各站點可用性實時檢測，故障第一時間告警。', 'Real-time availability checks for all sites, with instant alerts on outages.'],
     "导航": ["导航", "導航", "Navigate"],
     "我们的信念，": ["我们的信念，", "我們的信念，", "Our beliefs,"],
     "为我们导航。": ["为我们导航。", "為我們導航。", "guide our way."],
