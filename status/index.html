@@ -363,7 +363,7 @@
           + '<div class="main">'
           + '<span class="dot ' + (r.ok ? 'ok' : 'fail') + '"></span>'
           + '<div class="info"><div class="name">' + r.name + '</div>'
-          + '<div class="url">' + r.url.replace(/^https?:\/\//, '') + '</div>'
+          + '<div class="url">' + r.url.replace(/^https?:\/\//, '').replace(/\/$/, '') + '</div>'
           + '</div>'
           + '<div class="meta">'
           + (r.ok
@@ -374,7 +374,7 @@
           + '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
           + '</div>'
           + '<div class="more">'
-          + '<div class="kv"><b>域名</b><span>' + r.url + '</span></div>'
+          + '<div class="kv"><b>域名</b><span>' + r.url.replace(/\/$/, '') + '</span></div>'
           + '<div class="kv"><b>状态</b><span>' + (r.ok ? '✅ 正常运行' : '❌ 故障') + ' · HTTP ' + (r.code || '-') + '</span></div>'
           + '<div class="kv"><b>响应</b><span>' + (r.ms >= 1000 ? (r.ms / 1000).toFixed(2) + ' 秒' : r.ms + ' 毫秒') + '</span></div>'
           + '<div class="kv"><b>检测</b><span>' + new Date(r.at).toLocaleString('zh-CN') + '</span></div>'
