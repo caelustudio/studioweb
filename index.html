@@ -191,7 +191,7 @@
       transform: rotate(30deg);
     }
 
-    /* ===== 第一屏：全屏风景照背景 ===== */
+    /* ===== 第一屏：全屏风景照背景（随时间轮换） ===== */
     .hero-black {
       height: 100vh;
       width: 100%;
@@ -202,7 +202,7 @@
       text-align: center;
       padding: 5rem 2rem 3rem;
       position: relative;
-      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop');
+      background-image: var(--hero-image, url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop'));
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -355,21 +355,32 @@
       animation: heroFadeUpCentered 1s cubic-bezier(0.22, 1, 0.36, 1) 1s both;
     }
 
-    /* ===== 第一屏：背景缓慢缩放 ===== */
+    /* ===== 第一屏：背景随时间轮换（场景层） ===== */
     .hero-black {
       overflow: hidden;
     }
 
-    .hero-black::after {
-      content: '';
+    .hero-scene {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-image: inherit;
+      background-image: var(--hero-image, url('/assets/hero-landscape.jpeg')), url('/assets/hero-landscape.jpeg');
       background-size: cover;
       background-position: center;
       z-index: 0;
       animation: heroBgZoom 20s ease-out forwards;
+    }
+
+    .hero-scene-next {
+      opacity: 0;
+      transition: opacity 1.1s ease;
+    }
+
+    .hero-scene-next.is-visible { opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scene { animation: none; }
+      .hero-scene-next { transition: none; }
     }
 
     .hero-black::before {
@@ -1231,7 +1242,32 @@
   </script>
 
   <meta property="og:url" content="https://www.caelus.top/" />
-  <link rel="canonical" href="https://www.caelus.top/" /><link rel="stylesheet" href="https://www.caelus.top/fonts/opposans40/result.css">
+  <link rel="canonical" href="https://www.caelus.top/" /><script>
+    // ===== 首页背景随时间轮换：7 个时段场景 =====
+    (function() {
+      const sceneImages = {
+        predawn: '/assets/hero-predawn.webp', dawn: '/assets/hero-dawn.webp',
+        morning: '/assets/hero-morning.webp', noon: '/assets/hero-noon.webp',
+        afternoon: '/assets/hero-afternoon.webp', dusk: '/assets/hero-landscape.jpeg',
+        night: '/assets/hero-night.webp'
+      };
+      window.caelusSceneImages = sceneImages;
+      window.caelusSceneForTime = function(date) {
+        const minutes = date.getHours() * 60 + date.getMinutes();
+        if (minutes < 6 * 60) return 'predawn';
+        if (minutes < 8 * 60) return 'dawn';
+        if (minutes < 11 * 60) return 'morning';
+        if (minutes < 13 * 60) return 'noon';
+        if (minutes < 18 * 60) return 'afternoon';
+        if (minutes < 19 * 60) return 'dusk';
+        return 'night';
+      };
+      const initialScene = window.caelusSceneForTime(new Date());
+      document.documentElement.dataset.heroScene = initialScene;
+      document.documentElement.style.setProperty('--hero-image', 'url("' + sceneImages[initialScene] + '")');
+    })();
+  </script>
+  <link rel="stylesheet" href="https://www.caelus.top/fonts/opposans40/result.css">
 <style>
 /* Caelus Studio 统一字体 OPPO Sans 4.0：标题 medium(500) 正文 regular(400) */
 html,body{font-family:'OPPO Sans 4.0','PingFang SC','Microsoft YaHei',system-ui,sans-serif;font-weight:400}
@@ -1283,6 +1319,8 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
 
   <!-- ===== 第一屏 ===== -->
   <section class="hero-black" data-page-node-id="xnM0oOIPy81TbqCXrNBhBP">
+    <div class="hero-scene hero-scene-current" aria-hidden="true"></div>
+    <div class="hero-scene hero-scene-next" aria-hidden="true"></div>
     <div class="hero-title-group" data-page-node-id="4f0WJACrakyLSsNYkhb5tj">
       <h1 data-page-node-id="BEciJODrE1gzh9dS5iytX5">Begin With Design, Believe In Design.</h1>
       <div class="sub" data-page-node-id="UdjYCEUW7j84AxBbAVukVu">始于设计，忠于设计。</div>
@@ -2050,6 +2088,51 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
 
     resetGame();
     draw();
+  </script>
+  <script>
+    // The background also changes if this tab remains open across a time boundary.
+    (function() {
+      const hero = document.querySelector('.hero-black');
+      if (!hero) return;
+      const incoming = hero.querySelector('.hero-scene-next');
+      const images = window.caelusSceneImages;
+      const fallback = '/assets/hero-landscape.jpeg';
+      let currentScene = document.documentElement.dataset.heroScene;
+      let switching = false;
+
+      async function refreshScene() {
+        const scene = window.caelusSceneForTime(new Date());
+        if (switching || scene === currentScene) return;
+        switching = true;
+        const url = images[scene];
+        try {
+          const nextImage = new Image();
+          nextImage.src = url;
+          if (nextImage.decode) await nextImage.decode();
+          else await new Promise((resolve, reject) => {
+            nextImage.onload = resolve;
+            nextImage.onerror = reject;
+          });
+          if (scene !== window.caelusSceneForTime(new Date())) return;
+          incoming.style.backgroundImage = 'url("' + url + '"), url("' + fallback + '")';
+          incoming.classList.add('is-visible');
+          await new Promise(resolve => setTimeout(resolve, 1100));
+          document.documentElement.style.setProperty('--hero-image', 'url("' + url + '")');
+          document.documentElement.dataset.heroScene = scene;
+          currentScene = scene;
+          incoming.classList.remove('is-visible');
+        } catch (_) {
+          // Keep the previous landscape until the next check if an asset fails.
+        } finally {
+          switching = false;
+        }
+      }
+
+      setInterval(refreshScene, 15000);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) refreshScene();
+      });
+    })();
   </script>
 <script src="i18n.js"></script>
 </html>
