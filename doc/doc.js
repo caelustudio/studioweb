@@ -49,9 +49,13 @@
     nav += prev ? '<a href="/doc/' + prev.page.id + '/">← ' + esc(prev.page.title) + '</a>' : '<span></span>';
     nav += next ? '<a href="/doc/' + next.page.id + '/">' + esc(next.page.title) + ' →</a>' : '<span></span>';
     nav += '</div>';
+    var syncNote = cur.page.synced === false
+      ? '<div class="sync-note">本文正在与 Caelus Studio 飞书知识库核对，当前为过渡版本，最终以飞书原文为准。</div>'
+      : '';
     content.innerHTML =
       '<h2 class="doc-title">' + esc(cur.page.title) + '</h2>' +
       '<div class="doc-meta">最后更新：' + esc(cur.page.updated) + '　·　' + esc(cur.space.name) + '</div>' +
+      syncNote +
       '<div class="doc-body">' + cur.page.body.join('') + '</div>' + nav;
   } else {
     var cards = '';

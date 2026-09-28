@@ -15,16 +15,25 @@
   <meta property="og:image" content="https://www.caelus.top/og-main.png">
   <link rel="canonical" href="https://www.caelus.top/doc/">
   <link rel="stylesheet" href="https://www.caelus.top/fonts/opposans40/result.css">
+  <link rel="stylesheet" href="/assets/theme.css">
+  <script>(function(){try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <link rel="stylesheet" href="/doc/doc.css">
 </head>
 <body>
+  <div class="custom-cursor" id="customCursor"></div>
+
   <header class="docbar">
     <div class="docbar-left">
       <button class="menu-btn" id="menuBtn" type="button" aria-label="目录">☰</button>
       <h1>Caelus Studio 文档库</h1>
       <span class="crumb" id="crumb">全部文档</span>
     </div>
-    <img class="docbar-logo" src="/assets/favicon.png" alt="Caelus Studio" />
+    <div class="docbar-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换深色/浅色模式">
+        <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+      </button>
+      <img class="docbar-logo" src="/assets/favicon.png" alt="Caelus Studio" />
+    </div>
   </header>
 
   <div class="layout">
@@ -34,5 +43,6 @@
 
   <script src="/doc/docs.js"></script>
   <script src="/doc/doc.js"></script>
+  <script src="/assets/theme.js"></script>
 </body>
 </html>

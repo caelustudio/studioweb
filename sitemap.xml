@@ -44,6 +44,20 @@
   </url>
 
   <url>
+       <loc>https://www.caelus.top/doc/starid/agreement/</loc>
+       <lastmod>2026-09-28</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/terms/service-terms/</loc>
+       <lastmod>2026-09-28</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
        <loc>https://www.caelus.top/account/</loc>
        <lastmod>2026-09-28</lastmod>
        <changefreq>monthly</changefreq>

@@ -15,16 +15,9 @@
   <meta property="og:image" content="https://www.caelus.top/og-main.png">
   <link rel="canonical" href="https://www.caelus.top/account/">
   <link rel="stylesheet" href="https://www.caelus.top/fonts/opposans40/result.css">
+  <link rel="stylesheet" href="/assets/theme.css">
+  <script>(function(){try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <style>
-    :root{
-      --bg-primary:#0b0b0b; --bg-secondary:#0b0b0b; --bg-card:#111;
-      --text-primary:#f0f0f0; --text-secondary:#d0d0d0; --text-muted:#888;
-      --border-color:rgba(255,255,255,0.04); --border-card:rgba(255,255,255,0.04);
-      --shadow-card:0 4px 16px rgba(0,0,0,0.3);
-      --accent:#0a84ff; --footer-color:#555;
-      --danger:#ff6b6b; --ok:#30d158;
-      --card-hover-border:rgba(255,255,255,0.08);
-    }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
@@ -52,6 +45,12 @@
     }
     .brand span{font-size:.78rem;color:var(--text-muted)}
     .topbar-logo{height:34px;width:auto;flex:none}
+
+
+    .brand-mark{height:26px;width:auto;flex:none;opacity:.9}
+    .topbar-right{display:flex;align-items:center;gap:12px;flex:none}
+    [data-theme="light"] .topbar{background:rgba(245,245,245,0.9)}
+    [data-theme="light"] .field input{background:var(--bg-secondary)}
 
     /* ===== 容器 ===== */
     .wrap{max-width:960px;margin:0 auto;padding:32px 24px 80px}
@@ -150,15 +149,22 @@
   </style>
 </head>
 <body>
+  <div class="custom-cursor" id="customCursor"></div>
+
   <header class="topbar">
     <div class="topbar-left">
-      <a class="back-home" href="/">← 返回主站</a>
+      <img class="brand-mark" src="/assets/favicon.png" alt="Caelus Studio" />
       <div class="brand">
         <h1>Star ID</h1>
         <span>Caelus Studio 统一账户</span>
       </div>
     </div>
-    <img class="topbar-logo" src="/assets/favicon.png" alt="Caelus Studio" />
+    <div class="topbar-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换深色/浅色模式">
+        <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+      </button>
+      <img class="topbar-logo" src="/assets/favicon.png" alt="Caelus Studio" />
+    </div>
   </header>
 
   <main class="wrap">
@@ -238,6 +244,20 @@
         <div class="field"><label>新密码</label><input type="password" id="resetPwd" placeholder="6-64 位" autocomplete="new-password" /></div>
         <button class="btn ghost" id="resetPwdBtn" type="button">用验证码重置密码</button>
         <p class="msg" id="resetMsg"></p>
+
+        <div class="divider"></div>
+        <p class="muted">收不到验证码邮件？可以提交人工审核：回答几个只有你本人才清楚的登录信息问题，我们对照你最近的登录活动（时间、地点、系统与浏览器）核实后，会通过邮件回复结果。</p>
+        <button class="btn ghost" id="showReqBtn" type="button">申请人工重置密码</button>
+        <div id="reqForm" hidden>
+          <div class="field"><label>注册邮箱</label><input type="email" id="reqEmail" placeholder="you@example.com" /></div>
+          <div class="field"><label>你最近一次登录所在的城市是？</label><input type="text" id="reqCity" placeholder="如：西安" /></div>
+          <div class="field"><label>你最常用的操作系统是？</label><input type="text" id="reqOs" placeholder="macOS / Windows / iOS / Android" /></div>
+          <div class="field"><label>你最近一次登录使用的浏览器是？</label><input type="text" id="reqBrowser" placeholder="Chrome / Safari / Edge / Firefox" /></div>
+          <div class="field"><label>备用联系方式（选填）</label><input type="text" id="reqContact" maxlength="120" placeholder="QQ / 微信，便于我们核实" /></div>
+          <div class="field"><label>补充说明（选填）</label><input type="text" id="reqReason" maxlength="200" placeholder="简单说明情况" /></div>
+          <button class="btn" id="submitReqBtn" type="button">提交申请</button>
+          <p class="msg" id="reqMsg"></p>
+        </div>
       </section>
 
       <section class="card">
@@ -436,6 +456,34 @@
     }).catch(function () { btn.disabled = false; show($('resetMsg'), '网络错误'); });
   });
 
+  /* ---- 人工改密申请 ---- */
+  var reqWrap = $('reqForm');
+  $('showReqBtn').addEventListener('click', function () {
+    reqWrap.hidden = !reqWrap.hidden;
+    if (!reqWrap.hidden && me && me.email) $('reqEmail').value = me.email;
+  });
+  $('submitReqBtn').addEventListener('click', function () {
+    var email = $('reqEmail').value.trim();
+    if (!mailOk(email)) { show($('reqMsg'), '请输入注册邮箱'); return; }
+    var answers = {
+      city: $('reqCity').value.trim(),
+      os: $('reqOs').value.trim(),
+      browser: $('reqBrowser').value.trim()
+    };
+    if (!answers.city || !answers.os || !answers.browser) { show($('reqMsg'), '请回答全部三个问题'); return; }
+    var btn = this; btn.disabled = true;
+    api('/api/auth/password-request', {
+      email: email, answers: answers,
+      contact: $('reqContact').value.trim(), reason: $('reqReason').value.trim()
+    }).then(function (r) {
+      btn.disabled = false;
+      if (r && r.ok) {
+        show($('reqMsg'), '申请已提交（编号 ' + r.id + '），审核结果会发送到你的邮箱', true);
+        reqWrap.hidden = true;
+      } else show($('reqMsg'), (r && r.error) || '提交失败');
+    }).catch(function () { btn.disabled = false; show($('reqMsg'), '网络错误'); });
+  });
+
   /* ---- 退出 ---- */
   $('logoutBtn').addEventListener('click', function () {
     api('/api/auth/logout', { token: token }).then(function () {});
@@ -540,5 +588,6 @@
   loadMe();
 })();
 </script>
+<script src="/assets/theme.js"></script>
 </body>
 </html>
