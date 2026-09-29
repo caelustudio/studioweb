@@ -61,6 +61,7 @@ a{color:inherit;text-decoration:none}
 .doc-body p{margin:0 0 14px}
 .doc-body ul{margin:0 0 16px;padding-left:22px}
 .doc-body li{margin-bottom:7px}
+.doc-body ul ul{margin:6px 0 2px;padding-left:18px;list-style:circle}
 .doc-body strong{color:var(--text-primary);font-weight:500}
 .doc-body .note{
   border-left:2px solid var(--accent);background:var(--bg-card);

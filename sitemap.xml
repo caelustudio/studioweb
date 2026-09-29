@@ -51,6 +51,251 @@
   </url>
 
   <url>
+       <loc>https://www.caelus.top/doc/policies/purchase-agreement/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/privacy/privacy-policy/</loc>
+       <lastmod>2026-09-28</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/terms/service-terms/</loc>
+       <lastmod>2026-09-28</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/agreement/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/developer/</loc>
+       <lastmod>2026-08-21</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/license/</loc>
+       <lastmod>2026-09-12</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/macro-security/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/open-source/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/overview/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/privacy/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/third-party/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/treeos/usage/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/agreement/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/changelog/</loc>
+       <lastmod>2026-09-28</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/developer/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/macro-security/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/open-source/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/overview/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/privacy/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/third-party/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/caelusos/usage/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/about/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/agreement/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/auto-renewal/</loc>
+       <lastmod>2026-08-30</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/brand-guidelines/</loc>
+       <lastmod>2026-08-30</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/copyright/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/credits/</loc>
+       <lastmod>2026-09-28</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/design-resources/</loc>
+       <lastmod>2026-08-03</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/email/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/membership/</loc>
+       <lastmod>2026-09-05</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/partner-agreement/</loc>
+       <lastmod>2026-09-09</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/partner-branding/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/privacy/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/sponsor/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
+       <loc>https://www.caelus.top/doc/studio/vba-terms/</loc>
+       <lastmod>2026-09-14</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.7</priority>
+  </url>
+
+  <url>
        <loc>https://www.caelus.top/doc/terms/service-terms/</loc>
        <lastmod>2026-09-28</lastmod>
        <changefreq>monthly</changefreq>
