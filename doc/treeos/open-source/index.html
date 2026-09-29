@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="/assets/theme.css?v=20260929">
   <script>(function(){try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <link rel="stylesheet" href="/doc/doc.css?v=20260929">
-<link rel="stylesheet" href="/assets/cookie-consent.css?v=20260929">
+<link rel="stylesheet" href="/assets/cookie-consent.css?v=20260930">
+<script src="/assets/cookie-consent.js?v=20260930"></script>
 </head>
 <body>
   <div class="custom-cursor" id="customCursor"></div>
@@ -46,9 +47,28 @@
   <script src="/assets/theme.js?v=20260929"></script>
 
   <div class="cookie-bar" id="cookieBar" hidden>
-    <p>本站使用 Cookie 保存你的登录状态与界面偏好，不会用于广告或跨站追踪。详见<a href="/doc/privacy/privacy-policy/">隐私政策</a>。</p>
-    <button type="button" id="cookieAccept">知道了</button>
+    <p class="ck-title">关于 Cookie</p>
+    <p class="ck-text">我们使用 Cookie 与本地存储保存登录状态、界面偏好与访问统计，不会用于广告或跨站追踪。你可以选择允许哪些类别。详见<a href="/doc/privacy/privacy-policy/">隐私政策</a>。</p>
+    <div class="cookie-cats">
+      <label class="cookie-cat is-locked">
+        <input type="checkbox" checked disabled>
+        <span><b>必要</b><i>登录会话与账户安全，关闭后无法登录</i></span>
+        <span class="cat-tag">始终启用</span>
+      </label>
+      <label class="cookie-cat">
+        <input type="checkbox" id="cookieCatPref">
+        <span><b>偏好设置</b><i>深色 / 浅色主题、语言选择</i></span>
+      </label>
+      <label class="cookie-cat">
+        <input type="checkbox" id="cookieCatStat">
+        <span><b>访问统计</b><i>匿名统计页面访问量，不识别个人身份</i></span>
+      </label>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" id="cookieReject">仅必要</button>
+      <button type="button" id="cookieSave">保存选择</button>
+      <button type="button" id="cookieAccept" class="is-primary">全部接受</button>
+    </div>
   </div>
-  <script src="/assets/cookie-consent.js?v=20260929"></script>
 </body>
 </html>
