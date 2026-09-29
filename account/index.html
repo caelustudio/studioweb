@@ -64,6 +64,8 @@
       -webkit-text-stroke:.3px currentColor;
     }
     .muted{color:var(--text-muted);font-size:.82rem;line-height:1.7}
+    a.link{color:var(--accent,#0a84ff);text-decoration:underline;cursor:pointer}
+    a.link:hover{filter:brightness(1.1)}
 
     /* ===== 未登录 ===== */
     .auth-tabs{display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid var(--border-color)}
@@ -182,6 +184,38 @@
         <div class="field"><label>密码</label><input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password" /></div>
         <button class="btn" id="loginBtn" type="button">登录</button>
         <p class="msg err" id="loginErr"></p>
+        <p class="muted" style="margin-top:10px">忘记密码？<a href="javascript:void(0)" class="link" id="forgotLink">找回密码</a></p>
+      </div>
+
+      <div id="panelForgot" hidden>
+        <p class="muted">输入注册邮箱，我们会发送一封验证码邮件，验证后即可设置新密码。</p>
+        <div class="field"><label>注册邮箱</label><input type="email" id="fgEmail" placeholder="you@example.com" autocomplete="email" /></div>
+        <div class="field">
+          <label>邮箱验证码</label>
+          <div class="code-row">
+            <input type="text" id="fgCode" maxlength="6" inputmode="numeric" placeholder="6 位验证码" />
+            <button id="fgSendCode" type="button">获取验证码</button>
+          </div>
+        </div>
+        <div class="field"><label>新密码</label><input type="password" id="fgPassword" placeholder="6-64 位" autocomplete="new-password" /></div>
+        <button class="btn" id="fgResetBtn" type="button">重置密码</button>
+        <p class="msg" id="fgMsg"></p>
+
+        <div class="divider"></div>
+        <p class="muted">收不到验证码邮件？可以提交人工审核：回答几个只有你本人才清楚的登录信息问题，我们对照你最近的登录活动（时间、地点、系统与浏览器）核实后，会通过邮件回复结果。</p>
+        <button class="btn ghost" id="fgShowReqBtn" type="button">申请人工重置密码</button>
+        <div id="fgReqForm" hidden>
+          <div class="field"><label>你最近一次登录所在的城市是？</label><input type="text" id="fgCity" placeholder="如：西安" /></div>
+          <div class="field"><label>你最常用的操作系统是？</label><input type="text" id="fgOs" placeholder="macOS / Windows / iOS / Android" /></div>
+          <div class="field"><label>你最近一次登录使用的浏览器是？</label><input type="text" id="fgBrowser" placeholder="Chrome / Safari / Edge / Firefox" /></div>
+          <div class="field"><label>备用联系方式（选填）</label><input type="text" id="fgContact" maxlength="120" placeholder="QQ / 微信，便于我们核实" /></div>
+          <div class="field"><label>补充说明（选填）</label><input type="text" id="fgReason" maxlength="200" placeholder="简单说明情况" /></div>
+          <button class="btn" id="fgSubmitReqBtn" type="button">提交申请</button>
+          <p class="msg" id="fgReqMsg"></p>
+        </div>
+
+        <div class="divider"></div>
+        <p class="muted"><a href="javascript:void(0)" class="link" id="fgBackLink">← 返回登录</a></p>
       </div>
 
       <div id="panelRegister" hidden>
@@ -339,15 +373,22 @@
   var curType = 'shop';
 
   /* ---- tab 切换 ---- */
-  Array.prototype.forEach.call(document.querySelectorAll('.auth-tab'), function (b) {
-    b.addEventListener('click', function () {
-      var t = b.getAttribute('data-tab');
-      Array.prototype.forEach.call(document.querySelectorAll('.auth-tab'), function (x) { x.classList.remove('active'); });
-      b.classList.add('active');
-      $('panelLogin').hidden = (t !== 'login');
-      $('panelRegister').hidden = (t !== 'register');
+  function showPanel(t) {
+    Array.prototype.forEach.call(document.querySelectorAll('.auth-tab'), function (x) {
+      x.classList.toggle('active', x.getAttribute('data-tab') === t);
     });
+    $('panelLogin').hidden = (t !== 'login');
+    $('panelRegister').hidden = (t !== 'register');
+    $('panelForgot').hidden = (t !== 'forgot');
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.auth-tab'), function (b) {
+    b.addEventListener('click', function () { showPanel(b.getAttribute('data-tab')); });
   });
+  $('forgotLink').addEventListener('click', function () {
+    if ($('loginEmail').value.trim() && !$('fgEmail').value.trim()) $('fgEmail').value = $('loginEmail').value.trim();
+    showPanel('forgot');
+  });
+  $('fgBackLink').addEventListener('click', function () { showPanel('login'); });
 
   /* ---- 验证码倒计时 ---- */
   var codeTimers = {};
@@ -362,10 +403,10 @@
     }, 1000);
   }
 
-  function sendCode(email, btn, key, errEl) {
+  function sendCode(email, btn, key, errEl, purpose) {
     if (!mailOk(email)) { show(errEl, '请输入正确的电子邮箱'); return; }
     btn.disabled = true;
-    api('/api/auth/send-code', { email: email }).then(function (r) {
+    api('/api/auth/send-code', { email: email, purpose: purpose || 'register' }).then(function (r) {
       btn.disabled = false;
       if (r && r.ok) { countdown(btn, 60, key); show(errEl, '验证码已发送，请查收邮件', true); }
       else show(errEl, (r && r.error) || '发送失败，请稍后再试');
@@ -378,7 +419,10 @@
   $('sendResetCode').addEventListener('click', function () {
     var email = me && me.email;
     if (!email) { show($('resetMsg'), '请先登录'); return; }
-    sendCode(email, this, 'reset', $('resetMsg'));
+    sendCode(email, this, 'reset', $('resetMsg'), 'reset');
+  });
+  $('fgSendCode').addEventListener('click', function () {
+    sendCode($('fgEmail').value.trim(), this, 'fgReset', $('fgMsg'), 'reset');
   });
 
   /* ---- 注册 ---- */
@@ -456,6 +500,50 @@
       btn.disabled = false;
       show($('resetMsg'), r && r.ok ? '密码已重置' : ((r && r.error) || '重置失败'), !!(r && r.ok));
     }).catch(function () { btn.disabled = false; show($('resetMsg'), '网络错误'); });
+  });
+
+  /* ---- 未登录：忘记密码（验证码重置） ---- */
+  $('fgResetBtn').addEventListener('click', function () {
+    var email = $('fgEmail').value.trim(), code = $('fgCode').value.trim(), npw = $('fgPassword').value;
+    if (!mailOk(email)) { show($('fgMsg'), '请输入注册邮箱'); return; }
+    if (!/^\d{6}$/.test(code)) { show($('fgMsg'), '请输入 6 位验证码'); return; }
+    if (!pwdOk(npw)) { show($('fgMsg'), '新密码需为 6-64 位'); return; }
+    var btn = this; btn.disabled = true;
+    api('/api/auth/password', { email: email, code: code, newPassword: npw }).then(function (r) {
+      btn.disabled = false;
+      if (r && r.ok) {
+        show($('fgMsg'), '密码已重置，请用新密码登录', true);
+        $('fgCode').value = ''; $('fgPassword').value = '';
+        setTimeout(function () { showPanel('login'); $('loginEmail').value = email; }, 1200);
+      } else show($('fgMsg'), (r && r.error) || '重置失败');
+    }).catch(function () { btn.disabled = false; show($('fgMsg'), '网络错误，请稍后再试'); });
+  });
+
+  /* ---- 未登录：忘记密码（人工审核） ---- */
+  var fgReqWrap = $('fgReqForm');
+  $('fgShowReqBtn').addEventListener('click', function () {
+    fgReqWrap.hidden = !fgReqWrap.hidden;
+  });
+  $('fgSubmitReqBtn').addEventListener('click', function () {
+    var email = $('fgEmail').value.trim();
+    if (!mailOk(email)) { show($('fgReqMsg'), '请先填写注册邮箱'); return; }
+    var answers = {
+      city: $('fgCity').value.trim(),
+      os: $('fgOs').value.trim(),
+      browser: $('fgBrowser').value.trim()
+    };
+    if (!answers.city || !answers.os || !answers.browser) { show($('fgReqMsg'), '请回答全部三个问题'); return; }
+    var btn = this; btn.disabled = true;
+    api('/api/auth/password-request', {
+      email: email, answers: answers,
+      contact: $('fgContact').value.trim(), reason: $('fgReason').value.trim()
+    }).then(function (r) {
+      btn.disabled = false;
+      if (r && r.ok) {
+        show($('fgReqMsg'), '申请已提交（编号 ' + r.id + '），审核结果会发送到你的邮箱', true);
+        fgReqWrap.hidden = true;
+      } else show($('fgReqMsg'), (r && r.error) || '提交失败');
+    }).catch(function () { btn.disabled = false; show($('fgReqMsg'), '网络错误，请稍后再试'); });
   });
 
   /* ---- 人工改密申请 ---- */
