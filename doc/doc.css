@@ -36,7 +36,7 @@ a{color:inherit;text-decoration:none}
 }
 .side-group{margin-bottom:18px}
 .side-group-name{
-  font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;
+  font-size:.74rem;letter-spacing:.08em;
   color:var(--text-muted);padding:0 10px 8px;
 }
 .side-link{
@@ -75,7 +75,7 @@ a{color:inherit;text-decoration:none}
   border-radius:14px;padding:18px 18px 16px;transition:border-color .2s;
 }
 .home-card:hover{border-color:var(--card-hover-border,rgba(255,255,255,0.12))}
-.home-card .hc-space{font-size:.73rem;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase}
+.home-card .hc-space{font-size:.73rem;color:var(--text-muted);letter-spacing:.06em}
 .home-card .hc-title{margin:6px 0 8px;font-size:1rem;font-weight:500;color:var(--text-primary);-webkit-text-stroke:.3px currentColor}
 .home-card .hc-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6}
 

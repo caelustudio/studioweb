@@ -147,6 +147,7 @@
     footer a{color:var(--footer-color);text-decoration:underline}
     footer a:hover{color:var(--text-secondary)}
   </style>
+<link rel="stylesheet" href="/assets/cookie-consent.css?v=20260929">
 </head>
 <body>
   <div class="custom-cursor" id="customCursor"></div>
@@ -589,5 +590,11 @@
 })();
 </script>
 <script src="/assets/theme.js"></script>
+
+  <div class="cookie-bar" id="cookieBar" hidden>
+    <p>本站使用 Cookie 保存你的登录状态与界面偏好，不会用于广告或跨站追踪。详见<a href="/doc/privacy/privacy-policy/">隐私政策</a>。</p>
+    <button type="button" id="cookieAccept">知道了</button>
+  </div>
+  <script src="/assets/cookie-consent.js?v=20260929"></script>
 </body>
 </html>
