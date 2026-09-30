@@ -64,6 +64,8 @@
       -webkit-text-stroke:.3px currentColor;
     }
     .muted{color:var(--text-muted);font-size:.82rem;line-height:1.7}
+    .check-row{display:flex;align-items:flex-start;gap:9px;margin:12px 0;font-size:.82rem;line-height:1.6;color:var(--text-secondary);cursor:pointer}
+    .check-row input[type="checkbox"]{flex:none;width:15px;height:15px;margin-top:2px;accent-color:var(--accent,#0a84ff);cursor:pointer}
     a.link{color:var(--accent,#0a84ff);text-decoration:underline;cursor:pointer}
     a.link:hover{filter:brightness(1.1)}
 
@@ -184,6 +186,10 @@
         <div class="field"><label>密码</label><input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password" /></div>
         <button class="btn" id="loginBtn" type="button">登录</button>
         <p class="msg err" id="loginErr"></p>
+        <label class="check-row" style="margin-top:12px">
+          <input type="checkbox" id="loginAgree" />
+          <span>我已阅读并同意<a class="link" href="/doc/terms/service-terms/" target="_blank" rel="noopener">《服务条款》</a>与<a class="link" href="/doc/privacy/privacy-policy/" target="_blank" rel="noopener">《隐私政策》</a></span>
+        </label>
         <p class="muted" style="margin-top:10px">忘记密码？<a href="javascript:void(0)" class="link" id="forgotLink">找回密码</a></p>
       </div>
 
@@ -230,6 +236,14 @@
         </div>
         <div class="field"><label>密码</label><input type="password" id="regPassword" placeholder="6-64 位密码" autocomplete="new-password" /></div>
         <div class="field"><label>确认密码</label><input type="password" id="regPassword2" placeholder="再次输入密码" autocomplete="new-password" /></div>
+        <label class="check-row">
+          <input type="checkbox" id="regAgree" />
+          <span>我已阅读并同意<a class="link" href="/doc/terms/service-terms/" target="_blank" rel="noopener">《服务条款》</a>与<a class="link" href="/doc/privacy/privacy-policy/" target="_blank" rel="noopener">《隐私政策》</a></span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="regPromo" />
+          <span>我愿意接收 Caelus Studio 的产品与活动推广邮件（可随时退订，不影响必要通知）</span>
+        </label>
         <button class="btn" id="regBtn" type="button">创建 Star ID</button>
         <p class="msg err" id="regErr"></p>
         <p class="msg ok" id="regOk"></p>
@@ -304,6 +318,15 @@
           <button class="rec-tab" data-type="vba" type="button">VBA 生成</button>
         </div>
         <div class="rec-list" id="recList"><p class="muted">暂无记录</p></div>
+      </section>
+
+      <section class="card">
+        <h2>邮件订阅</h2>
+        <label class="check-row">
+          <input type="checkbox" id="promoToggle" />
+          <span>接收 Caelus Studio 的产品与活动推广邮件（登录、订单、安全提醒等必要通知不受影响，可随时取消）</span>
+        </label>
+        <p class="msg" id="promoMsg"></p>
       </section>
 
       <section class="card">
@@ -435,9 +458,13 @@
     if (!/^\d{6}$/.test(code)) { show($('regErr'), '请输入 6 位验证码'); return; }
     if (!pwdOk(pw)) { show($('regErr'), '密码需为 6-64 位'); return; }
     if (pw !== pw2) { show($('regErr'), '两次输入的密码不一致'); return; }
+    if (!$('regAgree').checked) { show($('regErr'), '请先阅读并同意《服务条款》与《隐私政策》'); return; }
     this.disabled = true;
     var btn = this;
-    api('/api/auth/register', { email: email, code: code, password: pw, nickname: $('regNickname').value.trim() })
+    api('/api/auth/register', {
+      email: email, code: code, password: pw, nickname: $('regNickname').value.trim(),
+      agree: true, promo: $('regPromo').checked
+    })
       .then(function (r) {
         btn.disabled = false;
         if (r && r.ok) { token = r.token; setToken(token); show($('regOk'), 'Star ID 创建成功', true); loadMe(); }
@@ -451,9 +478,10 @@
     var pw = $('loginPassword').value;
     if (!mailOk(email)) { show($('loginErr'), '请输入正确的电子邮箱'); return; }
     if (!pw) { show($('loginErr'), '请输入密码'); return; }
+    if (!$('loginAgree').checked) { show($('loginErr'), '请先阅读并同意《服务条款》与《隐私政策》'); return; }
     this.disabled = true;
     var btn = this;
-    api('/api/auth/login', { email: email, password: pw }).then(function (r) {
+    api('/api/auth/login', { email: email, password: pw, agree: true }).then(function (r) {
       btn.disabled = false;
       if (r && r.ok) { token = r.token; setToken(token); loadMe(); }
       else show($('loginErr'), (r && r.error) || '登录失败');
@@ -574,6 +602,15 @@
     }).catch(function () { btn.disabled = false; show($('reqMsg'), '网络错误'); });
   });
 
+  /* ---- 推广邮件订阅开关 ---- */
+  $('promoToggle').addEventListener('change', function () {
+    var on = this.checked;
+    api('/api/auth/update', { token: token, promo: on }).then(function (r) {
+      if (r && r.ok) show($('promoMsg'), on ? '已订阅推广邮件' : '已取消推广邮件订阅', true);
+      else { show($('promoMsg'), (r && r.error) || '设置失败'); $('promoToggle').checked = !on; }
+    }).catch(function () { show($('promoMsg'), '网络错误'); $('promoToggle').checked = !on; });
+  });
+
   /* ---- 退出 ---- */
   $('logoutBtn').addEventListener('click', function () {
     api('/api/auth/logout', { token: token }).then(function () {});
@@ -658,6 +695,7 @@
     $('pfQQ').value = me.qq || '';
     $('pfPhone').value = me.phone || '';
     $('pfAddress').value = me.address || '';
+    if ($('promoToggle')) $('promoToggle').checked = !!me.promo;
     renderRecords();
   }
 
