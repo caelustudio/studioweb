@@ -109,11 +109,6 @@
 
     /* ===== Star ID 卡片 ===== */
     .id-card{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-    .id-badge{
-      flex:none;width:78px;height:78px;border-radius:20px;display:flex;align-items:center;
-      justify-content:center;background:linear-gradient(150deg,#0a84ff,#5e5ce6);
-      color:#fff;font-size:1.6rem;font-weight:500;
-    }
     .id-meta{min-width:0;flex:1}
     .id-label{font-size:.76rem;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase}
     .id-value{font-size:1.5rem;font-weight:500;margin:2px 0 4px;letter-spacing:.04em}
@@ -184,6 +179,10 @@
       <div id="panelLogin">
         <div class="field"><label>电子邮箱</label><input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" /></div>
         <div class="field"><label>密码</label><input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password" /></div>
+        <label class="check-row">
+          <input type="checkbox" id="loginRemember" />
+          <span>保留登录信息（最长 30 天）</span>
+        </label>
         <button class="btn" id="loginBtn" type="button">登录</button>
         <p class="msg err" id="loginErr"></p>
         <label class="check-row" style="margin-top:12px">
@@ -244,6 +243,10 @@
           <input type="checkbox" id="regPromo" />
           <span>我愿意接收 Caelus Studio 的产品与活动推广邮件（可随时退订，不影响必要通知）</span>
         </label>
+        <label class="check-row">
+          <input type="checkbox" id="regRemember" />
+          <span>保留登录信息（最长 30 天）</span>
+        </label>
         <button class="btn" id="regBtn" type="button">创建 Star ID</button>
         <p class="msg err" id="regErr"></p>
         <p class="msg ok" id="regOk"></p>
@@ -254,7 +257,6 @@
     <div id="userView" hidden>
       <section class="card">
         <div class="id-card">
-          <div class="id-badge" id="idBadge">★</div>
           <div class="id-meta">
             <div class="id-label">Star ID</div>
             <div class="id-value" id="idValue">—</div>
@@ -350,13 +352,19 @@
   var API = 'https://caelus-terminal.app.workbuddy.host';
   var COOKIE = 'starid_token';
 
-  function setToken(t) {
+  function setToken(t, remember) {
     // 跨子域共享登录态（www / shop / news / vba）
-    var attrs = '; path=/; max-age=' + (30 * 86400) + '; SameSite=Lax; Secure';
+    // 勾选「保留登录信息」时最长保存 30 天；未勾选时为 session cookie，浏览器关闭即失效
+    var attrs = remember
+      ? '; path=/; max-age=' + (30 * 86400) + '; SameSite=Lax; Secure'
+      : '; path=/; SameSite=Lax; Secure';
     try {
       document.cookie = COOKIE + '=' + encodeURIComponent(t) + attrs + '; domain=.caelus.top';
     } catch (_) {}
-    try { localStorage.setItem(COOKIE, t); } catch (_) {}
+    try {
+      if (remember) localStorage.setItem(COOKIE, t);
+      else localStorage.removeItem(COOKIE);
+    } catch (_) {}
   }
   function getToken() {
     var m = document.cookie.match(/(?:^|;\s*)starid_token=([^;]*)/);
@@ -467,7 +475,7 @@
     })
       .then(function (r) {
         btn.disabled = false;
-        if (r && r.ok) { token = r.token; setToken(token); show($('regOk'), 'Star ID 创建成功', true); loadMe(); }
+        if (r && r.ok) { token = r.token; setToken(token, $('regRemember').checked); show($('regOk'), 'Star ID 创建成功', true); loadMe(); }
         else show($('regErr'), (r && r.error) || '注册失败');
       }).catch(function () { btn.disabled = false; show($('regErr'), '网络错误，请稍后再试'); });
   });
@@ -483,7 +491,7 @@
     var btn = this;
     api('/api/auth/login', { email: email, password: pw, agree: true }).then(function (r) {
       btn.disabled = false;
-      if (r && r.ok) { token = r.token; setToken(token); loadMe(); }
+      if (r && r.ok) { token = r.token; setToken(token, $('loginRemember').checked); loadMe(); }
       else show($('loginErr'), (r && r.error) || '登录失败');
     }).catch(function () { btn.disabled = false; show($('loginErr'), '网络错误，请稍后再试'); });
   });
@@ -690,7 +698,6 @@
     if (guest) return;
     $('idValue').textContent = me.starId || '—';
     $('idSub').textContent = me.email + (me.nickname ? '　·　' + me.nickname : '');
-    $('idBadge').textContent = '★';
     $('pfNickname').value = me.nickname || '';
     $('pfQQ').value = me.qq || '';
     $('pfPhone').value = me.phone || '';
