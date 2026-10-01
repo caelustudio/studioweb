@@ -115,6 +115,7 @@
       border-radius: 50%;
       border: 1.5px solid var(--ok);
       opacity: 0.35;
+      animation: statusDotPulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
     .row {
       display: flex;
@@ -190,8 +191,18 @@
       border-radius: 50%;
       border: 1.5px solid var(--ok);
       opacity: 0.35;
+      animation: statusDotPulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
     .row .info { flex: 1; min-width: 0; }
+    @keyframes statusDotPulse {
+      0% { transform: scale(1); opacity: 0.4; }
+      70% { transform: scale(2.1); opacity: 0; }
+      100% { transform: scale(2.1); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .summary .dot.ok::after,
+      .row .dot.ok::after { animation: none; }
+    }
     .row .name { font-weight: 450; font-size: 1.02rem; transition: color 0.3s ease; }
     .row .url {
       font-size: 0.82rem;
