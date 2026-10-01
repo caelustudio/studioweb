@@ -1,7 +1,7 @@
 /* Caelus Studio Service Worker：全部走网络优先，失败回退缓存
    注意：静态资源不要使用「缓存优先」，否则站点更新后用户仍会拿到旧版
    页面（表现为内容时好时坏、点进文档看到旧版）。 */
-var CACHE = 'caelus-v2';
+var CACHE = 'caelus-v3';
 var CORE = [
   '/manifest.json',
   '/icons/icon-192.png',

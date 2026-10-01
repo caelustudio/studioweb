@@ -365,7 +365,7 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-image: var(--hero-image, url('/assets/hero-landscape.jpeg')), url('/assets/hero-landscape.jpeg');
+      background-image: var(--hero-image, url('/assets/hero-landscape.jpeg?v=20261001')), url('/assets/hero-landscape.jpeg?v=20261001');
       background-size: cover;
       background-position: center;
       z-index: 0;
@@ -1247,10 +1247,10 @@
     // ===== 首页背景随时间轮换：7 个时段场景 =====
     (function() {
       const sceneImages = {
-        predawn: '/assets/hero-predawn.webp', dawn: '/assets/hero-dawn.webp',
-        morning: '/assets/hero-morning.webp', noon: '/assets/hero-noon.webp',
-        afternoon: '/assets/hero-afternoon.webp', dusk: '/assets/hero-landscape.jpeg',
-        night: '/assets/hero-night.webp'
+        predawn: '/assets/hero-predawn.webp?v=20261001', dawn: '/assets/hero-dawn.webp?v=20261001',
+        morning: '/assets/hero-morning.webp?v=20261001', noon: '/assets/hero-noon.webp?v=20261001',
+        afternoon: '/assets/hero-afternoon.webp?v=20261001', dusk: '/assets/hero-landscape.jpeg?v=20261001',
+        night: '/assets/hero-night.webp?v=20261001'
       };
       window.caelusSceneImages = sceneImages;
       window.caelusSceneForTime = function(date) {
@@ -2098,7 +2098,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
       if (!hero) return;
       const incoming = hero.querySelector('.hero-scene-next');
       const images = window.caelusSceneImages;
-      const fallback = '/assets/hero-landscape.jpeg';
+      const fallback = '/assets/hero-landscape.jpeg?v=20261001';
       let currentScene = document.documentElement.dataset.heroScene;
       let switching = false;
 
