@@ -189,6 +189,8 @@
     "关于 Cookie": ["关于 Cookie", "關於 Cookie", "About Cookies"],
     "我们使用 Cookie 与本地存储保存登录状态、界面偏好与访问统计，不会用于广告或跨站追踪。你可以选择允许哪些类别。详见": ["我们使用 Cookie 与本地存储保存登录状态、界面偏好与访问统计，不会用于广告或跨站追踪。你可以选择允许哪些类别。详见", "我們使用 Cookie 與本機儲存保存登入狀態、介面偏好與訪問統計，不會用於廣告或跨站追蹤。你可以選擇允許哪些類別。詳見", "We use cookies and local storage to keep you signed in, remember preferences and count visits — never for ads or cross-site tracking. Choose which categories to allow. See our "],
     "隐私政策": ["隐私政策", "隱私政策", "Privacy Policy"],
+    "Cookie 设置": ["Cookie 设置", "Cookie 設定", "Cookie settings"],
+    "服务条款": ["服务条款", "服務條款", "Terms of Service"],
     "必要": ["必要", "必要", "Necessary"],
     "登录会话与账户安全，关闭后无法登录": ["登录会话与账户安全，关闭后无法登录", "登入工作階段與帳號安全，關閉後無法登入", "Login sessions and account security; disabling this means you cannot sign in"],
     "始终启用": ["始终启用", "始終啟用", "Always on"],
