@@ -141,6 +141,22 @@
     .rec-sub{font-size:.76rem;color:var(--text-muted)}
     .rec-time{flex:none;font-size:.74rem;color:var(--text-muted);white-space:nowrap}
 
+    /* ===== 已授权的应用 ===== */
+    .app-list{display:flex;flex-direction:column;gap:8px}
+    .app-item{
+      display:flex;justify-content:space-between;gap:14px;align-items:center;
+      padding:10px 12px;border:1px solid var(--border-color);border-radius:10px;background:var(--bg-primary);
+    }
+    .app-main{min-width:0}
+    .app-name{font-size:.88rem;color:var(--text-primary);margin-bottom:3px;word-break:break-all}
+    .app-sub{font-size:.76rem;color:var(--text-muted);word-break:break-all}
+    .app-id{font-size:.72rem;color:var(--text-muted);opacity:.8;margin-top:2px;word-break:break-all}
+    .app-revoke{
+      flex:none;padding:.35rem 12px;border:1px solid var(--border-color);background:transparent;
+      color:var(--text-secondary);border-radius:999px;font-family:inherit;font-size:.78rem;cursor:pointer;
+    }
+    .app-revoke:hover{color:#fff;background:#d33;border-color:#d33}
+
     /* ===== 页脚 ===== */
     footer{padding:28px 24px 40px;text-align:center;color:var(--footer-color);font-size:.78rem}
     footer a{color:var(--footer-color);text-decoration:underline}
@@ -320,6 +336,13 @@
           <button class="rec-tab" data-type="vba" type="button">VBA 生成</button>
         </div>
         <div class="rec-list" id="recList"><p class="muted">暂无记录</p></div>
+      </section>
+
+      <section class="card">
+        <h2>已授权的应用</h2>
+        <p class="muted">这些应用通过 Caelus OAuth 2.0 获得了你账号的部分权限。撤销后，它们将立即失去访问令牌，需要重新授权。</p>
+        <div class="app-list" id="appList"><p class="muted">暂无授权记录</p></div>
+        <p class="msg" id="appMsg"></p>
       </section>
 
       <section class="card">
@@ -709,7 +732,7 @@
   function loadMe() {
     if (!token) { render(); return; }
     api('/api/auth/me', { token: token }).then(function (r) {
-      if (r && r.ok) { me = r.user; render(); loadRecords(); }
+      if (r && r.ok) { me = r.user; render(); loadRecords(); loadApps(); }
       else { clearToken(); token = ''; me = null; render(); }
     }).catch(function () { render(); });
   }
@@ -717,6 +740,47 @@
     api('/api/auth/records', { token: token }).then(function (r) {
       if (r && r.ok) { records = r.records || []; me = r.user || me; renderRecords(); }
     }).catch(function () {});
+  }
+
+  /* ---- 已授权的应用（OAuth 2.0） ---- */
+  var SCOPE_LABEL = { star_id: 'Star ID', profile: '昵称与注册时间', email: '邮箱地址' };
+  var apps = [];
+
+  function scopeText(s) {
+    var list = String(s || '').split(/\s+/).filter(Boolean);
+    if (!list.length) return '未授予任何权限';
+    return list.map(function (x) { return SCOPE_LABEL[x] || x; }).join('、');
+  }
+  function renderApps() {
+    var box = $('appList');
+    if (!box) return;
+    if (!apps.length) { box.innerHTML = '<p class="muted">暂无授权记录</p>'; return; }
+    box.innerHTML = apps.map(function (a) {
+      return '<div class="app-item"><div class="app-main"><div class="app-name">' + escapeHtml(a.name || a.clientId) +
+        '</div><div class="app-sub">权限：' + escapeHtml(scopeText(a.scope)) + '　·　最近授权 ' + fmtTime(a.lastTs) +
+        '</div><div class="app-id">' + escapeHtml(a.clientId) + '</div></div>' +
+        '<button class="app-revoke" type="button" data-client="' + escapeHtml(a.clientId) + '">撤销</button></div>';
+    }).join('');
+    Array.prototype.forEach.call(box.querySelectorAll('.app-revoke'), function (b) {
+      b.addEventListener('click', function () { revokeApp(b.getAttribute('data-client'), b); });
+    });
+  }
+  function loadApps() {
+    if (!token) { apps = []; renderApps(); return; }
+    api('/api/auth/apps', { token: token }).then(function (r) {
+      apps = (r && r.ok && r.apps) ? r.apps : [];
+      renderApps();
+    }).catch(function () { apps = []; renderApps(); });
+  }
+  function revokeApp(clientId, btn) {
+    if (!clientId) return;
+    if (!window.confirm('确定撤销该应用的授权吗？撤销后它需要重新获取你的同意。')) return;
+    btn.disabled = true;
+    api('/api/auth/revoke-app', { token: token, clientId: clientId }).then(function (r) {
+      btn.disabled = false;
+      if (r && r.ok) { show($('appMsg'), '已撤销授权，共 ' + (r.revoked || 0) + ' 个令牌失效', true); loadApps(); }
+      else show($('appMsg'), (r && r.error) || '撤销失败，请稍后再试');
+    }).catch(function () { btn.disabled = false; show($('appMsg'), '网络错误，请稍后再试'); });
   }
 
   render();
