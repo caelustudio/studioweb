@@ -331,7 +331,7 @@
       <section class="card">
         <h2>活动记录</h2>
         <div class="rec-tabs">
-          <button class="rec-tab active" data-type="shop" type="button">商店购买</button>
+          <button class="rec-tab active" data-type="shop" type="button">商店</button>
           <button class="rec-tab" data-type="news" type="button">资讯浏览</button>
           <button class="rec-tab" data-type="vba" type="button">VBA 生成</button>
         </div>
@@ -679,11 +679,14 @@
     });
   });
 
-  var TYPE_LABEL = { shop: '商店购买', news: '资讯浏览', vba: 'VBA 生成' };
+  var TYPE_LABEL = { shop: '商店', news: '资讯浏览', vba: 'VBA 生成' };
 
   function recordTitle(r) {
     var m = r.meta || {};
-    if (r.type === 'shop') return (m.product || m.name || '商品') + ' ×' + (m.qty || m.quantity || 1) + (m.amount ? '　￥' + m.amount : '');
+    if (r.type === 'shop') {
+      if (m.kind === 'view') return '浏览了 ' + (m.title || m.product || '商品');
+      return (m.product || m.name || '商品') + ' ×' + (m.qty || m.quantity || 1) + (m.amount ? '　￥' + m.amount : '');
+    }
     if (r.type === 'news') return m.title || m.url || m.path || '浏览了一篇资讯';
     if (r.type === 'vba') return m.title || m.name || m.prompt || '生成了一段 VBA';
     return m.title || JSON.stringify(m).slice(0, 60);
