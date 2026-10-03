@@ -7,6 +7,7 @@
     'Caelus Studio - 始于设计，忠于设计 | 创意设计工作室': ['Caelus Studio - 始于设计，忠于设计 | 创意设计工作室', 'Caelus Studio - 始於設計，忠於設計 | 創意設計工作室', 'Caelus Studio - Begin With Design, Believe In Design | Creative Design Studio'],
     '首页': ['首页', '首頁', 'Home'],
     '下载': ['下载', '下載', 'Download'],
+    '登录': ['登录', '登入', 'Sign in'],
     '联系': ['联系', '聯繫', 'Contact'],
     '始于设计，忠于设计。': ['始于设计，忠于设计。', '始於設計，忠於設計。', 'Begin with design, believe in design.'],
     '下滑探索': ['下滑探索', '下滑探索', 'Scroll to explore'],
@@ -213,7 +214,9 @@
     if (obs) obs.disconnect();
     try {
       if (!document.body) return;
-      var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (node) { var p = node.parentNode; return (p && (p.nodeName === 'SCRIPT' || p.nodeName === 'STYLE')) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } }), n, nodes = [];
+      var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (node) { var p = node.parentNode; if (p && (p.nodeName === 'SCRIPT' || p.nodeName === 'STYLE')) return NodeFilter.FILTER_REJECT;
+        if (p && p.closest && p.closest('[data-no-i18n]')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT; } }), n, nodes = [];
       while ((n = w.nextNode())) nodes.push(n);
       for (var i = 0; i < nodes.length; i++) {
         if (!ORIG_N.has(nodes[i])) ORIG_N.set(nodes[i], norm(nodes[i].nodeValue));

@@ -1138,6 +1138,22 @@
       color: #fff;
       background: rgba(255,255,255,0.12);
     }
+    /* ===== 账号入口 ===== */
+    .nav-links a#navAccount {
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: .35rem .85rem;
+    }
+    .nav-links a#navAccount.nav-account--in {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    [data-theme="light"] .site-nav.scrolled .nav-links a#navAccount.nav-account--in {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
     [data-theme="light"] .site-nav.scrolled .nav-links a.active {
       color: #1a1a1a;
       background: rgba(0,0,0,0.08);
@@ -1262,6 +1278,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
         <li data-page-node-id="YR0ByEj1pwHUmDi2djANOF"><a href="#" onclick="window.scrollTo({top:0,behavior:&#39;smooth&#39;});return false;" data-page-node-id="PM7ZNsHPQtanvdJISy6p19">首页</a></li>
         <li data-page-node-id="eR4RRDHAUcw7lAETFvUbDA"><a href="#download" data-page-node-id="zSADOz3WKFDFzNLJa4OAJC">下载</a></li>
         <li data-page-node-id="akin4EeTmCDJJ7Skhsb0ou"><a href="#contact" data-page-node-id="rCmndyTmPjFDz4KiTBpXuw">联系</a></li>
+        <li><a href="/account/" id="navAccount">登录</a></li>
       </ul>
       <button class="nav-menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false" data-page-node-id="wN5Q6KuihpFz1o2Wsa4QUO">
         <span data-page-node-id="INZYmqS0AHfeGzJLFtxiwt"></span><span data-page-node-id="lTdvVtxDyCP91vwOILijxm"></span><span data-page-node-id="DpNdE7s4GGQClGLDWUCqWk"></span>
@@ -1277,6 +1294,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
     <a href="#" onclick="window.scrollTo({top:0,behavior:&#39;smooth&#39;});return false;" data-page-node-id="jSzNU8wS67DHyhVuYDi2zv">首页</a>
     <a href="#download" data-page-node-id="75M99bWhWlGBUJD33rwI4D">下载</a>
     <a href="#contact" data-page-node-id="V0fgCsSGGusyLgqrX0Iwwx">联系</a>
+    <a href="/account/" id="navAccountMobile">登录</a>
   </div>
 
   <!-- ===== 返回顶部按钮 ===== -->
@@ -2060,6 +2078,29 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
     draw();
   </script>
 <script src="i18n.js"></script>
+<script>
+  /* ===== 导航栏账号入口：已登录显示昵称 ===== */
+  (function () {
+    var els = [document.getElementById('navAccount'), document.getElementById('navAccountMobile')].filter(Boolean);
+    if (!els.length) return;
+    var m = document.cookie.match(/(?:^|;\s*)starid_token=([^;]*)/);
+    var tk = m ? decodeURIComponent(m[1]) : '';
+    if (!tk) { try { tk = localStorage.getItem('starid_token') || ''; } catch (_) {} }
+    if (!tk) return;
+    fetch('https://caelus-terminal.app.workbuddy.host/api/auth/me', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token: tk })
+    }).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r || !r.ok || !r.user) return;
+      var name = r.user.nickname || String(r.user.email || '').split('@')[0] || '我的';
+      els.forEach(function (el) {
+        el.textContent = name;
+        el.setAttribute('data-no-i18n', '');
+        el.classList.add('nav-account--in');
+        el.title = 'Star ID · ' + (r.user.starId || '');
+      });
+    }).catch(function () {});
+  })();
+</script>
 
   <div class="cookie-bar" id="cookieBar" hidden>
     <p class="ck-title">关于 Cookie</p>
