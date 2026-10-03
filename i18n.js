@@ -203,7 +203,7 @@
   '限时优惠': ['限时优惠', '限時優惠', 'Limited Offer'],
   '官方周边': ['官方周边', '官方周邊', 'Official Merch'],
   '9.9 元优惠券': ['9.9 元优惠券', '9.9 元優惠券', '¥9.9 Coupon'],
-  '星轨钥匙扣': ['星轨钥匙扣', '星軌鑰匙圈', 'Star Orbit Keychain'],
+  '周边钥匙扣': ['周边钥匙扣', '周邊鑰匙圈', 'Merch Keychain'],
   '周边商店': ['周边商店', '周邊商店', 'Store'],
     "全部文档": ["全部文档", "全部文件", "All docs"],
     "每 60 秒自动刷新 · 由 Caelus 可用性监控提供": ["每 60 秒自动刷新 · 由 Caelus 可用性监控提供", "每 60 秒自動刷新 · 由 Caelus 可用性監控提供", "Auto-refreshes every 60 seconds · powered by Caelus uptime monitoring"],
