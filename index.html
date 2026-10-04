@@ -1073,6 +1073,7 @@
       /* 汉堡菜单替换横排链接 */
       .nav-links { display: none; }
       .nav-menu-btn { display: flex; }
+      .nav-account { display: none; }
       .download-section { padding: 3rem 1.2rem 3rem; }
       .section-title h2 { font-size: 1.4rem; }
       .ppt-icon-large { width: 4.2rem; height: 4.2rem; }
@@ -1168,17 +1169,36 @@
       background: rgba(255,255,255,0.12);
     }
     /* ===== 账号入口 ===== */
-    .nav-links a#navAccount {
-      border: 1px solid var(--border-color);
+    .nav-account {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
       border-radius: 999px;
-      padding: .35rem .85rem;
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      flex-shrink: 0;
     }
-    .nav-links a#navAccount.nav-account--in {
+    .nav-account:hover {
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .nav-account.nav-account--in {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
     }
-    [data-theme="light"] .site-nav.scrolled .nav-links a#navAccount.nav-account--in {
+    [data-theme="light"] .site-nav.scrolled .nav-account {
+      color: rgba(26,26,26,0.5);
+    }
+    [data-theme="light"] .site-nav.scrolled .nav-account:hover {
+      color: rgba(26,26,26,0.85);
+      background: rgba(0,0,0,0.06);
+      border-color: rgba(0,0,0,0.08);
+    }
+    [data-theme="light"] .site-nav.scrolled .nav-account.nav-account--in {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
@@ -1307,8 +1327,8 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
         <li data-page-node-id="YR0ByEj1pwHUmDi2djANOF"><a href="#" onclick="window.scrollTo({top:0,behavior:&#39;smooth&#39;});return false;" data-page-node-id="PM7ZNsHPQtanvdJISy6p19">首页</a></li>
         <li data-page-node-id="eR4RRDHAUcw7lAETFvUbDA"><a href="#download" data-page-node-id="zSADOz3WKFDFzNLJa4OAJC">下载</a></li>
         <li data-page-node-id="akin4EeTmCDJJ7Skhsb0ou"><a href="#contact" data-page-node-id="rCmndyTmPjFDz4KiTBpXuw">联系</a></li>
-        <li><a href="/account/" id="navAccount">登录</a></li>
       </ul>
+      <a href="/account/" id="navAccount" class="nav-account" data-no-i18n>登录</a>
       <button class="nav-menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false" data-page-node-id="wN5Q6KuihpFz1o2Wsa4QUO">
         <span data-page-node-id="INZYmqS0AHfeGzJLFtxiwt"></span><span data-page-node-id="lTdvVtxDyCP91vwOILijxm"></span><span data-page-node-id="DpNdE7s4GGQClGLDWUCqWk"></span>
       </button>
@@ -1323,7 +1343,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
     <a href="#" onclick="window.scrollTo({top:0,behavior:&#39;smooth&#39;});return false;" data-page-node-id="jSzNU8wS67DHyhVuYDi2zv">首页</a>
     <a href="#download" data-page-node-id="75M99bWhWlGBUJD33rwI4D">下载</a>
     <a href="#contact" data-page-node-id="V0fgCsSGGusyLgqrX0Iwwx">联系</a>
-    <a href="/account/" id="navAccountMobile">登录</a>
+    <a href="/account/" id="navAccountMobile" data-no-i18n>登录</a>
   </div>
 
   <!-- ===== 返回顶部按钮 ===== -->
