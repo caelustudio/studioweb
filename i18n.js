@@ -56,6 +56,8 @@
     "新闻中心": ["新闻中心", "新聞中心", "News"],
     "工作室的最新动态与产品发布。": ["工作室的最新动态与产品发布。", "工作室的最新動態與產品發布。", "Latest updates and product releases from the studio."],
     "商店": ["商店", "商店", "Shop"],
+    "论坛": ["论坛", "論壇", "Forum"],
+    "Star ID 登录后即可发帖，与其他成员评论、点赞。": ["Star ID 登录后即可发帖，与其他成员评论、点赞。", "Star ID 登入後即可發帖，與其他成員評論、點讚。", "Community — sign in with Star ID to post, comment and like."],
     "Caelus Studio 官方周边，把热爱带回家。": ["Caelus Studio 官方周边，把热爱带回家。", "Caelus Studio 官方周邊，把熱愛帶回家。", "Official Caelus Studio merch — bring the passion home."],
     "VBA 生成器": ["VBA 生成器", "VBA 產生器", "VBA Generator"],
     "免费在线 VBA 代码生成器，让 PPT 直接向 DeepSeek 提问。": ["免费在线 VBA 代码生成器，让 PPT 直接向 DeepSeek 提问。", "免費線上 VBA 程式碼產生器，讓 PPT 直接向 DeepSeek 提問。", "Free online VBA code generator — let your slides ask DeepSeek directly."],
