@@ -89,6 +89,27 @@
       font-family:inherit; font-size:.9rem;
     }
     .field input:focus{outline:none;border-color:var(--accent)}
+    /* 头像设置 */
+    .avatar-row{display:flex;gap:16px;align-items:center;margin:4px 0 18px}
+    .avatar-pick{
+      position:relative;flex:none;width:78px;height:78px;border-radius:50%;overflow:hidden;cursor:pointer;
+      background:var(--bg-primary);border:1px solid var(--border-color);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .avatar-pick img{width:100%;height:100%;object-fit:cover;display:block}
+    .avatar-pick span{font-size:1.8rem;font-weight:500;color:var(--accent);line-height:1}
+    .avatar-pick .avatar-edit{
+      position:absolute;left:0;right:0;bottom:0;height:22px;background:rgba(0,0,0,.55);color:#fff;
+      font-size:11px;font-style:normal;display:flex;align-items:center;justify-content:center;
+      opacity:0;transition:opacity .15s;
+    }
+    .avatar-pick:hover .avatar-edit{opacity:1}
+    .avatar-side{flex:1 1 auto;min-width:0}
+    .avatar-btns{display:flex;gap:8px;flex-wrap:wrap}
+    .avatar-side .btn{width:auto;margin-top:0;padding:7px 14px;font-size:.82rem;display:inline-flex}
+    .avatar-hint{margin:8px 0 0;font-size:.76rem;color:var(--text-secondary);line-height:1.5}
+    .avatar-side .msg{margin:6px 0 0}
+    @media (max-width:520px){ .avatar-row{align-items:flex-start} }
     .code-row{display:flex;gap:10px}
     .code-row input{flex:1}
     .code-row button{
@@ -293,6 +314,22 @@
 
       <section class="card">
         <h2>个人资料</h2>
+        <div class="avatar-row">
+          <div class="avatar-pick" id="avaBox" title="点击更换头像">
+            <img id="avaImg" alt="头像" hidden />
+            <span id="avaFallback">C</span>
+            <i class="avatar-edit">更换</i>
+          </div>
+          <div class="avatar-side">
+            <div class="avatar-btns">
+              <button class="btn ghost" id="avaPick" type="button">更换头像</button>
+              <button class="btn ghost" id="avaClear" type="button">移除</button>
+            </div>
+            <p class="avatar-hint">支持 JPG / PNG / WebP，会自动裁成正方形并压缩后上传；论坛、账号中心统一显示这个头像。</p>
+            <p class="msg" id="avaMsg"></p>
+          </div>
+          <input type="file" id="avaFile" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+        </div>
         <div class="grid2">
           <div class="field"><label>昵称</label><input type="text" id="pfNickname" maxlength="20" /></div>
           <div class="field"><label>QQ</label><input type="text" id="pfQQ" maxlength="20" inputmode="numeric" /></div>
@@ -596,6 +633,60 @@
     }).catch(function () { btn.disabled = false; show($('loginErr'), '网络错误，请稍后再试'); });
   });
 
+  /* ---- 头像 ---- */
+  function avatarChar() {
+    var s = (me && (me.nickname || me.email)) || 'C';
+    return String(s).trim().charAt(0).toUpperCase();
+  }
+  function renderAvatar() {
+    var img = $('avaImg'), fb = $('avaFallback');
+    if (!img) return;
+    if (me && me.avatar) { img.src = me.avatar; img.hidden = false; fb.hidden = true; }
+    else { img.hidden = true; img.removeAttribute('src'); fb.hidden = false; fb.textContent = avatarChar(); }
+  }
+  function pickAvatarFile() { var f = $('avaFile'); if (!f) return; f.value = ''; f.click(); }
+  // 本地先裁成正方形 + 缩到 256×256 再上传，避免把几 MB 的原图直接丢给后端
+  function handleAvatarFile(file) {
+    if (!file) return;
+    if (!/^image\//.test(file.type || '')) { show($('avaMsg'), '请选择图片文件'); return; }
+    show($('avaMsg'), '正在处理图片…', true);
+    var fr = new FileReader();
+    fr.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var S = 256;
+        var cv = document.createElement('canvas');
+        cv.width = cv.height = S;
+        var ctx = cv.getContext('2d');
+        var side = Math.min(img.width, img.height);
+        if (!side) { show($('avaMsg'), '图片读取失败，请换一张'); return; }
+        ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, S, S);
+        var url = cv.toDataURL('image/png');
+        if (url.length > 1600000) url = cv.toDataURL('image/jpeg', 0.88); // 照片型 PNG 过大 → 转 JPEG
+        api('/api/auth/avatar', { token: token, data: url }).then(function (r) {
+          if (r && r.ok) { me = r.user; renderAvatar(); show($('avaMsg'), '头像已更新', true); }
+          else show($('avaMsg'), (r && r.error) || '上传失败，请稍后再试');
+        })['catch'](function () { show($('avaMsg'), '网络错误，请稍后再试'); });
+      };
+      img.onerror = function () { show($('avaMsg'), '图片读取失败，请换一张'); };
+      img.src = fr.result;
+    };
+    fr.onerror = function () { show($('avaMsg'), '图片读取失败，请换一张'); };
+    fr.readAsDataURL(file);
+  }
+  if ($('avaBox')) {
+    $('avaBox').addEventListener('click', pickAvatarFile);
+    $('avaPick').addEventListener('click', pickAvatarFile);
+    $('avaFile').addEventListener('change', function () { handleAvatarFile(this.files && this.files[0]); });
+    $('avaClear').addEventListener('click', function () {
+      if (!confirm('确定移除当前头像？')) return;
+      api('/api/auth/avatar', { token: token, remove: true }).then(function (r) {
+        if (r && r.ok) { me = r.user; renderAvatar(); show($('avaMsg'), '头像已移除', true); }
+        else show($('avaMsg'), (r && r.error) || '操作失败');
+      })['catch'](function () { show($('avaMsg'), '网络错误'); });
+    });
+  }
+
   /* ---- 保存资料 ---- */
   $('saveProfile').addEventListener('click', function () {
     var btn = this;
@@ -805,6 +896,7 @@
     $('pfQQ').value = me.qq || '';
     $('pfPhone').value = me.phone || '';
     $('pfAddress').value = me.address || '';
+    renderAvatar();
     if ($('promoToggle')) $('promoToggle').checked = !!me.promo;
     renderOkBind();
     renderGsBind();
