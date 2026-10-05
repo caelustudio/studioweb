@@ -51,7 +51,7 @@
     .topbar-right{display:flex;align-items:center;gap:12px;flex:none}
     [data-theme="light"] .topbar{background:rgba(245,245,245,0.9)}
     [data-theme="light"] .field input{background:var(--bg-secondary)}
-    .auth-logo{height:15px;width:auto;flex:none;vertical-align:-2px;margin-right:9px;filter:invert(1) brightness(1.5)}
+    .auth-logo{height:12px;width:auto;flex:none;vertical-align:-1px;margin-right:9px;filter:invert(1) brightness(1.5)}
     [data-theme="light"] .auth-logo{filter:none}
     .auth-logo.gs{height:17px;vertical-align:-4px}
 
@@ -272,7 +272,8 @@
       </div>
 
       <div class="divider"></div>
-      <button class="btn ghost" id="okLoginBtn" type="button"><img class="auth-logo" src="/assets/ok-logo.png" alt="">使用 OK 账号登录 / 注册</button>
+      <button class="btn ghost" id="okLoginBtn" type="button"><img class="auth-logo" src="/assets/ok-logo.png?v=2" alt="">使用 OK 账号登录 / 注册</button>
+      <button class="btn ghost" id="gsLoginBtn" type="button" style="margin-top:10px"><img class="auth-logo gs" src="/assets/gitsource.svg" alt="">使用 GitSource 账号登录 / 注册</button>
       <p class="muted" style="margin-top:10px">在 OK 平台（okteam.cn）登录后即可继续：已有 Star ID 会自动关联，首次使用会自动创建。</p>
       <p class="msg" id="okMsg"></p>
     </section>
@@ -499,6 +500,7 @@
     location.href = u;
   }
   $('okLoginBtn').addEventListener('click', function () { okGo(false); });
+  $('gsLoginBtn').addEventListener('click', function () { gsGo(false); });
 
   /* ---- GitSource 账号登录 / 绑定（git.rivulet.org.cn） ---- */
   function gsGo(bind) {
