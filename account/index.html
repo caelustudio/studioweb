@@ -51,6 +51,9 @@
     .topbar-right{display:flex;align-items:center;gap:12px;flex:none}
     [data-theme="light"] .topbar{background:rgba(245,245,245,0.9)}
     [data-theme="light"] .field input{background:var(--bg-secondary)}
+    .auth-logo{height:15px;width:auto;flex:none;vertical-align:-2px;margin-right:9px;filter:invert(1) brightness(1.5)}
+    [data-theme="light"] .auth-logo{filter:none}
+    .auth-logo.gs{height:17px;vertical-align:-4px}
 
     /* ===== 容器 ===== */
     .wrap{max-width:960px;margin:0 auto;padding:32px 24px 80px}
@@ -269,7 +272,7 @@
       </div>
 
       <div class="divider"></div>
-      <button class="btn ghost" id="okLoginBtn" type="button">使用 OK 账号登录 / 注册</button>
+      <button class="btn ghost" id="okLoginBtn" type="button"><img class="auth-logo" src="/assets/ok-logo.png" alt="">使用 OK 账号登录 / 注册</button>
       <p class="muted" style="margin-top:10px">在 OK 平台（okteam.cn）登录后即可继续：已有 Star ID 会自动关联，首次使用会自动创建。</p>
       <p class="msg" id="okMsg"></p>
     </section>
@@ -537,7 +540,7 @@
     if (!row || !me) return;
     row.innerHTML = me.okBound
       ? '<p class="msg ok" style="margin-top:0">已绑定 OK 账号</p>'
-      : '<button class="btn ghost" id="okBindBtn" type="button">绑定 OK 账号</button>';
+      : '<button class="btn ghost" id="okBindBtn" type="button"><img class="auth-logo" src="/assets/ok-logo.png" alt="">绑定 OK 账号</button>';
     var b = $('okBindBtn');
     if (b) b.addEventListener('click', function () { okGo(true); });
   }
@@ -547,7 +550,7 @@
     if (!row || !me) return;
     row.innerHTML = me.gsBound
       ? '<p class="msg ok" style="margin-top:0">已绑定 GitSource 账号</p>'
-      : '<button class="btn ghost" id="gsBindBtn" type="button">绑定 GitSource 账号</button>';
+      : '<button class="btn ghost" id="gsBindBtn" type="button"><img class="auth-logo gs" src="/assets/gitsource.svg" alt="">绑定 GitSource 账号</button>';
     var b = $('gsBindBtn');
     if (b) b.addEventListener('click', function () { gsGo(true); });
   }
