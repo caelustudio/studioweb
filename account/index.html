@@ -298,8 +298,9 @@
         <button class="btn" id="saveProfile" type="button">保存资料</button>
         <p class="msg ok" id="profileMsg"></p>
         <div class="divider"></div>
-        <p class="muted">第三方登录：绑定 OK 账号后，可以直接用 OK 账号登录 Star ID。</p>
+        <p class="muted">第三方登录：绑定 OK 账号 / GitSource 账号后，可以直接用它们登录 Star ID。</p>
         <div id="okBindRow" style="margin-top:12px"></div>
+        <div id="gsBindRow" style="margin-top:10px"></div>
       </section>
 
       <section class="card">
@@ -496,13 +497,32 @@
   }
   $('okLoginBtn').addEventListener('click', function () { okGo(false); });
 
-  // 从 OK 授权回跳：用一次性码换登录令牌（令牌本身不进 URL）
+  /* ---- GitSource 账号登录 / 绑定（git.rivulet.org.cn） ---- */
+  function gsGo(bind) {
+    var u = API + '/api/auth/gitsource/start?next=' + encodeURIComponent(ACCOUNT_URL);
+    if (bind && token) u += '&bind=' + encodeURIComponent(token);
+    location.href = u;
+  }
+
+  // 从 OK / GitSource 授权回跳：用一次性码换登录令牌（令牌本身不进 URL）
   (function () {
     var q = new URLSearchParams(location.search);
     var code = q.get('ok_code'), err = q.get('ok_error');
-    if (!code && !err) return;
+    var gsCode = q.get('gs_code'), gsErr = q.get('gs_error');
+    if (!code && !err && !gsCode && !gsErr) return;
     try { history.replaceState(null, '', location.pathname); } catch (_) {}
+    if (gsErr) { show($('okMsg'), gsErr); return; }
     if (err) { show($('okMsg'), err); return; }
+    if (gsCode) {
+      show($('okMsg'), '正在登录……', true);
+      api('/api/auth/gitsource/session', { code: gsCode }).then(function (r) {
+        if (!r || !r.ok) { show($('okMsg'), (r && r.error) || '登录失败，请重试'); return; }
+        token = r.token; setToken(token, true);
+        show($('okMsg'), '登录成功', true);
+        loadMe();
+      }).catch(function () { show($('okMsg'), '网络错误，请稍后再试'); });
+      return;
+    }
     show($('okMsg'), '正在登录……', true);
     api('/api/auth/ok/session', { code: code }).then(function (r) {
       if (!r || !r.ok) { show($('okMsg'), (r && r.error) || '登录失败，请重试'); return; }
@@ -520,6 +540,16 @@
       : '<button class="btn ghost" id="okBindBtn" type="button">绑定 OK 账号</button>';
     var b = $('okBindBtn');
     if (b) b.addEventListener('click', function () { okGo(true); });
+  }
+
+  function renderGsBind() {
+    var row = $('gsBindRow');
+    if (!row || !me) return;
+    row.innerHTML = me.gsBound
+      ? '<p class="msg ok" style="margin-top:0">已绑定 GitSource 账号</p>'
+      : '<button class="btn ghost" id="gsBindBtn" type="button">绑定 GitSource 账号</button>';
+    var b = $('gsBindBtn');
+    if (b) b.addEventListener('click', function () { gsGo(true); });
   }
 
   /* ---- 注册 ---- */  $('regBtn').addEventListener('click', function () {
@@ -772,6 +802,7 @@
     $('pfAddress').value = me.address || '';
     if ($('promoToggle')) $('promoToggle').checked = !!me.promo;
     renderOkBind();
+    renderGsBind();
     renderRecords();
   }
 
