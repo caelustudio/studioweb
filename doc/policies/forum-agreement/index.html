@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-doc="policies/forum-agreement">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caelus Studio 文档库</title>
+  <meta name="description" content="论坛社区规范、违规处理（警告 / 封禁 / 注销）与申诉方式。">
+  <meta name="theme-color" content="#0b0b0b">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Caelus Studio">
+  <meta property="og:title" content="Caelus Studio 文档库">
+  <meta property="og:description" content="协议、隐私政策与服务条款的只读文档库。">
+  <meta property="og:url" content="https://www.caelus.top/doc/">
+  <meta property="og:image" content="https://www.caelus.top/og-main.png">
+  <link rel="canonical" href="https://www.caelus.top/doc/">
+  <link rel="stylesheet" href="https://www.caelus.top/fonts/opposans40/result.css">
+  <link rel="stylesheet" href="/assets/theme.css?v=20260929">
+  <script>(function(){try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <link rel="stylesheet" href="/doc/doc.css?v=20260929">
+<link rel="stylesheet" href="/assets/cookie-consent.css?v=20260930">
+<script src="/assets/cookie-consent.js?v=20260930"></script>
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <header class="docbar">
+    <div class="docbar-left">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="目录">☰</button>
+      <h1>Caelus Studio 文档库</h1>
+      <span class="crumb" id="crumb">全部文档</span>
+    </div>
+    <div class="docbar-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换深色/浅色模式">
+        <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main class="content" id="content"></main>
+  </div>
+
+  <script src="/doc/docs.js?v=20260929"></script>
+  <script src="/doc/doc.js?v=20260929"></script>
+  <script src="/assets/theme.js?v=20260929"></script>
+
+  <div class="cookie-bar" id="cookieBar" hidden>
+    <p class="ck-title">关于 Cookie</p>
+    <p class="ck-text">我们使用 Cookie 与本地存储保存登录状态、界面偏好与访问统计，不会用于广告或跨站追踪。你可以选择允许哪些类别。详见<a href="/doc/privacy/privacy-policy/">隐私政策</a>。</p>
+    <div class="cookie-cats">
+      <label class="cookie-cat is-locked">
+        <input type="checkbox" checked disabled>
+        <span><b>必要</b><i>登录会话与账户安全，关闭后无法登录</i></span>
+        <span class="cat-tag">始终启用</span>
+      </label>
+      <label class="cookie-cat">
+        <input type="checkbox" id="cookieCatPref">
+        <span><b>偏好设置</b><i>深色 / 浅色主题、语言选择</i></span>
+      </label>
+      <label class="cookie-cat">
+        <input type="checkbox" id="cookieCatStat">
+        <span><b>访问统计</b><i>匿名统计页面访问量，不识别个人身份</i></span>
+      </label>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" id="cookieReject">仅必要</button>
+      <button type="button" id="cookieSave">保存选择</button>
+      <button type="button" id="cookieAccept" class="is-primary">全部接受</button>
+    </div>
+  </div>
+</body>
+</html>
