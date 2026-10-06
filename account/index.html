@@ -54,6 +54,7 @@
     .auth-logo{height:12px;width:auto;flex:none;vertical-align:-1px;margin-right:9px;filter:invert(1) brightness(1.5)}
     [data-theme="light"] .auth-logo{filter:none}
     .auth-logo.gs{height:17px;vertical-align:-4px}
+    .auth-logo.xh{height:18px;vertical-align:-4px;filter:none}
 
     /* ===== 容器 ===== */
     .wrap{max-width:960px;margin:0 auto;padding:32px 24px 80px}
@@ -295,7 +296,8 @@
       <div class="divider"></div>
       <button class="btn ghost" id="okLoginBtn" type="button"><img class="auth-logo" src="/assets/ok-logo.png?v=2" alt="">使用 OK 账号登录 / 注册</button>
       <button class="btn ghost" id="gsLoginBtn" type="button" style="margin-top:10px"><img class="auth-logo gs" src="/assets/gitsource.svg" alt="">使用 GitSource 账号登录 / 注册</button>
-      <p class="muted" style="margin-top:10px">在 OK 平台（okteam.cn）登录后即可继续：已有 Star ID 会自动关联，首次使用会自动创建。</p>
+      <button class="btn ghost" id="xhsLoginBtn" type="button" style="margin-top:10px"><img class="auth-logo xh" src="/assets/xinghuan.png" alt="">使用星环设计账号登录 / 注册</button>
+      <p class="muted" style="margin-top:10px">在 OK 平台（okteam.cn）、GitSource 或星环设计登录后即可继续：已有 Star ID 会自动关联，首次使用会自动创建。</p>
       <p class="msg" id="okMsg"></p>
     </section>
 
@@ -339,9 +341,10 @@
         <button class="btn" id="saveProfile" type="button">保存资料</button>
         <p class="msg ok" id="profileMsg"></p>
         <div class="divider"></div>
-        <p class="muted">第三方登录：绑定 OK 账号 / GitSource 账号后，可以直接用它们登录 Star ID。</p>
+        <p class="muted">第三方登录：绑定 OK / GitSource / 星环设计账号后，可以直接用它们登录 Star ID。</p>
         <div id="okBindRow" style="margin-top:12px"></div>
         <div id="gsBindRow" style="margin-top:10px"></div>
+        <div id="xhsBindRow" style="margin-top:10px"></div>
       </section>
 
       <section class="card">
@@ -538,6 +541,7 @@
   }
   $('okLoginBtn').addEventListener('click', function () { okGo(false); });
   $('gsLoginBtn').addEventListener('click', function () { gsGo(false); });
+  $('xhsLoginBtn').addEventListener('click', function () { xhGo(false); });
 
   /* ---- GitSource 账号登录 / 绑定（git.rivulet.org.cn） ---- */
   function gsGo(bind) {
@@ -546,15 +550,34 @@
     location.href = u;
   }
 
-  // 从 OK / GitSource 授权回跳：用一次性码换登录令牌（令牌本身不进 URL）
+  /* ---- 星环设计账号登录 / 绑定（xinghuanshequ.pages.dev） ---- */
+  function xhGo(bind) {
+    var u = API + '/api/auth/xinghuan/start?next=' + encodeURIComponent(ACCOUNT_URL);
+    if (bind && token) u += '&bind=' + encodeURIComponent(token);
+    location.href = u;
+  }
+
+  // 从 OK / GitSource / 星环授权回跳：用一次性码换登录令牌（令牌本身不进 URL）
   (function () {
     var q = new URLSearchParams(location.search);
     var code = q.get('ok_code'), err = q.get('ok_error');
     var gsCode = q.get('gs_code'), gsErr = q.get('gs_error');
-    if (!code && !err && !gsCode && !gsErr) return;
+    var xhsCode = q.get('xhs_code'), xhsErr = q.get('xhs_error');
+    if (!code && !err && !gsCode && !gsErr && !xhsCode && !xhsErr) return;
     try { history.replaceState(null, '', location.pathname); } catch (_) {}
+    if (xhsErr) { show($('okMsg'), xhsErr); return; }
     if (gsErr) { show($('okMsg'), gsErr); return; }
     if (err) { show($('okMsg'), err); return; }
+    if (xhsCode) {
+      show($('okMsg'), '正在登录……', true);
+      api('/api/auth/xinghuan/session', { code: xhsCode }).then(function (r) {
+        if (!r || !r.ok) { show($('okMsg'), (r && r.error) || '登录失败，请重试'); return; }
+        token = r.token; setToken(token, true);
+        show($('okMsg'), '登录成功', true);
+        loadMe();
+      }).catch(function () { show($('okMsg'), '网络错误，请稍后再试'); });
+      return;
+    }
     if (gsCode) {
       show($('okMsg'), '正在登录……', true);
       api('/api/auth/gitsource/session', { code: gsCode }).then(function (r) {
@@ -592,6 +615,16 @@
       : '<button class="btn ghost" id="gsBindBtn" type="button"><img class="auth-logo gs" src="/assets/gitsource.svg" alt="">绑定 GitSource 账号</button>';
     var b = $('gsBindBtn');
     if (b) b.addEventListener('click', function () { gsGo(true); });
+  }
+
+  function renderXhsBind() {
+    var row = $('xhsBindRow');
+    if (!row || !me) return;
+    row.innerHTML = me.xhsBound
+      ? '<p class="msg ok" style="margin-top:0">已绑定星环设计账号</p>'
+      : '<button class="btn ghost" id="xhsBindBtn" type="button"><img class="auth-logo xh" src="/assets/xinghuan.png" alt="">绑定星环设计账号</button>';
+    var b = $('xhsBindBtn');
+    if (b) b.addEventListener('click', function () { xhGo(true); });
   }
 
   /* ---- 注册 ---- */  $('regBtn').addEventListener('click', function () {
@@ -900,6 +933,7 @@
     if ($('promoToggle')) $('promoToggle').checked = !!me.promo;
     renderOkBind();
     renderGsBind();
+    renderXhsBind();
     renderRecords();
   }
 
