@@ -50,6 +50,12 @@
       justify-content: space-between;
       margin-bottom: 2.2rem;
     }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
     .brand {
       display: flex;
       align-items: center;
@@ -292,14 +298,16 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
   <div class="custom-cursor" id="customCursor"></div>
 
   <div class="wrap">
-    <div class="top" data-lang-mount>
+    <div class="top">
       <a class="brand" href="/">
         <img src="../favicon.png" alt="Caelus Studio">
         Caelus Studio
       </a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换深浅色">
-        <svg viewBox="0 0 24 24" id="themeIcon"></svg>
-      </button>
+      <div class="top-actions" data-lang-mount>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换深浅色">
+          <svg viewBox="0 0 24 24" id="themeIcon"></svg>
+        </button>
+      </div>
     </div>
 
     <h1>站点状态</h1>
@@ -367,14 +375,27 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
     setTheme(currentTheme);
 
     // ===== 状态渲染 =====
+    function T(k, fb) {
+      var api = window.CaelusI18n;
+      if (api && api.t) return api.t(k, fb);
+      return fb === undefined ? k : fb;
+    }
+    function curLang() {
+      var api = window.CaelusI18n;
+      return (api && api.lang) ? api.lang() : 'zh-CN';
+    }
+    var LOCALE = { 'zh-CN': 'zh-CN', 'zh-TW': 'zh-Hant', 'en': 'en-US' };
+    var lastData = null;
+
     function fmtTime(iso) {
       try {
         var d = new Date(iso);
-        return d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+        return d.toLocaleTimeString(LOCALE[curLang()] || 'zh-CN', { hour: '2-digit', minute: '2-digit' });
       } catch (e) { return ''; }
     }
 
     function render(d) {
+      lastData = d;
       var rows = document.getElementById('rows');
       var h = '';
       d.results.forEach(function (r, idx) {
@@ -387,17 +408,17 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
           + '<div class="meta">'
           + (r.ok
               ? '<div class="ms">' + (r.ms >= 1000 ? (r.ms / 1000).toFixed(2) + 's' : r.ms + 'ms') + '</div>'
-              : '<div class="detail">' + (r.detail || '故障') + '</div>')
-          + '<div class="when">' + fmtTime(r.at) + ' 检测</div>'
+              : '<div class="detail">' + (r.detail ? T(r.detail, r.detail) : T('故障')) + '</div>')
+          + '<div class="when">' + fmtTime(r.at) + ' ' + T('检测') + '</div>'
           + '</div>'
           + '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
           + '</div>'
           + '<div class="more">'
-          + '<div class="kv"><b>域名</b><span>' + r.url.replace(/\/$/, '') + '</span></div>'
-          + '<div class="kv"><b>状态</b><span>' + (r.ok ? '✅ 正常运行' : '❌ 故障') + ' · HTTP ' + (r.code || '-') + '</span></div>'
-          + '<div class="kv"><b>响应</b><span>' + (r.ms >= 1000 ? (r.ms / 1000).toFixed(2) + ' 秒' : r.ms + ' 毫秒') + '</span></div>'
-          + '<div class="kv"><b>检测</b><span>' + new Date(r.at).toLocaleString('zh-CN') + '</span></div>'
-          + '<a class="visit" href="' + r.url + '" target="_blank" rel="noopener">前往站点 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>'
+          + '<div class="kv"><b>' + T('域名') + '</b><span>' + r.url.replace(/\/$/, '') + '</span></div>'
+          + '<div class="kv"><b>' + T('状态') + '</b><span>' + (r.ok ? '✅ ' + T('正常运行') : '❌ ' + T('故障')) + ' · HTTP ' + (r.code || '-') + '</span></div>'
+          + '<div class="kv"><b>' + T('响应') + '</b><span>' + (r.ms >= 1000 ? (r.ms / 1000).toFixed(2) + ' ' + T('秒') : r.ms + ' ' + T('毫秒')) + '</span></div>'
+          + '<div class="kv"><b>' + T('检测') + '</b><span>' + new Date(r.at).toLocaleString(LOCALE[curLang()] || 'zh-CN') + '</span></div>'
+          + '<a class="visit" href="' + r.url + '" target="_blank" rel="noopener">' + T('前往站点') + ' <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>'
           + '</div>'
           + '</div>';
       });
@@ -426,11 +447,11 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
       var txt = document.getElementById('sumText');
       if (d.allOk) {
         dot.className = 'dot ok';
-        txt.textContent = '所有系统运行正常 · 共 ' + d.results.length + ' 项检测';
+        txt.textContent = T('所有系统运行正常 · 共 {n} 项检测').replace('{n}', d.results.length);
       } else {
         var bad = d.results.filter(function (r) { return !r.ok; }).length;
         dot.className = 'dot fail';
-        txt.textContent = '发现 ' + bad + ' 项故障，我们正在关注';
+        txt.textContent = T('发现 {n} 项故障，我们正在关注').replace('{n}', bad);
       }
     }
 
@@ -440,9 +461,19 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
         .then(render)
         .catch(function () {
           document.getElementById('sumDot').className = 'dot fail';
-          document.getElementById('sumText').textContent = '状态服务暂时无法访问';
+          document.getElementById('sumText').textContent = T('状态服务暂时无法访问');
         });
     }
+
+    // 语言切换后按新语言重绘（文案由 JS 动态生成，不经过字典扫描）
+    // 注意：本段内联脚本先于 i18n.js 执行，需要等它加载完成
+    (function bindLang() {
+      if (window.CaelusI18n && window.CaelusI18n.onChange) {
+        window.CaelusI18n.onChange(function () { if (lastData) render(lastData); else load(); });
+      } else {
+        setTimeout(bindLang, 50);
+      }
+    })();
 
     load();
     setInterval(load, 60000);

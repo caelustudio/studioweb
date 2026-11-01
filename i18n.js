@@ -182,7 +182,7 @@
     "主题切换等偏好仅保存在你自己的设备上，用于记住你的选择，绝不上传服务器。": ["主题切换等偏好仅保存在你自己的设备上，用于记住你的选择，绝不上传服务器。", "主題切換等偏好僅保存在你自己的裝置上，用於記住你的選擇，絕不上傳伺服器。", "Preferences like your theme choice are stored only on your own device to remember your settings — never uploaded to any server."],
     "你的数据，": ["你的数据，", "你的資料，", "Your data,"],
     "由你掌控。": ["由你掌控。", "由你掌控。", "in your control."],
-    "本网站不收集任何个人信息，也不留存访问记录。若你通过电子邮件或社交渠道联系我们， 相关交流内容仅用于回复你的问题，你随时可以要求我们删除，我们会照做。": ["本网站不收集任何个人信息，也不留存访问记录。若你通过电子邮件或社交渠道联系我们， 相关交流内容仅用于回复你的问题，你随时可以要求我们删除，我们会照做。", "本網站不收集任何個人資訊，也不留存訪問記錄。若你透過電子郵件或社交渠道聯繫我們，相關交流內容僅用於回覆你的問題，你隨時可以要求我們刪除，我們會照做。", "This site collects no personal information and keeps no visit records. If you contact us by email or social channels, that conversation is used only to reply to you — ask us to delete it anytime, and we will."],
+    "我们仅在你主动提供时收集邮箱、昵称等账号信息；匿名统计与登录后的活动记录仅用于改善服务。 若你通过电子邮件或社交渠道联系我们，相关交流内容仅用于回复你的问题，你随时可以要求我们删除，我们会照做。": ["我们仅在你主动提供时收集邮箱、昵称等账号信息；匿名统计与登录后的活动记录仅用于改善服务。 若你通过电子邮件或社交渠道联系我们，相关交流内容仅用于回复你的问题，你随时可以要求我们删除，我们会照做。", "我們僅在你主動提供時收集信箱、暱稱等帳號資訊；匿名統計與登入後的活動記錄僅用於改善服務。 若你透過電子郵件或社群管道聯繫我們，相關交流內容僅用於回覆你的問題，你隨時可以要求我們刪除，我們會照做。", "Account details such as email and nickname are collected only when you provide them. Anonymous stats and post-sign-in activity are used only to improve the service. If you contact us by email or social channels, the conversation is used only to answer your question — and you can ask us to delete it at any time; we will."],
     "最小收集": ["最小收集", "最小收集", "Minimal Collection"],
     "不收集姓名、手机号等任何个人信息，不留存访问日志，能不收集的坚决不收集。": ["不收集姓名、手机号等任何个人信息，不留存访问日志，能不收集的坚决不收集。", "不收集姓名、手機號等任何個人資訊，不留存訪問日誌，能不收集的堅決不收集。", "No names, phone numbers or any personal information; no visit logs. If it does not need collecting, we do not collect it."],
     "随时可删": ["随时可删", "隨時可刪", "Delete Anytime"],
@@ -283,15 +283,80 @@
     "站点状态 · Caelus Studio": ["站点状态 · Caelus Studio", "站點狀態 · Caelus Studio", "Site Status · Caelus Studio"],
     "Star ID - Caelus Studio": ["Star ID - Caelus Studio", "Star ID - Caelus Studio", "Star ID - Caelus Studio"],
     "开发者 - Caelus Studio": ["开发者 - Caelus Studio", "開發者 - Caelus Studio", "Developers - Caelus Studio"],
+
+    // 站点状态页（含 JS 动态生成的文案，通过 window.CaelusI18n.t() 取值）
+    "站点状态": ["站点状态", "站點狀態", "Site status"],
+    "返回主站": ["返回主站", "返回主站", "Back to main site"],
+    "切换深浅色": ["切换深浅色", "切換深淺色", "Toggle light / dark"],
+    "切换深色/浅色模式": ["切换深色/浅色模式", "切換深色/淺色模式", "Toggle dark / light mode"],
+    "打开菜单": ["打开菜单", "開啟選單", "Open menu"],
+    "域名": ["域名", "網域", "Domain"],
+    "状态": ["状态", "狀態", "Status"],
+    "响应": ["响应", "回應", "Response"],
+    "检测": ["检测", "檢測", "Checked"],
+    "正常运行": ["正常运行", "正常運作", "Operational"],
+    "故障": ["故障", "故障", "Down"],
+    "内容异常（缺少关键内容）": ["内容异常（缺少关键内容）", "內容異常（缺少關鍵內容）", "Content mismatch (key content missing)"],
+    "秒": ["秒", "秒", "s"],
+    "毫秒": ["毫秒", "毫秒", "ms"],
+    "前往站点": ["前往站点", "前往站點", "Visit site"],
+    "所有系统运行正常 · 共 {n} 项检测": ["所有系统运行正常 · 共 {n} 项检测", "所有系統運作正常 · 共 {n} 項檢測", "All systems operational · {n} checks"],
+    "发现 {n} 项故障，我们正在关注": ["发现 {n} 项故障，我们正在关注", "發現 {n} 項故障，我們正在關注", "{n} checks failing — we are on it"],
+    "状态服务暂时无法访问": ["状态服务暂时无法访问", "狀態服務暫時無法存取", "Status service is temporarily unreachable"],
+
+    // 账号中心：第三方登录与头像
+    "使用 OK 账号登录 / 注册": ["使用 OK 账号登录 / 注册", "使用 OK 帳號登入 / 註冊", "Sign in / up with OK"],
+    "使用 GitSource 账号登录 / 注册": ["使用 GitSource 账号登录 / 注册", "使用 GitSource 帳號登入 / 註冊", "Sign in / up with GitSource"],
+    "使用星环设计账号登录 / 注册": ["使用星环设计账号登录 / 注册", "使用星環設計帳號登入 / 註冊", "Sign in / up with Xinghuan Design"],
+    "在 OK 平台（okteam.cn）、GitSource 或星环设计登录后即可继续：已有 Star ID 会自动关联，首次使用会自动创建。": ["在 OK 平台（okteam.cn）、GitSource 或星环设计登录后即可继续：已有 Star ID 会自动关联，首次使用会自动创建。", "在 OK 平台（okteam.cn）、GitSource 或星環設計登入後即可繼續：已有 Star ID 會自動關聯，首次使用會自動建立。", "Continue after signing in with OK (okteam.cn), GitSource or Xinghuan Design: an existing Star ID is linked automatically, and one is created on first use."],
+    "更换头像": ["更换头像", "更換頭像", "Change avatar"],
+    "移除": ["移除", "移除", "Remove"],
+    "支持 JPG / PNG / WebP，会自动裁成正方形并压缩后上传；论坛、账号中心统一显示这个头像。": ["支持 JPG / PNG / WebP，会自动裁成正方形并压缩后上传；论坛、账号中心统一显示这个头像。", "支援 JPG / PNG / WebP，會自動裁成正方形並壓縮後上傳；論壇、帳號中心統一顯示這個頭像。", "JPG / PNG / WebP supported — the image is cropped to a square and compressed. The forum and account center both use it."],
+    "第三方登录：绑定 OK / GitSource / 星环设计账号后，可以直接用它们登录 Star ID。": ["第三方登录：绑定 OK / GitSource / 星环设计账号后，可以直接用它们登录 Star ID。", "第三方登入：綁定 OK / GitSource / 星環設計帳號後，可以直接用它們登入 Star ID。", "Linked sign-in: connect an OK / GitSource / Xinghuan Design account and use it to sign in to your Star ID."],
+    "更换": ["更换", "更換", "Change"],
+
+    // 文档库 / 开发者
+    "文档为只读版本": ["文档为只读版本", "文件為唯讀版本", "Read-only documentation"],
+    "共 {n} 篇文档 · 只读": ["共 {n} 篇文档 · 只读", "共 {n} 篇文件 · 唯讀", "{n} documents · read-only"],
+    "下载 caelus-auth.js": ["下载 caelus-auth.js", "下載 caelus-auth.js", "Download caelus-auth.js"],
+    "查看 Caelus-OAuth.md": ["查看 Caelus-OAuth.md", "檢視 Caelus-OAuth.md", "View Caelus-OAuth.md"],
+    "打开 OAuth Demo": ["打开 OAuth Demo", "開啟 OAuth Demo", "Open the OAuth demo"],
+    // 隐私页
+    "Caelus Studio 只收集必要数据，绝不用于广告或跨站追踪；你可以选择匿名浏览，也可以自愿注册 Star ID 账号。": ["Caelus Studio 只收集必要数据，绝不用于广告或跨站追踪；你可以选择匿名浏览，也可以自愿注册 Star ID 账号。", "Caelus Studio 只收集必要数据，絕不用於廣告或跨站追蹤；你可以選擇匿名瀏覽，也可以自願註冊 Star ID 帳號。", "Caelus Studio collects only what it needs — never for ads or cross-site tracking. You can browse anonymously or register a Star ID voluntarily."],
+    "隐私是每个人的基本权利，也是 Caelus Studio 的一项核心信念。 我们设计网站的理念就是保护隐私：少收集、不滥用、全透明——只在必要范围内收集数据，绝不用于广告或跨站追踪。": ["隐私是每个人的基本权利，也是 Caelus Studio 的一项核心信念。 我们设计网站的理念就是保护隐私：少收集、不滥用、全透明——只在必要范围内收集数据，绝不用于广告或跨站追踪。", "隱私是每個人的基本權利，也是 Caelus Studio 的一項核心信念。 我們設計網站的理念就是保護隱私：少收集、不濫用、全透明——只在必要範圍內收集資料，絕不用於廣告或跨站追蹤。", "Privacy is a fundamental right — and a core belief at Caelus Studio. We build for privacy: collect less, never misuse, stay transparent. Data is gathered only where necessary, never for ads or cross-site tracking."],
+    "可控统计": ["可控统计", "可控統計", "Controllable stats"],
+    "我们只在 Cookie 提示条获得你同意后，记录匿名的页面访问量；登录用户的操作记录仅用于账号中心「活动记录」，不会出售或用于广告。": ["我们只在 Cookie 提示条获得你同意后，记录匿名的页面访问量；登录用户的操作记录仅用于账号中心「活动记录」，不会出售或用于广告。", "我們只在 Cookie 提示條取得你同意後，記錄匿名的頁面訪問量；登入使用者的操作記錄僅用於帳號中心「活動記錄」，不會出售或用於廣告。", "Anonymous page views are recorded only after you agree via the cookie bar. Activity for signed-in users is used solely for the account center's Activity log — never sold, never used for ads."],
+    "自主选择": ["自主选择", "自主選擇", "Your choice"],
+    "你可以匿名浏览大部分内容；如需购买、订阅或使用 Star ID 登录第三方应用，可以自愿注册账号。所有账户数据均可一键删除。": ["你可以匿名浏览大部分内容；如需购买、订阅或使用 Star ID 登录第三方应用，可以自愿注册账号。所有账户数据均可一键删除。", "你可以匿名瀏覽大部分內容；如需購買、訂閱或使用 Star ID 登入第三方應用，可以自願註冊帳號。所有帳戶資料均可一鍵刪除。", "Most content can be browsed anonymously. To buy, subscribe, or sign in to third-party apps with a Star ID, you can register voluntarily — and delete all account data in one click."],
+    "匿名浏览时不收集任何个人信息；注册 Star ID 仅需邮箱与密码，手机号与地址为可选补充，能不收集的坚决不收集。": ["匿名浏览时不收集任何个人信息；注册 Star ID 仅需邮箱与密码，手机号与地址为可选补充，能不收集的坚决不收集。", "匿名瀏覽時不收集任何個人資訊；註冊 Star ID 僅需信箱與密碼，手機號與地址為可選補充，能不收集的堅決不收集。", "No personal information is collected while browsing anonymously. A Star ID needs only an email and password; phone and address are optional. If we can avoid collecting it, we do."],
+    "匿名浏览时不收集任何个人信息；注册 Star ID 仅需邮箱与密码，手机号与地址为可选补充，能不收集的坚决不收集。": ["匿名浏览时不收集任何个人信息；注册 Star ID 仅需邮箱与密码，手机号与地址为可选补充，能不收集的坚决不收集。", "匿名瀏覽時不收集任何個人資訊；註冊 Star ID 僅需信箱與密碼，手機號與地址為可選補充，能不收集的堅決不收集。", "No personal information is collected while browsing anonymously. A Star ID needs only an email and password; phone and address are optional. If we can avoid collecting it, we do."],
   };
 
   var LABEL = { 'zh-CN': '简', 'zh-TW': '繁', 'en': 'EN' };
   var HTMLLANG = { 'zh-CN': 'zh-CN', 'zh-TW': 'zh-Hant', 'en': 'en' };
+  var listeners = [];
 
   function cur() { try { return localStorage.getItem('caelus_lang') || 'zh-CN'; } catch (e) { return 'zh-CN'; } }
   function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
   var IDX = { 'zh-CN': 0, 'zh-TW': 1, 'en': 2 };
   function tr(s) { var e = DICT[norm(s)]; if (!e) return null; var v = e[IDX[cur()]]; return v === undefined ? null : v; }
+
+  // 供页面内动态生成的文案调用（如状态页的 JS 渲染）
+  window.CaelusI18n = {
+    lang: cur,
+    t: function (key, fallback) {
+      var v = tr(key);
+      if (v !== null) return v;
+      return fallback === undefined ? key : fallback;
+    },
+    onChange: function (cb) { if (typeof cb === 'function') listeners.push(cb); },
+    refresh: function () { apply(); }
+  };
+  function fire() {
+    for (var i = 0; i < listeners.length; i++) {
+      try { listeners[i](cur()); } catch (e) {}
+    }
+  }
 
   var obs = null;
   var ORIG_N = new WeakMap(), ORIG_P = new WeakMap(), ORIG_T = null;
@@ -345,13 +410,14 @@
       var order = ['zh-CN', 'zh-TW', 'en'];
       setLang(order[(order.indexOf(cur()) + 1) % 3]);
       apply();
+      fire();
     });
   }
 
   function setLang(l) { try { localStorage.setItem('caelus_lang', l); } catch (e) {} }
 
   var style = document.createElement('style');
-  style.textContent = '.lang-toggle{font-size:12px;font-weight:600;line-height:1;display:flex;align-items:center;justify-content:center;letter-spacing:.02em;}';
+  style.textContent = '.lang-toggle{font-size:12px;font-weight:600;line-height:1;display:flex;align-items:center;justify-content:center;letter-spacing:.02em;min-width:36px;padding:0 6px;box-sizing:border-box;flex-shrink:0;}';
   document.head.appendChild(style);
 
   inject();

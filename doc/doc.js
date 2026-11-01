@@ -82,6 +82,23 @@
     if (e.target.classList.contains('side-link')) side.classList.remove('open');
   });
 
+  /* ---- 语言切换：只处理界面文案，文档正文与标题维持原文 ---- */
+  function localize() {
+    var api = window.CaelusI18n;
+    if (!api || !api.t) { setTimeout(localize, 60); return; }
+    var meta = document.querySelector('.doc-meta');
+    if (meta) meta.textContent = api.t('共 {n} 篇文档 · 只读').replace('{n}', pages.length);
+  }
+  function bindLang() {
+    if (window.CaelusI18n && window.CaelusI18n.onChange) {
+      window.CaelusI18n.onChange(localize);
+      localize();
+    } else {
+      setTimeout(bindLang, 60);
+    }
+  }
+  bindLang();
+
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
