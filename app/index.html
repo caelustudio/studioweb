@@ -165,6 +165,138 @@
       }catch(e){document.documentElement.setAttribute('data-theme','dark');}
     })();
   </script>
+  <style id="refine-2026">
+    /* ================================================================
+       界面精修覆盖层（追加，不删除任何原有规则；删掉本块即可回滚）
+       1 等宽数字  2 同心圆角  3 模块错开入场  4 标题均衡  5 柔阴影 + 低饱和
+       ================================================================ */
+    :root{
+      /* 2 同心圆角：外层半径 = 内层半径 + 内边距，四边等距 → 圆心对齐 */
+      --pad:14px;
+      --r-inner:10px;
+      --r-outer:calc(var(--r-inner) + var(--pad));   /* = 24px */
+
+      /* 5 低饱和配色 · 深色 */
+      --accent:#8FA9C4;
+      --accent-solid:#3B5673;
+      --on-accent:#F2F5F8;
+      --accent-soft:rgba(143,169,196,.12);
+      --text-primary:#E9EBEF;
+      --text-muted:#9BA2AC;
+      --text-faint:#6E7580;
+      --bg:#0E1013;
+      --bg-card:#171A1F;
+      --bg-elevated:#1D2127;
+      --border:transparent;                          /* 实线边框交给阴影 */
+
+      /* 5 多层柔和阴影：由近及远四层 + 顶部微高光，深浅背景自然融合 */
+      --shadow: inset 0 1px 0 rgba(255,255,255,.045),
+                0 1px 2px rgba(0,0,0,.26),
+                0 4px 10px rgba(0,0,0,.24),
+                0 14px 28px rgba(0,0,0,.22),
+                0 32px 64px rgba(0,0,0,.20);
+      --shadow-soft: 0 1px 2px rgba(0,0,0,.26),
+                     0 4px 10px rgba(0,0,0,.24),
+                     0 14px 28px rgba(0,0,0,.22);
+    }
+    html[data-theme="light"]{
+      --accent:#1C4E89;
+      --accent-solid:#1C4E89;
+      --on-accent:#FFFFFF;
+      --accent-soft:#EAF1F9;
+      --text-primary:#0F1115;
+      --text-muted:#565C66;
+      --text-faint:#99A0A8;
+      --bg:#F2F3F5;
+      --bg-card:#FFFFFF;
+      --bg-elevated:#F7F8FA;
+      --border:transparent;
+      --shadow: inset 0 1px 0 rgba(255,255,255,0),
+                0 1px 2px rgba(27,31,39,.045),
+                0 4px 10px rgba(27,31,39,.045),
+                0 14px 28px rgba(27,31,39,.055),
+                0 32px 64px rgba(27,31,39,.055);
+      --shadow-soft: 0 1px 2px rgba(27,31,39,.045),
+                     0 4px 10px rgba(27,31,39,.045),
+                     0 14px 28px rgba(27,31,39,.055);
+    }
+
+    /* 1 等宽数字：位数变化时不会左右跳动 */
+    body{
+      font-variant-numeric:tabular-nums lining-nums;
+      font-feature-settings:"tnum" 1,"lnum" 1;
+    }
+
+    /* 2 同心圆角：外层 --r-outer，内层 --r-inner，间距 --pad */
+    .preview-frame{border-radius:var(--r-outer);padding:var(--pad)}
+    .preview-frame img,.preview-fallback{border-radius:var(--r-inner)}
+    .feature-card,.download-card{border-radius:var(--r-outer)}
+    .feature-icon,.dl-badge,.btn{border-radius:var(--r-inner)}
+    .dl-specs{
+      border-radius:var(--r-inner);
+      background:var(--bg-elevated);
+      padding:var(--pad);
+      border-top-color:transparent;
+    }
+    /* 胶囊 / 圆形控件统一为圆角矩形 */
+    .hero-tag,.theme-toggle,.lang-toggle{border-radius:var(--r-inner)}
+
+    /* 3 模块依次错开延迟入场（backwards：动画结束不锁定终态，hover 仍生效） */
+    @keyframes refine-rise{
+      from{opacity:0;transform:translateY(14px)}
+      to{opacity:1;transform:none}
+    }
+    .hero-tag,.hero h1,.hero h2,.hero p,.preview-frame,
+    .section-head,.feature-card,.download-card,.footer{
+      animation:refine-rise .68s cubic-bezier(.22,1,.36,1) backwards;
+      animation-delay:calc(var(--i,0) * 75ms);
+    }
+    .hero-tag{--i:0}
+    .hero h1{--i:1}
+    .hero h2{--i:2}
+    .hero p{--i:3}
+    .preview-frame{--i:4}
+    #features .section-head{--i:5}
+    .features .feature-card:nth-child(1){--i:6}
+    .features .feature-card:nth-child(2){--i:7}
+    .features .feature-card:nth-child(3){--i:8}
+    .features .feature-card:nth-child(4){--i:9}
+    .features .feature-card:nth-child(5){--i:10}
+    #download .section-head{--i:11}
+    .download-card{--i:12}
+    .footer{--i:13}
+    @media (prefers-reduced-motion:reduce){
+      .hero-tag,.hero h1,.hero h2,.hero p,.preview-frame,
+      .section-head,.feature-card,.download-card,.footer{
+        animation-duration:.01ms;animation-delay:0ms;
+      }
+    }
+
+    /* 4 标题均衡换行，正文防孤字 */
+    .hero h1,.hero h2,.section-head h3,.feature-card h4,.dl-meta .dl-name{text-wrap:balance}
+    .hero p,.section-head p,.feature-card p,.dl-note,.footer p{text-wrap:pretty}
+
+    /* 5 去多余装饰：渐变光晕 / 渐变文字 / 渐变徽标 / 蓝色外发光 */
+    .hero{background:var(--bg)}
+    .hero h1{
+      background:none;
+      -webkit-text-fill-color:var(--text-primary);
+      color:var(--text-primary);
+    }
+    .brand .mark{background:var(--accent-solid)}
+    .dl-badge{background:var(--accent-soft)}
+    .dl-badge svg{fill:var(--accent)}
+    .btn-primary{background:var(--accent-solid);color:var(--on-accent);box-shadow:var(--shadow-soft)}
+    .btn-primary:hover{transform:none;box-shadow:var(--shadow);filter:brightness(1.08)}
+    .hero-tag{border-color:transparent;box-shadow:var(--shadow-soft)}
+    .theme-toggle,.lang-toggle,.btn-ghost,.feature-card{box-shadow:var(--shadow-soft)}
+    .btn-ghost:hover{box-shadow:var(--shadow)}
+    .feature-card:hover{transform:none;border-color:transparent;box-shadow:var(--shadow)}
+    .preview-frame,.download-card{box-shadow:var(--shadow)}
+    .topbar{background:rgba(14,16,19,.62);border-bottom-color:transparent;box-shadow:var(--shadow-soft)}
+    html[data-theme="light"] .topbar{background:rgba(242,243,245,.72)}
+    .dl-specs,.footer{border-top-color:transparent}
+  </style>
 </head>
 <body>
   <div class="cursor-glow"></div>
