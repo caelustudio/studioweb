@@ -65,9 +65,10 @@
     @media (pointer:coarse){.cursor-glow{display:none!important}body{cursor:auto!important}}
 
     /* 顶栏 */
-    .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:flex-end;padding:18px 40px;backdrop-filter:saturate(180%) blur(20px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--border)}
+    .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;backdrop-filter:saturate(180%) blur(20px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--border)}
     html[data-theme="light"] .topbar{background:rgba(245,245,247,.7)}
-    .brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;letter-spacing:-.01em}
+    .brand{font-size:15px;font-weight:700;letter-spacing:.03em;color:var(--text-primary);text-decoration:none;white-space:nowrap;transition:opacity .2s}
+    .brand:hover{opacity:.72}
     .brand .mark{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
     .brand .mark svg{width:14px;height:14px;fill:#fff}
     .topnav{display:flex;align-items:center;gap:28px;font-size:14px;color:var(--text-muted)}
@@ -302,6 +303,7 @@
   <div class="cursor-glow"></div>
 
   <header class="topbar">
+    <a class="brand" href="https://www.caelus.top">Caelus Studio</a>
     <nav class="topnav">
       <div class="nav-links" style="display:flex;gap:28px">
         <a href="#preview">预览</a>
