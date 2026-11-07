@@ -5,7 +5,7 @@
   <link rel="icon" href="https://www.caelus.top/favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Caelus Studio — 下载 · 为创作而生的桌面应用</title>
-  <meta name="description" content="下载 Caelus Studio v1.7.0 —— 为创作而生的 Windows 桌面应用：浅色精致化界面、内置自动更新、Star ID 安全登录。">
+  <meta name="description" content="下载 Caelus Studio v26.11.7 —— 为创作而生的 Windows 桌面应用：深浅色双主题、内置自动更新、Star ID 安全登录。">
   <meta name="theme-color" content="#0b0b0b">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Caelus Studio">
@@ -68,8 +68,8 @@
     .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;backdrop-filter:saturate(180%) blur(20px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--border)}
     html[data-theme="light"] .topbar{background:rgba(245,245,247,.7)}
     .brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;letter-spacing:-.01em}
-
-
+    .brand .mark{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
+    .brand .mark svg{width:14px;height:14px;fill:#fff}
     .topnav{display:flex;align-items:center;gap:28px;font-size:14px;color:var(--text-muted)}
     .topnav a{transition:color .2s}
     .topnav a:hover{color:var(--text-primary)}
@@ -303,7 +303,7 @@
 
   <header class="topbar">
     <div class="brand">
-
+      <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 0 1 6 6h-2a4 4 0 0 0-4-4V6z"/></svg></span>
       Caelus Studio
     </div>
     <nav class="topnav">
@@ -323,10 +323,10 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-tag">CAELUS STUDIO · v1.7.0</div>
+    <div class="hero-tag">CAELUS STUDIO · v26.11.7</div>
     <h1>Begin With Design,<br>Believe In Design.</h1>
     <h2>始于设计，忠于设计。</h2>
-    <p>为创作而生的 Windows 桌面应用。浅色精致化界面、内置自动更新、Star ID 安全登录——干净、专注</p>
+    <p>为创作而生的 Windows 桌面应用。深浅色主题、内置自动更新、Star ID 安全登录——干净、专注，拒绝 AI 味。</p>
   </section>
 
   <!-- 预览 -->
@@ -348,7 +348,7 @@
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
         <h4>精致化界面</h4>
-        <p>浅色主题，统一的设计令牌与柔和阴影，圆角矩形控件，干净不喧哗。</p>
+        <p>浅色与深色双主题，统一的设计令牌与柔和阴影，圆角矩形控件，干净不喧哗。</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 10.12 13.88 3a2.5 2.5 0 0 0-3.54 0l-7 7a2.5 2.5 0 0 0 0 3.54l7.12 7.12a2.5 2.5 0 0 0 3.54 0l7-7a2.5 2.5 0 0 0 0-3.54zM12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/></svg></div>
@@ -362,13 +362,18 @@
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19 13.6 9.9c.9-2.3.4-5-1.5-6.9-1.4-1.4-3.3-2-5.2-1.8l2.9 2.9-2.2 2.2-2.9-2.9c-.2 1.9.4 3.8 1.8 5.2 1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l1.4-1.4c.4-.4.4-1 0-1.4z"/></svg></div>
-        <h4>内置小工具</h4>
-        <p>启动器、下载器、跨设备 Shout 提醒等实用小工具，一处集成，随取随用。</p>
+        <h4>启动器与小工具</h4>
+        <p>启动器直接读取版本文件、按需切换与删除；下载器、跨设备 Shout 提醒一处集成。</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
         <h4>隐私优先</h4>
         <p>绝不嵌入敏感凭据到前端，写权限依靠登录态与行级安全策略，安全由架构保证。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg></div>
+        <h4>状态实时同步</h4>
+        <p>下载页与商店页按云端设定的频率刷新，窗口在后台也持续同步作品上下架与版本。</p>
       </div>
     </div>
   </section>
@@ -385,7 +390,7 @@
         <div class="dl-badge"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></div>
         <div class="dl-meta">
           <div class="dl-name">Caelus Studio</div>
-          <div class="dl-ver">版本 <b>v1.7.0</b> · Windows 安装包</div>
+          <div class="dl-ver">版本 <b>v26.11.7</b> · Windows 安装包</div>
         </div>
       </div>
       <div class="dl-specs">
@@ -396,11 +401,12 @@
       <div class="dl-actions">
         <a class="btn btn-primary" href="https://download.caelus.top/APP-Download/Caelus%20Studio.exe" id="cardDownload">
           <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-          下载 v1.7.0
+          下载 v26.11.7
         </a>
         <a class="btn btn-ghost" href="https://www.caelus.top" target="_blank" rel="noopener">访问官网</a>
       </div>
       <div class="dl-note">
+        如您发现下载速度缓慢，请使用加速器加速 GitHub 或用 VPN 改善环境。<br>
         下载完成后双击即可安装，首次启动将引导您登录 Star ID。
       </div>
     </div>
@@ -408,7 +414,7 @@
 
   <footer class="footer">
     <div class="brand">
-
+      <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 0 1 6 6h-2a4 4 0 0 0-4-4V6z"/></svg></span>
       Caelus Studio
     </div>
     <div class="footer-links">
@@ -458,20 +464,22 @@
     var DICT={
       '始于设计，忠于设计。':['始于设计，忠于设计。','始於設計，忠於設計。','Begin with design, stay true to design.'],
       'Caelus Studio — 下载 · 为创作而生的桌面应用':['Caelus Studio — 下载 · 为创作而生的桌面应用','Caelus Studio — 下載 · 為創作而生的桌面應用','Caelus Studio — Download · A desktop app built for creation'],
-      '为创作而生的 Windows 桌面应用。浅色精致化界面、内置自动更新、Star ID 安全登录——干净、专注，拒绝 AI 味。':['为创作而生的 Windows 桌面应用。浅色精致化界面、内置自动更新、Star ID 安全登录——干净、专注，拒绝 AI 味。','為創作而生的 Windows 桌面應用。淺色精緻化介面、內建自動更新、Star ID 安全登入——乾淨、專注，拒絕 AI 味。','A Windows desktop app built for creation: a refined light interface, built-in auto-update, secure Star ID sign-in — clean, focused, and free of AI sameness.'],
+      '为创作而生的 Windows 桌面应用。深浅色主题、内置自动更新、Star ID 安全登录——干净、专注，拒绝 AI 味。':['为创作而生的 Windows 桌面应用。深浅色主题、内置自动更新、Star ID 安全登录——干净、专注，拒绝 AI 味。','為創作而生的 Windows 桌面應用。深淺色主題、內建自動更新、Star ID 安全登入——乾淨、專注，拒絕 AI 味。','A Windows desktop app built for creation: light and dark themes, built-in auto-update, secure Star ID sign-in — clean, focused, and free of AI sameness.'],
       'Caelus Studio 应用界面预览':['Caelus Studio 应用界面预览','Caelus Studio 應用介面預覽','Caelus Studio app preview'],
       '为创作而生的每一个细节':['为创作而生的每一个细节','為創作而生的每一個細節','Every detail, made for creation'],
       '从界面到交互，每一处圆角、间距与配色都经过反复推敲，只为带来安静而专注的体验。':['从界面到交互，每一处圆角、间距与配色都经过反复推敲，只为带来安静而专注的体验。','從介面到互動，每一處圓角、間距與配色都經過反覆推敲，只為帶來安靜而專注的體驗。','From interface to interaction, every corner radius, spacing and colour is carefully refined — for a calm, focused experience.'],
       '精致化界面':['精致化界面','精緻化介面','Refined interface'],
-      '浅色主题，统一的设计令牌与柔和阴影，圆角矩形控件，干净不喧哗。':['浅色主题，统一的设计令牌与柔和阴影，圆角矩形控件，干净不喧哗。','淺色主題，統一的設計令牌與柔和陰影，圓角矩形控制項，乾淨不喧嘩。','A light theme with unified design tokens and soft shadows, rounded-rectangle controls — clean and quiet.'],
+      '浅色与深色双主题，统一的设计令牌与柔和阴影，圆角矩形控件，干净不喧哗。':['浅色与深色双主题，统一的设计令牌与柔和阴影，圆角矩形控件，干净不喧哗。','淺色與深色雙主題，統一的設計令牌與柔和陰影，圓角矩形控制項，乾淨不喧嘩。','Light and dark themes with unified design tokens and soft shadows, rounded-rectangle controls — clean and quiet.'],
       '内置自动更新':['内置自动更新','內建自動更新','Built-in auto-update'],
       '新版本发布后自动检测并静默替换自身，无需手动卸载重装，始终用上最新能力。':['新版本发布后自动检测并静默替换自身，无需手动卸载重装，始终用上最新能力。','新版本發佈後自動偵測並靜默替換自身，無需手動解除安裝重裝，始終用上最新能力。','After a new release it auto-detects and silently replaces itself — no manual uninstall or reinstall, always on the latest build.'],
       'Star ID 安全登录':['Star ID 安全登录','Star ID 安全登入','Secure Star ID sign-in'],
       '基于 Star ID 的 OAuth 2.0 + PKCE 鉴权，登录态与云端数据隔离，隐私优先。':['基于 Star ID 的 OAuth 2.0 + PKCE 鉴权，登录态与云端数据隔离，隐私优先。','基於 Star ID 的 OAuth 2.0 + PKCE 鑑權，登入態與雲端資料隔離，隱私優先。','Star ID based OAuth 2.0 + PKCE authentication, with sign-in state isolated from cloud data — privacy first.'],
-      '内置小工具':['内置小工具','內建小工具','Built-in tools'],
-      '启动器、下载器、跨设备 Shout 提醒等实用小工具，一处集成，随取随用。':['启动器、下载器、跨设备 Shout 提醒等实用小工具，一处集成，随取随用。','啟動器、下載器、跨裝置 Shout 提醒等實用小工具，一處整合，隨取隨用。','Practical tools like a launcher, downloader and cross-device Shout alerts — all integrated in one place.'],
+      '启动器与小工具':['启动器与小工具','啟動器與小工具','Launcher and tools'],
+      '启动器直接读取版本文件、按需切换与删除；下载器、跨设备 Shout 提醒一处集成。':['启动器直接读取版本文件、按需切换与删除；下载器、跨设备 Shout 提醒一处集成。','啟動器直接讀取版本檔案、按需切換與刪除；下載器、跨裝置 Shout 提醒一處整合。','The launcher reads version files directly with quick switching and removal; downloader and cross-device Shout in one place.'],
       '隐私优先':['隐私优先','隱私優先','Privacy first'],
       '绝不嵌入敏感凭据到前端，写权限依靠登录态与行级安全策略，安全由架构保证。':['绝不嵌入敏感凭据到前端，写权限依靠登录态与行级安全策略，安全由架构保证。','絕不嵌入敏感憑證到前端，寫權限依靠登入態與列級安全策略，安全由架構保證。','We never embed sensitive credentials in the front end; write access relies on sign-in state and row-level security — safety by architecture.'],
+      '状态实时同步':['状态实时同步','狀態即時同步','Live status sync'],
+      '下载页与商店页按云端设定的频率刷新，窗口在后台也持续同步作品上下架与版本。':['下载页与商店页按云端设定的频率刷新，窗口在后台也持续同步作品上下架与版本。','下載頁與商店頁按雲端設定的頻率重新整理，視窗在背景也持續同步作品上下架與版本。','Download and shop pages refresh at a cloud-configured interval, staying in sync even when the window is in the background.'],
       '立即下载 Caelus Studio':['立即下载 Caelus Studio','立即下載 Caelus Studio','Download Caelus Studio'],
       '支持 Windows 10 / 11（x64）。一键安装，自动更新，免费使用。':['支持 Windows 10 / 11（x64）。一键安装，自动更新，免费使用。','支援 Windows 10 / 11（x64）。一鍵安裝，自動更新，免費使用。','Supports Windows 10 / 11 (x64). One-click install, auto-update, free to use.'],
       '版本':['版本 ','版本 ','Version '],
@@ -479,9 +487,10 @@
       '独立安装包':['独立安装包','獨立安裝包','Standalone installer'],
       '免费':['免费','免費','Free'],
       '自动更新':['自动更新','自動更新','Auto-update'],
-      '下载 v1.7.0':['下载 v1.7.0','下載 v1.7.0','Download v1.7.0'],
+      '下载 v26.11.7':['下载 v26.11.7','下載 v26.11.7','Download v26.11.7'],
       '访问官网':['访问官网','訪問官網','Visit site'],
-            '下载完成后双击即可安装，首次启动将引导您登录 Star ID。':['下载完成后双击即可安装，首次启动将引导您登录 Star ID。','下載完成後雙擊即可安裝，首次啟動將引導您登入 Star ID。','After the download finishes, double-click to install. The first launch guides you to sign in with Star ID.'],
+      '如您发现下载速度缓慢，请使用加速器加速 GitHub 或用 VPN 改善环境。':['如您发现下载速度缓慢，请使用加速器加速 GitHub 或用 VPN 改善环境。','如您發現下載速度緩慢，請使用加速器加速 GitHub 或用 VPN 改善環境。','If downloads feel slow, use a GitHub accelerator or a VPN to improve your connection.'],
+      '下载完成后双击即可安装，首次启动将引导您登录 Star ID。':['下载完成后双击即可安装，首次启动将引导您登录 Star ID。','下載完成後雙擊即可安裝，首次啟動將引導您登入 Star ID。','After the download finishes, double-click to install. The first launch guides you to sign in with Star ID.'],
       '预览':['预览','預覽','Preview'],
       '特性':['特性','特性','Features'],
       '下载':['下载','下載','Download'],
