@@ -65,7 +65,7 @@
     @media (pointer:coarse){.cursor-glow{display:none!important}body{cursor:auto!important}}
 
     /* 顶栏 */
-    .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;backdrop-filter:saturate(180%) blur(20px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--border)}
+    .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:flex-end;padding:18px 40px;backdrop-filter:saturate(180%) blur(20px);background:rgba(11,11,11,.6);border-bottom:1px solid var(--border)}
     html[data-theme="light"] .topbar{background:rgba(245,245,247,.7)}
     .brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;letter-spacing:-.01em}
     .brand .mark{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
@@ -302,10 +302,6 @@
   <div class="cursor-glow"></div>
 
   <header class="topbar">
-    <div class="brand">
-      <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 0 1 6 6h-2a4 4 0 0 0-4-4V6z"/></svg></span>
-      Caelus Studio
-    </div>
     <nav class="topnav">
       <div class="nav-links" style="display:flex;gap:28px">
         <a href="#preview">预览</a>
@@ -413,10 +409,6 @@
   </section>
 
   <footer class="footer">
-    <div class="brand">
-      <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 0 1 6 6h-2a4 4 0 0 0-4-4V6z"/></svg></span>
-      Caelus Studio
-    </div>
     <div class="footer-links">
       <a href="https://www.caelus.top" target="_blank" rel="noopener">官网</a>
       <a href="https://github.com/caelustudio" target="_blank" rel="noopener">GitHub</a>
