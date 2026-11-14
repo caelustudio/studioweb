@@ -45,8 +45,7 @@
 
         <div class="tabs">
           <button class="tab active" id="tabLogin">密码登录</button>
-          <!-- 注册已关闭：隐藏注册入口，仅已有管理员可登录 -->
-          <button class="tab hidden" id="tabReg">注册管理员</button>
+          <button class="tab" id="tabReg">注册账号</button>
         </div>
 
         <div id="paneLogin">
@@ -74,12 +73,9 @@
             <input type="password" id="rgPwd" placeholder="至少 6 位" autocomplete="new-password" />
           </label>
           <label class="field">
-            <span class="lbl">邮箱验证码</span>
-            <div class="row">
-              <input type="text" id="rgCode" placeholder="6 位验证码" />
-              <button id="btnSend" style="flex:none">获取验证码</button>
-            </div>
-            <div class="hint" id="rgHint">注册需要先验证邮箱，验证通过即自动登录。</div>
+            <span class="lbl">邀请码</span>
+            <input type="text" id="rgCode" placeholder="向管理员索取" autocomplete="off" />
+            <div class="hint" id="rgHint">注册需要邀请码（防止公开站点被随意注册），注册成功后自动登录。</div>
           </label>
           <div class="actions">
             <button class="primary" id="btnReg">注册并登录</button>
@@ -567,7 +563,7 @@
 </div>
 
 
-<script src="cloud-api.js?v=1"></script>
-<script src="app.js?v=26.11.7-6"></script>
+<script src="cloud-api.js?v=2"></script>
+<script src="app.js?v=26.11.7-7"></script>
 </body>
 </html>
