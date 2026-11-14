@@ -151,6 +151,29 @@ var cloud = {
       return Promise.resolve({ error: null });
     },
 
+    /** 凭邀请码注册；成功后直接拿到 token，等价于登录 */
+    signUp: function (p) {
+      var email = (p && p.email) || "";
+      var password = (p && p.password) || "";
+      var code = (p && p.code) || "";
+      return fetch(API_BASE + "/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, password: password, code: code })
+      })
+        .then(function (r) {
+          return r.json().then(function (j) {
+            if (!r.ok) return { data: null, error: { message: (j && j.message) || "注册失败" } };
+            _setToken(j.token);
+            _setEmail(j.email);
+            return { data: { access_token: j.token, user: { email: j.email } }, error: null };
+          });
+        })
+        .catch(function (e) {
+          return { data: null, error: { message: String(e && e.message ? e.message : e) } };
+        });
+    },
+
     /** 自建后端没有邮件服务，验证码登录走不了；UI 会提示改用密码 */
     sendOtp: function () {
       return Promise.resolve({
