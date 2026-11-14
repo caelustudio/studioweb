@@ -22,7 +22,7 @@ if (typeof cloud === "undefined") {
   throw new Error("cloud-api.js 未加载");
 }
 // 与客户端 TreeOSSource.LocalAppVersion 保持一致，改客户端版本时这里也要改
-var CLIENT_VERSION = "26.11.7";
+var CLIENT_VERSION = "26.11.14";
 
 var FIELDS = [
   "treeos_enabled", "treeos_version", "treeos_url", "treeos_note", "treeos_icon", "treeos_eol", "treeos_desc",
