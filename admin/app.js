@@ -53,10 +53,19 @@ function readForm() {
   return out;
 }
 
+/**
+ * D1（SQLite）没有布尔类型，存的是 1/0，而 Supabase 返回 true/false。
+ * 迁移到新后端后必须用宽松判断，否则 1 === true 是 false，
+ * 表现为「保存成功后开关全部弹回关闭」。
+ */
+function toBool(v) {
+  return v === true || v === 1 || v === "1" || v === "true";
+}
+
 function writeForm(cfg) {
   FIELDS.forEach(function (f) {
     var el = $(f);
-    if (TOGGLES.indexOf(f) >= 0) el.checked = cfg[f] === true;
+    if (TOGGLES.indexOf(f) >= 0) el.checked = toBool(cfg[f]);
     else el.value = cfg[f] == null ? "" : String(cfg[f]);
   });
   $("updatedAt").textContent = cfg.updated_at
