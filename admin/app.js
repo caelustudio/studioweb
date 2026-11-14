@@ -158,9 +158,20 @@ async function sendCode() {
 }
 
 async function doRegister() {
-  // 注册已关闭：仅已有管理员可通过「密码登录」进入，不再开放自助注册。
-  setMsg($("rgMsg"), "注册已关闭，仅已有管理员可登录。", "err");
-  return;
+  var email = $("rgEmail").value.trim();
+  var pwd = $("rgPwd").value;
+  var code = $("rgCode").value.trim();
+
+  if (!email) { setMsg($("rgMsg"), "请填写邮箱。", "err"); return; }
+  if (!pwd || pwd.length < 6) { setMsg($("rgMsg"), "密码至少 6 位。", "err"); return; }
+  if (!code) { setMsg($("rgMsg"), "请填写邀请码。", "err"); return; }
+
+  setMsg($("rgMsg"), '<span class="spinner"></span> 注册中…');
+  var r = await cloud.auth.signUp({ email: email, password: pwd, code: code });
+  if (r.error) { setMsg($("rgMsg"), r.error.message, "err"); return; }
+
+  setMsg($("rgMsg"), "注册成功，已自动登录。", "ok");
+  await refreshSession();
 }
 
 // ---------- 非授权域名提示 ----------
@@ -949,7 +960,7 @@ $("curVer").textContent = CLIENT_VERSION;
 $("btnSave").onclick = saveConfig;
 $("btnReload").onclick = loadConfig;
 $("btnLogin").onclick = doLogin;
-$("btnSend").onclick = sendCode;
+if ($("btnSend")) $("btnSend").onclick = sendCode;   // 邀请码注册后不再有「获取验证码」按钮
 $("btnReg").onclick = doRegister;
 $("liPwd").addEventListener("keydown", function (e) { if (e.key === "Enter") doLogin(); });
 $("rgCode").addEventListener("keydown", function (e) { if (e.key === "Enter") doRegister(); });
