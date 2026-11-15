@@ -555,13 +555,26 @@ function renderFeedback() {
   var list = $("feedbackList");
   list.innerHTML = "";
   $("feedbackCount").textContent = feedbackItems.length ? feedbackItems.length + " 条" : "";
+  $("fbToolbar").style.display = feedbackItems.length ? "flex" : "none";
   if (!feedbackItems.length) {
     list.innerHTML = '<div class="hint">还没有反馈。桌面端「关于」页提交后会显示在这里。</div>';
     return;
   }
+  $("fbAll").checked = false;
+  updateDelBtn();
+
   feedbackItems.forEach(function (f) {
     var row = document.createElement("div");
     row.className = "shop-row";
+
+    // 左侧勾选框，供批量删除
+    var pick = document.createElement("input");
+    pick.type = "checkbox";
+    pick.className = "fb-pick";
+    pick.setAttribute("data-id", f.id);
+    pick.style.flex = "none";
+    pick.onchange = updateDelBtn;
+    row.appendChild(pick);
 
     var info = document.createElement("div");
     info.className = "grow";
@@ -578,8 +591,49 @@ function renderFeedback() {
     info.querySelector(".body").textContent = f.content || "";
 
     row.appendChild(info);
+
+    // 右侧单条删除
+    var del = document.createElement("button");
+    del.className = "tiny";
+    del.textContent = "删除";
+    del.style.cssText = "flex:none;color:var(--danger);border-color:#3A2222";
+    del.onclick = function () { deleteFeedback(f.id); };
+    row.appendChild(del);
+
     list.appendChild(row);
   });
+}
+
+/** 顶部的「删除选中」按钮只有勾选后才可用，并显示数量 */
+function updateDelBtn() {
+  var n = document.querySelectorAll(".fb-pick:checked").length;
+  var btn = $("btnDelSelected");
+  if (!btn) return;
+  btn.textContent = n ? "删除选中（" + n + "）" : "删除选中";
+  btn.disabled = n === 0;
+}
+
+async function deleteFeedback(id) {
+  if (!confirm("确定删除这条反馈？")) return;
+  var res = await cloud.database.from("feedback").delete().eq("id", id);
+  if (res.error) { setMsg($("feedbackMsg"), "删除失败：" + res.error.message, "err"); return; }
+  setMsg($("feedbackMsg"), "已删除 1 条。", "ok");
+  await loadFeedback();
+}
+
+async function deleteSelectedFeedback() {
+  var picks = Array.prototype.slice.call(document.querySelectorAll(".fb-pick:checked"));
+  if (!picks.length) return;
+  if (!confirm("确定删除选中的 " + picks.length + " 条反馈？此操作不可撤销。")) return;
+
+  var okCount = 0, failCount = 0;
+  for (var i = 0; i < picks.length; i++) {
+    var res = await cloud.database.from("feedback").delete().eq("id", picks[i].getAttribute("data-id"));
+    if (res.error) failCount++; else okCount++;
+  }
+  setMsg($("feedbackMsg"), "已删除 " + okCount + " 条" + (failCount ? "，失败 " + failCount + " 条" : "") + "。",
+         failCount ? "err" : "ok");
+  await loadFeedback();
 }
 
 // ---------- 公告 ----------
@@ -990,6 +1044,12 @@ $("btnDeleteWork").onclick = function () {
   removeWork($("wkId").value, $("wkName").value.trim() || "这件作品");
 };
 $("btnReloadFeedback").onclick = loadFeedback;
+$("fbAll").onchange = function () {
+  var on = $("fbAll").checked;
+  document.querySelectorAll(".fb-pick").forEach(function (c) { c.checked = on; });
+  updateDelBtn();
+};
+$("btnDelSelected").onclick = deleteSelectedFeedback;
 // 公告
 $("btnPublishAnn").onclick = publishAnn;
 $("btnReloadAnn").onclick = loadAnn;
